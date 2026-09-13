@@ -728,102 +728,8 @@ const DRIVE_LINKS = {
 const DATA = {
   statistics: {
     label: "Research Methodology and Data Analytics",
-    textbook: "Gravetter & Wallnau, Statistics for the Behavioral Sciences (9th ed.)",
-    teaser: "The statistics behind every claim this program makes about populations, from distributions to z-scores.",
-    intro: "Every other subject in this program eventually asks you to trust a number, a survey result, a p-value, a claim that one country's fertility rate is \"significantly\" different from another's. This course is what lets you actually check that claim instead of taking it on faith. It builds up from the basics (what a distribution even is) through z-scores and probability, ending at the tool most research papers lean on: the distribution of sample means.",
-    funFact: "A z-score of 2 or higher looks unremarkable written down, but it means a result sits in roughly the top 2 to 3 percent of a normal distribution, rare enough that most researchers would call it statistically significant.",
-    sections: [
-      {
-        id: "s1", title: "Ch.1 \u2014 Introduction to Statistics",
-        lecture: "Stats 2026 lecture_1_2026.pdf", textbookRef: "Chapter 1",
-        notes: [
-          "Population = everyone you care about. Sample = smaller group you measure to represent it. Parameter describes a population, statistic describes a sample.",
-          "Descriptive stats just summarizes what you found. Inferential stats uses a sample to guess about the whole population.",
-          "Sampling error is the natural, expected gap between a sample statistic and the true population value. Not a mistake.",
-          "Discrete variable has no in-between values (siblings). Continuous variable can be any value including fractions (height). Real limits sit half a unit above and below a continuous score.",
-          "Scales of measurement, weakest to strongest: Nominal (labels only), Ordinal (ranked order), Interval (equal spacing, no true zero), Ratio (equal spacing plus true zero).",
-          "Correlational studies find relationships but never prove causation. Experiments manipulate an independent variable and can show cause and effect."
-        ],
-        exercises: [
-          {q: "30 students out of 1,000 are measured and the average reported. Descriptive or inferential?", a: "Descriptive. Just describing the sample measured, not generalizing to all 1,000."}
-        ]
-      },
-      {
-        id: "s2", title: "Ch.2 \u2014 Frequency Distributions",
-        lecture: "Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 2",
-        notes: [
-          "<span class='f'>p = f / N</span> where f is frequency and N is total people. Percentage = p times 100.",
-          "Grouped table rules: equal interval widths, bottom of each interval a multiple of the width, 10 or fewer intervals, round widths like 2, 5, 10, 20.",
-          "Apparent limits (the label, e.g. 20 to 29) are 1 unit narrower than real limits (19.5 to 29.5).",
-          "Histogram is for numeric data, bars touch. Bar graph is for nominal or ordinal data, gaps between bars.",
-          "Skew is named by the direction of the tail, not where scores pile up. Tail right means positive skew, tail left means negative skew."
-        ],
-        exercises: [
-          {q: "Interval labeled 20 to 29. Real limits?", a: "19.5 to 29.5."}
-        ]
-      },
-      {
-        id: "s3", title: "Ch.3 \u2014 Central Tendency",
-        lecture: "Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 3",
-        notes: [
-          "<span class='f'>\u03bc = \u03a3X / N</span> for a population, <span class='f'>M = \u03a3X / n</span> for a sample. \u03a3X means sum of scores.",
-          "Mean is sensitive to every score. Adding a constant shifts the mean by that constant. Multiplying scales the mean the same way.",
-          "Median only cares about order, so it resists extreme scores. Mean gets pulled toward outliers.",
-          "Mode is the most frequent score. Only measure that works with nominal, category based data.",
-          "Mean minus Median greater than 0 means positive skew. Mean minus Median less than 0 means negative skew."
-        ],
-        exercises: [
-          {q: "Income data has one billionaire, everyone else modest. Mean or median is more typical?", a: "Median. The billionaire drags the mean up, median ignores how extreme it is."}
-        ]
-      },
-      {
-        id: "s4", title: "Ch.4 \u2014 Variability",
-        lecture: "Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 4",
-        notes: [
-          "The pipeline: deviation (X minus mean), square it, sum it (SS), divide by N or n minus 1 (variance), square root (SD).",
-          "<span class='f'>SS = \u03a3(X \u2212 \u03bc)\u00b2</span> or <span class='f'>SS = \u03a3X\u00b2 \u2212 (\u03a3X)\u00b2/N</span>.",
-          "Population: <span class='f'>\u03c3\u00b2 = SS/N</span>, <span class='f'>\u03c3 = \u221a(SS/N)</span>Sample: <span class='f'>s\u00b2 = SS/(n\u22121)</span>, <span class='f'>s = \u221a(SS/(n\u22121))</span>.",
-          "Sample uses n minus 1 (degrees of freedom) because samples underestimate true spread, dividing by n would bias variance too low.",
-          "Adding a constant to every score leaves SD unchanged. Multiplying every score multiplies SD by that constant too."
-        ],
-        exercises: [
-          {q: "Sample has SS = 32, n = 5. Sample variance?", a: "s\u00b2 = 32/4 = 8."}
-        ]
-      },
-      {
-        id: "s5", title: "Ch.5 \u2014 z-Scores",
-        lecture: "Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 5",
-        notes: [
-          "<span class='f'>z = (X \u2212 \u03bc) / \u03c3</span> for a population, <span class='f'>z = (X \u2212 M) / s</span> for a sample. Sign shows above or below mean, number shows distance in SD units.",
-          "Solve for raw score: <span class='f'>X = \u03bc + z\u03c3</span>.",
-          "A z-distribution always has mean 0 and SD 1, same shape as the original.",
-          "Standardizing to a new mean and SD: convert X to z first, then new X = new mean plus z times new SD."
-        ],
-        exercises: []
-      },
-      {
-        id: "s6", title: "Ch.6 \u2014 Probability",
-        lecture: "Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 6",
-        notes: [
-          "<span class='f'>p(A) = outcomes classified as A / total possible outcomes</span>.",
-          "Random sampling needs equal chance per person and constant probability across draws, meaning sampling with replacement.",
-          "To find probability for a raw score, convert to z first, then look up the proportion.",
-          "Percentile rank is the percent of people scoring at or below that score."
-        ],
-        exercises: []
-      },
-      {
-        id: "s7", title: "Ch.7 \u2014 Distribution of Sample Means",
-        lecture: "Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 7",
-        notes: [
-          "Distribution of sample means is every possible sample mean (M) from samples of size n, for a given population.",
-          "Central Limit Theorem: for any population, as n grows, the distribution of sample means becomes normal. Already true if population is normal or n is 30 or more.",
-          "<span class='f'>Standard error = \u03c3 / \u221an</span>Bigger n means smaller standard error, means M clusters closer to the true mean.",
-          "<span class='f'>z = (M \u2212 \u03bc) / standard error</span> for a sample mean."
-        ],
-        exercises: []
-      }
-    ]
+    textbook: "Not uploaded yet.",
+    sections: []
   },
 
   fundamental: {
@@ -1393,8 +1299,102 @@ const DATA = {
 
   datapolicy: {
     label: "Data for Policy Development and Implementation",
-    textbook: "Not uploaded yet.",
-    sections: []
+    textbook: "Gravetter & Wallnau, Statistics for the Behavioral Sciences (9th ed.)",
+    teaser: "The statistics behind every claim this program makes about populations, from distributions to z-scores.",
+    intro: "Every other subject in this program eventually asks you to trust a number, a survey result, a p-value, a claim that one country's fertility rate is \"significantly\" different from another's. This course is what lets you actually check that claim instead of taking it on faith. It builds up from the basics (what a distribution even is) through z-scores and probability, ending at the tool most research papers lean on: the distribution of sample means.",
+    funFact: "A z-score of 2 or higher looks unremarkable written down, but it means a result sits in roughly the top 2 to 3 percent of a normal distribution, rare enough that most researchers would call it statistically significant.",
+    sections: [
+      {
+        id: "dp1", title: "Ch.1 — Introduction to Statistics",
+        lecture: "Stats 2026 lecture_1_2026.pdf", textbookRef: "Chapter 1",
+        notes: [
+          "Population = everyone you care about. Sample = smaller group you measure to represent it. Parameter describes a population, statistic describes a sample.",
+          "Descriptive stats just summarizes what you found. Inferential stats uses a sample to guess about the whole population.",
+          "Sampling error is the natural, expected gap between a sample statistic and the true population value. Not a mistake.",
+          "Discrete variable has no in-between values (siblings). Continuous variable can be any value including fractions (height). Real limits sit half a unit above and below a continuous score.",
+          "Scales of measurement, weakest to strongest: Nominal (labels only), Ordinal (ranked order), Interval (equal spacing, no true zero), Ratio (equal spacing plus true zero).",
+          "Correlational studies find relationships but never prove causation. Experiments manipulate an independent variable and can show cause and effect."
+        ],
+        exercises: [
+          {q: "30 students out of 1,000 are measured and the average reported. Descriptive or inferential?", a: "Descriptive. Just describing the sample measured, not generalizing to all 1,000."}
+        ]
+      },
+      {
+        id: "dp2", title: "Ch.2 — Frequency Distributions",
+        lecture: "Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 2",
+        notes: [
+          "<span class='f'>p = f / N</span> where f is frequency and N is total people. Percentage = p times 100.",
+          "Grouped table rules: equal interval widths, bottom of each interval a multiple of the width, 10 or fewer intervals, round widths like 2, 5, 10, 20.",
+          "Apparent limits (the label, e.g. 20 to 29) are 1 unit narrower than real limits (19.5 to 29.5).",
+          "Histogram is for numeric data, bars touch. Bar graph is for nominal or ordinal data, gaps between bars.",
+          "Skew is named by the direction of the tail, not where scores pile up. Tail right means positive skew, tail left means negative skew."
+        ],
+        exercises: [
+          {q: "Interval labeled 20 to 29. Real limits?", a: "19.5 to 29.5."}
+        ]
+      },
+      {
+        id: "dp3", title: "Ch.3 — Central Tendency",
+        lecture: "Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 3",
+        notes: [
+          "<span class='f'>μ = ΣX / N</span> for a population, <span class='f'>M = ΣX / n</span> for a sample. ΣX means sum of scores.",
+          "Mean is sensitive to every score. Adding a constant shifts the mean by that constant. Multiplying scales the mean the same way.",
+          "Median only cares about order, so it resists extreme scores. Mean gets pulled toward outliers.",
+          "Mode is the most frequent score. Only measure that works with nominal, category based data.",
+          "Mean minus Median greater than 0 means positive skew. Mean minus Median less than 0 means negative skew."
+        ],
+        exercises: [
+          {q: "Income data has one billionaire, everyone else modest. Mean or median is more typical?", a: "Median. The billionaire drags the mean up, median ignores how extreme it is."}
+        ]
+      },
+      {
+        id: "dp4", title: "Ch.4 — Variability",
+        lecture: "Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 4",
+        notes: [
+          "The pipeline: deviation (X minus mean), square it, sum it (SS), divide by N or n minus 1 (variance), square root (SD).",
+          "<span class='f'>SS = Σ(X − μ)²</span> or <span class='f'>SS = ΣX² − (ΣX)²/N</span>.",
+          "Population: <span class='f'>σ² = SS/N</span>, <span class='f'>σ = √(SS/N)</span>Sample: <span class='f'>s² = SS/(n−1)</span>, <span class='f'>s = √(SS/(n−1))</span>.",
+          "Sample uses n minus 1 (degrees of freedom) because samples underestimate true spread, dividing by n would bias variance too low.",
+          "Adding a constant to every score leaves SD unchanged. Multiplying every score multiplies SD by that constant too."
+        ],
+        exercises: [
+          {q: "Sample has SS = 32, n = 5. Sample variance?", a: "s² = 32/4 = 8."}
+        ]
+      },
+      {
+        id: "dp5", title: "Ch.5 — z-Scores",
+        lecture: "Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 5",
+        notes: [
+          "<span class='f'>z = (X − μ) / σ</span> for a population, <span class='f'>z = (X − M) / s</span> for a sample. Sign shows above or below mean, number shows distance in SD units.",
+          "Solve for raw score: <span class='f'>X = μ + zσ</span>.",
+          "A z-distribution always has mean 0 and SD 1, same shape as the original.",
+          "Standardizing to a new mean and SD: convert X to z first, then new X = new mean plus z times new SD."
+        ],
+        exercises: []
+      },
+      {
+        id: "dp6", title: "Ch.6 — Probability",
+        lecture: "Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 6",
+        notes: [
+          "<span class='f'>p(A) = outcomes classified as A / total possible outcomes</span>.",
+          "Random sampling needs equal chance per person and constant probability across draws, meaning sampling with replacement.",
+          "To find probability for a raw score, convert to z first, then look up the proportion.",
+          "Percentile rank is the percent of people scoring at or below that score."
+        ],
+        exercises: []
+      },
+      {
+        id: "dp7", title: "Ch.7 — Distribution of Sample Means",
+        lecture: "Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 7",
+        notes: [
+          "Distribution of sample means is every possible sample mean (M) from samples of size n, for a given population.",
+          "Central Limit Theorem: for any population, as n grows, the distribution of sample means becomes normal. Already true if population is normal or n is 30 or more.",
+          "<span class='f'>Standard error = σ / √n</span>Bigger n means smaller standard error, means M clusters closer to the true mean.",
+          "<span class='f'>z = (M − μ) / standard error</span> for a sample mean."
+        ],
+        exercises: []
+      }
+    ]
   }
 };
 
