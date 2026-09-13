@@ -223,6 +223,21 @@
   #main-inner.fade-in ul.notes li:nth-child(7),  #main-inner.fade-in .quiz-item:nth-child(7){animation-delay:0.20s;}
   #main-inner.fade-in .quiz-item:nth-child(8){animation-delay:0.23s;}
   #main-inner.fade-in .quiz-item:nth-child(n+9){animation-delay:0.26s;}
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    background:none;
+    border:none;
+    padding:0;
+    margin-bottom:18px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--fdef-text);
+    cursor:pointer;
+    transition:color 0.16s ease;
+  }
+  .back-link:hover{color:var(--teal);}
   .eyebrow{
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     font-size:13px;
@@ -714,6 +729,7 @@ const DATA = {
   statistics: {
     label: "Research Methodology and Data Analytics",
     textbook: "Gravetter & Wallnau, Statistics for the Behavioral Sciences (9th ed.)",
+    teaser: "The statistics behind every claim this program makes about populations, from distributions to z-scores.",
     intro: "Every other subject in this program eventually asks you to trust a number, a survey result, a p-value, a claim that one country's fertility rate is \"significantly\" different from another's. This course is what lets you actually check that claim instead of taking it on faith. It builds up from the basics (what a distribution even is) through z-scores and probability, ending at the tool most research papers lean on: the distribution of sample means.",
     funFact: "A z-score of 2 or higher looks unremarkable written down, but it means a result sits in roughly the top 2 to 3 percent of a normal distribution, rare enough that most researchers would call it statistically significant.",
     sections: [
@@ -813,6 +829,7 @@ const DATA = {
   fundamental: {
     label: "Fundamental Demographic Analysis",
     textbook: "No single assigned textbook noted yet, lecture slides are the primary source.",
+    teaser: "The core counts, ratios, and rates behind population change: births, deaths, migration, and age structure.",
     intro: "This is the core toolkit of the whole degree: the counts, ratios, and rates that every population argument eventually gets built out of. The six sessions move from basic definitions through data sources, age-sex structure, mortality, life tables, and fertility, tracing roughly the same path a country walks as it develops, from high births and deaths down to today's aging, shrinking populations in places like Japan.",
     funFact: "Japan's birth rate now sits at around 8 per 1,000 people against a death rate of around 12 per 1,000, meaning its population shrinks from natural change alone, before migration is even counted.",
     sections: [
@@ -1131,6 +1148,7 @@ const DATA = {
   econ: {
     label: "Public Economics and Policy",
     textbook: "Ihori, T. (2017). Principles of public finance. Springer Singapore. Stiglitz, J. E., & Rosengard, J. K. (2015). Economics of the public sector (4th international student ed.). WW Norton & Company.",
+    teaser: "Why governments tax and spend the way they do, and how that ripples through the wider economy.",
     intro: "Population policy is not free. Every idea in this course, universal health coverage, old age allowances, gender equality laws, ultimately has to be paid for, argued over, and weighed against what else the money could have done. This subject covers why governments intervene at all, how a baht of government spending ripples through the whole economy, and how taxation decisions quietly trade off efficiency against fairness.",
     funFact: "The richest 1% of people in Thailand hold about 67% of the country's wealth, a stark starting point for the whole debate over what governments should and shouldn't redistribute.",
     sections: [
@@ -1453,14 +1471,19 @@ function renderHome(){
   document.querySelector('.semester-card[data-semester]').addEventListener('click', function(){ active = {type:'semester', id:'1'}; render(); });
 }
 
+function backLinkHTML(label){
+  return '<button class="back-link" data-back="1">← ' + label + '</button>';
+}
+
 function renderSemester(id){
-  let html = '<div class="eyebrow">Semester ' + id + '</div><h1 class="section-title">Subjects</h1>';
+  let html = backLinkHTML('Home');
+  html += '<div class="eyebrow">Semester ' + id + '</div><h1 class="section-title">Subjects</h1>';
   html += '<div class="subject-intro">Five courses this trimester, shared across the same room and the same cohort. Pick one to see its sessions.</div>';
   html += '<div class="subject-grid">';
   for(const key in DATA){
     const subj = DATA[key];
     const count = subj.sections.length;
-    const teaser = subj.intro ? subj.intro.split('.')[0] + '.' : 'Materials not uploaded yet.';
+    const teaser = subj.teaser || 'Materials not uploaded yet.';
     html += '<div class="subject-card" data-overview="' + key + '"><div class="subject-card-title">' + subj.label + '</div><div class="subject-card-teaser">' + teaser + '</div><div class="subject-card-count">' + (count ? count + ' sessions' : 'no sessions yet') + '</div></div>';
   }
   html += '</div>';
@@ -1473,11 +1496,13 @@ function renderSemester(id){
       render();
     });
   });
+  document.querySelector('.back-link[data-back]').addEventListener('click', function(){ active = {type:'home'}; render(); });
 }
 
 function renderOverview(key){
   const subj = DATA[key];
-  let html = '<div class="eyebrow">Subject overview</div><h1 class="section-title">' + subj.label + '</h1>';
+  let html = backLinkHTML('Semester 1');
+  html += '<div class="eyebrow">Subject overview</div><h1 class="section-title">' + subj.label + '</h1>';
 
   if(subj.intro){
     html += '<div class="subject-intro">' + subj.intro + '</div>';
@@ -1512,6 +1537,7 @@ function renderOverview(key){
   document.querySelectorAll('.overview-list a[data-id]').forEach(function(el){
     el.addEventListener('click', function(){ active = {type:'section', id: el.dataset.id}; render(); });
   });
+  document.querySelector('.back-link[data-back]').addEventListener('click', function(){ active = {type:'semester', id:'1'}; render(); });
 }
 
 const sectionTabs = {};
@@ -1595,7 +1621,8 @@ function renderSection(id){
   }
   const activeTab = sectionTabs[id];
 
-  let html = '<div class="eyebrow">' + subj.label + '</div><h1 class="section-title">' + sec.title + '</h1>';
+  let html = backLinkHTML(subj.label);
+  html += '<div class="eyebrow">' + subj.label + '</div><h1 class="section-title">' + sec.title + '</h1>';
 
   html += '<div class="tab-bar">';
   tabs.forEach(function(t){
@@ -1615,6 +1642,11 @@ function renderSection(id){
       el.classList.toggle('open');
       el.querySelector('.quiz-toggle').textContent = el.classList.contains('open') ? 'hide' : 'reveal';
     });
+  });
+  document.querySelector('.back-link[data-back]').addEventListener('click', function(){
+    expandedSubjects[found.subjKey] = true;
+    active = {type:'overview', id: found.subjKey};
+    render();
   });
 }
 
