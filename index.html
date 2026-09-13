@@ -449,6 +449,28 @@
     border-left:3px solid var(--teal);
     margin:10px 0 8px;
   }
+  .stage-list{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    margin-top:10px;
+  }
+  .stage-row{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .stage-tag{
+    flex-shrink:0;
+    font-family:'SF Mono','JetBrains Mono',monospace;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--surface);
+    background:var(--teal);
+    padding:3px 8px;
+    min-width:52px;
+    text-align:center;
+  }
 
   .quiz-item{
     border-left:3px solid var(--coral);
@@ -607,7 +629,7 @@ const DATA = {
         notes: [
           "The pipeline: deviation (X minus mean), square it, sum it (SS), divide by N or n minus 1 (variance), square root (SD).",
           "<span class='f'>SS = \u03a3(X \u2212 \u03bc)\u00b2</span> or <span class='f'>SS = \u03a3X\u00b2 \u2212 (\u03a3X)\u00b2/N</span>.",
-          "Population: <span class='f'>\u03c3\u00b2 = SS/N</span>, <span class='f'>\u03c3 = \u221a(SS/N)</span>. Sample: <span class='f'>s\u00b2 = SS/(n\u22121)</span>, <span class='f'>s = \u221a(SS/(n\u22121))</span>.",
+          "Population: <span class='f'>\u03c3\u00b2 = SS/N</span>, <span class='f'>\u03c3 = \u221a(SS/N)</span>Sample: <span class='f'>s\u00b2 = SS/(n\u22121)</span>, <span class='f'>s = \u221a(SS/(n\u22121))</span>.",
           "Sample uses n minus 1 (degrees of freedom) because samples underestimate true spread, dividing by n would bias variance too low.",
           "Adding a constant to every score leaves SD unchanged. Multiplying every score multiplies SD by that constant too."
         ],
@@ -643,7 +665,7 @@ const DATA = {
         notes: [
           "Distribution of sample means is every possible sample mean (M) from samples of size n, for a given population.",
           "Central Limit Theorem: for any population, as n grows, the distribution of sample means becomes normal. Already true if population is normal or n is 30 or more.",
-          "<span class='f'>Standard error = \u03c3 / \u221an</span>. Bigger n means smaller standard error, means M clusters closer to the true mean.",
+          "<span class='f'>Standard error = \u03c3 / \u221an</span>Bigger n means smaller standard error, means M clusters closer to the true mean.",
           "<span class='f'>z = (M \u2212 \u03bc) / standard error</span> for a sample mean."
         ],
         exercises: []
@@ -669,9 +691,9 @@ const DATA = {
           "Demography comes from Greek: demos (the people) plus graphein (to write). It is literally the study of writing about the people, meaning counting them and tracking how their numbers change.",
           "<strong>Formal demography</strong> is the math side: births, deaths, migration, life tables, projections. It answers <em>what</em> is happening to population numbers. <strong>Population studies</strong> (social demography) borrows from economics and sociology to answer <em>why</em> it is happening and what it means for society.",
           "Four building blocks used everywhere in this field: <strong>Count</strong> (a plain number, e.g. 480,000 births), <strong>Proportion</strong> (a part compared to the whole that contains it, e.g. 20% of the population is over 60), <strong>Ratio</strong> (two separate, non-overlapping groups compared, e.g. 96 males per 100 females), <strong>Rate</strong> (how fast something happens relative to a population at risk, usually per 1,000 per year, e.g. crude birth rate).",
-          "<span class='f'>CBR = (B / P) \u00d7 1,000</span>. B is the number of live births in a year, P is the mid-year population (the population count around the middle of that year, used as the best single estimate of the population <em>during</em> the whole year).<br><br><strong>Worked example:</strong> A country records 480,000 live births with a mid-year population of 60,000,000. CBR = (480,000 / 60,000,000) \u00d7 1,000 = 8 births per 1,000 people.",
-          "<span class='f'>OADR = (Pop 65+ / Pop 15\u201364) \u00d7 100</span>. This is a ratio, not a proportion, because the numerator (elderly) and denominator (working age) are two completely separate, non-overlapping groups.<br><br><strong>Worked example:</strong> 8,200,000 people aged 65+ and 42,000,000 aged 15\u201364. OADR = (8,200,000 / 42,000,000) \u00d7 100 \u2248 19.5 dependents per 100 working-age people.",
-          "The <strong>Demographic Transition Model</strong> describes a pattern most countries pass through as they develop, tracked through birth and death rates moving over five stages. <strong>Stage 1</strong>: both high, slow growth. <strong>Stage 2</strong>: deaths fall fast (sanitation, medicine) while births stay high, rapid growth. <strong>Stage 3</strong>: births finally start falling too (urbanization, education, contraception), growth slows. <strong>Stage 4</strong>: both low, slow or stable growth. <strong>Stage 5</strong> (a newer, debated addition): births fall below replacement level, population may shrink and age rapidly.",
+          "<span class='f'>CBR = (B / P) \u00d7 1,000</span>B is the number of live births in a year, P is the mid-year population (the population count around the middle of that year, used as the best single estimate of the population <em>during</em> the whole year).<br><br><strong>Worked example:</strong> A country records 480,000 live births with a mid-year population of 60,000,000. CBR = (480,000 / 60,000,000) \u00d7 1,000 = 8 births per 1,000 people.",
+          "<span class='f'>OADR = (Pop 65+ / Pop 15\u201364) \u00d7 100</span>This is a ratio, not a proportion, because the numerator (elderly) and denominator (working age) are two completely separate, non-overlapping groups.<br><br><strong>Worked example:</strong> 8,200,000 people aged 65+ and 42,000,000 aged 15\u201364. OADR = (8,200,000 / 42,000,000) \u00d7 100 \u2248 19.5 dependents per 100 working-age people.",
+          "The <strong>Demographic Transition Model</strong> describes a pattern most countries pass through as they develop, tracked through birth and death rates moving over five stages.<div class='stage-list'><div class='stage-row'><span class='stage-tag'>Stage 1</span>Both high, slow growth.</div><div class='stage-row'><span class='stage-tag'>Stage 2</span>Deaths fall fast (sanitation, medicine) while births stay high, rapid growth.</div><div class='stage-row'><span class='stage-tag'>Stage 3</span>Births finally start falling too (urbanization, education, contraception), growth slows.</div><div class='stage-row'><span class='stage-tag'>Stage 4</span>Both low, slow or stable growth.</div><div class='stage-row'><span class='stage-tag'>Stage 5</span>A newer, debated addition. Births fall below replacement level, population may shrink and age rapidly.</div></div>",
           "<div style='background:#fff;border:1px solid var(--line);padding:18px;margin:6px 0;'><svg viewBox='0 0 600 260' style='width:100%;height:auto;'><line x1='50' y1='220' x2='570' y2='220' stroke='#888' stroke-width='1'/><line x1='50' y1='30' x2='50' y2='220' stroke='#888' stroke-width='1'/><polyline points='60,58 180,58 300,130 420,176.8 540,191.2' fill='none' stroke='#1F5C57' stroke-width='2.5'/><polyline points='60,58 180,148 300,184 420,184 540,176.8' fill='none' stroke='#8A2E24' stroke-width='2.5'/><circle cx='60' cy='58' r='3.5' fill='#1F5C57'/><circle cx='180' cy='58' r='3.5' fill='#1F5C57'/><circle cx='300' cy='130' r='3.5' fill='#1F5C57'/><circle cx='420' cy='176.8' r='3.5' fill='#1F5C57'/><circle cx='540' cy='191.2' r='3.5' fill='#1F5C57'/><circle cx='60' cy='58' r='3.5' fill='#8A2E24'/><circle cx='180' cy='148' r='3.5' fill='#8A2E24'/><circle cx='300' cy='184' r='3.5' fill='#8A2E24'/><circle cx='420' cy='184' r='3.5' fill='#8A2E24'/><circle cx='540' cy='176.8' r='3.5' fill='#8A2E24'/><text x='60' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 1</text><text x='180' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 2</text><text x='300' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 3</text><text x='420' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 4</text><text x='540' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 5</text><text x='30' y='60' font-size='11' text-anchor='middle' fill='#2A2823'>high</text><text x='30' y='195' font-size='11' text-anchor='middle' fill='#2A2823'>low</text><rect x='400' y='38' width='12' height='12' fill='#1F5C57'/><text x='417' y='48' font-size='12' fill='#2A2823'>Birth rate</text><rect x='500' y='38' width='12' height='12' fill='#8A2E24'/><text x='517' y='48' font-size='12' fill='#2A2823'>Death rate</text></svg><p style='font-family:-apple-system,sans-serif;font-size:12.5px;color:#8A8578;margin:8px 0 0;'>Illustrative pattern (not a specific country) showing why Stage 2 produces the fastest growth: the widest gap between the two lines.</p></div>",
           "Real countries mapped onto the model today (World Population Review, 2026 classification): <strong>Stage 2</strong> (still high birth rates, falling death rates): Niger, Ethiopia, Pakistan, DR Congo, Yemen, most of sub-Saharan Africa and parts of the Middle East. <strong>Stage 3</strong> (falling birth rates, slowing growth): India, Indonesia, Egypt, Mexico, Brazil. <strong>Stage 4</strong> (both low): most of Western Europe, the US, South Korea. <strong>Stage 5</strong> (below replacement, shrinking): Japan, Italy, Germany, Spain, Russia, South Korea.",
           "Niger is worth noting specifically: no country today is a perfectly pure Stage 1 case, but Niger's pyramid, extremely wide base, fertility above 6 children per woman, comes closest to what Stage 1 historically looked like, which is why it is usually classified as early Stage 2 rather than Stage 1 itself.",
@@ -715,8 +737,8 @@ const DATA = {
           "One sneaky data quality problem is age heaping, people rounding their age to a number ending in 0 or 5 instead of giving their exact age, especially in surveys where literacy or record-keeping is weaker. Whipple's Index catches this by checking how many people in a sample reported suspiciously round ages. A score of 100 means no rounding problem at all. A score way above that, like 150 or more, means a lot of people are just guessing round numbers instead of stating their real age, which can throw off any analysis that depends on exact ages."
         ],
         notes: [
-          "<span class='f'>P2 = P1 + B \u2212 D + IM \u2212 OM</span>. P1 and P2 are start and end population, B and D are births and deaths, IM and OM are in and out migration.",
-          "<span class='f'>P2 = P1 \u00d7 e^(rn)</span>. e is about 2.71828, r is growth rate as a decimal, n is years.",
+          "<span class='f'>P2 = P1 + B \u2212 D + IM \u2212 OM</span>P1 and P2 are start and end population, B and D are births and deaths, IM and OM are in and out migration.",
+          "<span class='f'>P2 = P1 \u00d7 e^(rn)</span>e is about 2.71828, r is growth rate as a decimal, n is years.",
           "Rule of 70: doubling time is about 70 divided by r, using r as a plain percent number, not a decimal.",
           "Four official sources: Census (universal but slow and costly), CRVS (continuous vital records), Sample surveys (detailed, sampling error), Population registers (continuous, needs strong ID systems).",
           "Whipple's Index checks age heaping. WI = 100 means no heaping, over 175 means very rough data."
@@ -763,9 +785,9 @@ const DATA = {
         ],
         notes: [
           "Pyramid rule: always divide by the total population, never the same-sex subtotal, or it hides real sex imbalance.",
-          "<span class='f'>SR = (Males / Females) \u00d7 100</span>. <span class='f'>SRB = (Male births / Female births) \u00d7 100</span>, normal range about 104 to 106.",
-          "<span class='f'>Youth DR = (Pop 0\u201314 / Pop 15\u201364) \u00d7 100</span>. <span class='f'>Old-Age DR = (Pop 65+ / Pop 15\u201364) \u00d7 100</span>. Total DR = Youth DR plus Old-Age DR.",
-          "<span class='f'>Aging Index = (Pop 65+ / Pop 0\u201314) \u00d7 100</span>. Over 100 means elderly outnumber children.",
+          "<span class='f'>SR = (Males / Females) \u00d7 100</span><span class='f'>SRB = (Male births / Female births) \u00d7 100</span>, normal range about 104 to 106.",
+          "<span class='f'>Youth DR = (Pop 0\u201314 / Pop 15\u201364) \u00d7 100</span><span class='f'>Old-Age DR = (Pop 65+ / Pop 15\u201364) \u00d7 100</span>Total DR = Youth DR plus Old-Age DR.",
+          "<span class='f'>Aging Index = (Pop 65+ / Pop 0\u201314) \u00d7 100</span>Over 100 means elderly outnumber children.",
           "First dividend: working age share rises as fertility falls, temporary. Second dividend: longer lifespans push saving and skill building, can persist longer.",
           "Growth contribution formula: annual growth equals (support ratio end divided by support ratio start), raised to the power of 1 over n years, minus 1."
         ],
@@ -1024,8 +1046,8 @@ const DATA = {
           "<span class='f'>AD = C + I</span> in a closed economy with no government. <span class='f'>AD = C + I + G</span> with government added. <span class='f'>AD = C + I + G + NX</span> in an open economy, where NX = exports − imports.",
           "Expansionary fiscal policy: government spending up or tax rate down, which raises national income. Contractionary fiscal policy: government spending down or tax rate up, which lowers national income.",
           "The 45-degree model finds equilibrium output where <span class='f'>Y = C + I + G</span>, with the consumption function <span class='f'>C = cY</span> where c is the MPC (marginal propensity to consume), 0 < MPC < 1. Note MPC + MPS = 1, where MPS is the marginal propensity to save.",
-          "Fiscal multiplier without tax: <span class='f'>ΔY / ΔG = 1 / (1 − c)</span>. A higher MPC means a bigger multiplier, because more of each round of new income gets spent again.",
-          "Fiscal multiplier with a tax rate t (where T = tY): <span class='f'>ΔY / ΔG = 1 / (1 − c(1 − t))</span>. The multiplier is smaller than the no-tax case, since part of each round of income leaks out as tax before it can be re-spent.",
+          "Fiscal multiplier without tax: <span class='f'>ΔY / ΔG = 1 / (1 − c)</span>A higher MPC means a bigger multiplier, because more of each round of new income gets spent again.",
+          "Fiscal multiplier with a tax rate t (where T = tY): <span class='f'>ΔY / ΔG = 1 / (1 − c(1 − t))</span>The multiplier is smaller than the no-tax case, since part of each round of income leaks out as tax before it can be re-spent.",
           "Balanced-budget multiplier: if <span class='f'>ΔT = ΔG</span>, then <span class='f'>ΔY = ΔG</span> exactly, a multiplier of 1. Government spending enters demand fully and immediately, while a tax rise only cuts consumption by the MPC share of it.",
           "Paradox of thrift: an economy-wide rise in saving reduces consumer demand, causing firms to cut production, so total output falls rather than rises."
         ],
@@ -1068,7 +1090,7 @@ const DATA = {
           "Crowding-out effect: higher government spending raises the interest rate (through increased borrowing), which reduces private investment. This shrinks the fiscal multiplier compared to the simple Keynesian model.",
           "Crowding-in effect: if public investment raises the productivity of private firms, it can increase private investment and consumption instead of reducing it, offsetting or reversing crowding out.",
           "Example of crowding in: Thailand's Eastern Economic Corridor (EEC). Public infrastructure attracts private investment, which raises demand across related industries, manufacturing (steel, cement, machinery), transport and logistics, and services (engineering, finance, insurance).",
-          "Open economy equilibrium conditions: goods market <span class='f'>Y = C(Y) + I(r) + G + NX(e, Y)</span>; money market <span class='f'>M = L(Y, r)</span>. With perfect capital mobility, the domestic interest rate equals the world interest rate, <span class='f'>r = r*</span>.",
+          "Open economy equilibrium conditions: goods market <span class='f'>Y = C(Y) + I(r) + G + NX(e, Y)</span>; money market <span class='f'>M = L(Y, r)</span>With perfect capital mobility, the domestic interest rate equals the world interest rate, <span class='f'>r = r*</span>.",
           "Fixed exchange rate: currency pegged to another currency, a basket, or a commodity, with the central bank intervening to hold it steady. Advantage: reduces uncertainty, promotes trade. Disadvantage: limits monetary policy independence.",
           "Flexible exchange rate: currency value set by market supply and demand, with little or no central bank intervention. Advantage: preserves monetary policy independence, adjusts to shocks. Disadvantage: more volatility.",
           "Under perfect capital mobility: fiscal policy is effective under a fixed exchange rate, but ineffective under a flexible exchange rate, where monetary policy becomes the effective tool instead."
