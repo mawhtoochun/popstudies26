@@ -102,7 +102,12 @@
     letter-spacing:1px;
     border-top:1px solid #2A3357;
     margin-top:4px;
+    cursor:pointer;
+    transition:color 0.16s ease;
   }
+  .toc-semester:hover{color:#6FCFC4;}
+  .toc-semester.active-semester{color:#6FCFC4;}
+  .toc-brand{cursor:pointer;}
   .toc-subject{
     padding:14px 20px 10px;
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -280,6 +285,69 @@
     letter-spacing:0.6px;
     color:var(--amber);
     margin-bottom:6px;
+  }
+  .semester-card{
+    background:var(--surface-alt);
+    border:1px solid var(--line);
+    border-left:4px solid var(--teal);
+    padding:20px 22px;
+    margin-top:16px;
+    max-width:420px;
+    cursor:pointer;
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .semester-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(var(--shadow-color),0.16);
+  }
+  .semester-card-title{
+    font-size:18px;
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:4px;
+  }
+  .semester-card-sub{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:13px;
+    color:var(--fdef-text);
+  }
+  .subject-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:14px;
+    margin-top:16px;
+  }
+  .subject-card{
+    background:var(--surface-alt);
+    border:1px solid var(--line);
+    border-left:4px solid var(--teal);
+    padding:18px 20px;
+    cursor:pointer;
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .subject-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(var(--shadow-color),0.16);
+  }
+  .subject-card-title{
+    font-size:15.5px;
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:8px;
+    line-height:1.35;
+  }
+  .subject-card-teaser{
+    font-size:13.5px;
+    line-height:1.55;
+    color:var(--charcoal);
+    margin-bottom:10px;
+  }
+  .subject-card-count{
+    font-family:'SF Mono','JetBrains Mono',monospace;
+    font-size:11.5px;
+    color:var(--teal);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
   }
   h2.block-title{
     font-size:13px;
@@ -499,6 +567,22 @@
     padding:8px 10px;
     border-left:3px solid var(--teal);
     margin:10px 0 8px;
+  }
+  .point-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    margin:12px 0 4px;
+  }
+  .point-row{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .point-arrow{
+    flex-shrink:0;
+    color:var(--teal);
+    font-weight:700;
   }
   .stage-list{
     display:flex;
@@ -737,7 +821,7 @@ const DATA = {
         lecture: "Session 1 \u2014 Introduction to Demography", filePath: "materials/fundamental/Session 1_Introduction_2026.pdf", textbookRef: "",
         summary: [
           "Demography is basically the study of people, counting them, measuring how their numbers change, and figuring out why. There are two branches. <strong>Formal demography</strong> is the math side, tracking births, deaths, and migration with numbers and formulas. <strong>Population studies</strong> asks the deeper question of why those numbers move the way they do, borrowing from economics and sociology. Think of it like a car: formal demography knows exactly how fast the car is going and how much fuel is left, population studies asks why the driver chose that speed and where they're headed.",
-          "Almost every formula in this whole subject boils down to one of four basic ideas. A <strong>count</strong> is just a plain number, like the number of babies born last year. A <strong>proportion</strong> is a part compared to a whole that contains it, like the share of the population over 60. A <strong>ratio</strong> compares two separate groups that don't overlap at all, like the number of men compared to women. A <strong>rate</strong> measures how fast something happens over time, usually per 1,000 people per year, like the birth rate.",
+          "Almost every formula in this whole subject boils down to one of four basic ideas.<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span>A <strong>count</strong> is just a plain number, like the number of babies born last year.</div><div class='point-row'><span class='point-arrow'>→</span>A <strong>proportion</strong> is a part compared to a whole that contains it, like the share of the population over 60.</div><div class='point-row'><span class='point-arrow'>→</span>A <strong>ratio</strong> compares two separate groups that don't overlap at all, like the number of men compared to women.</div><div class='point-row'><span class='point-arrow'>→</span>A <strong>rate</strong> measures how fast something happens over time, usually per 1,000 people per year, like the birth rate.</div></div>",
           "The Crude Birth Rate is just births divided by the total population, scaled up by 1,000 so the number is easier to read (8 sounds friendlier than 0.008). The Old Age Dependency Ratio compares how many elderly people there are for every 100 working-age people, essentially asking how much of a support burden the working population is carrying.",
           "The Demographic Transition Model describes a pattern almost every country passes through as it develops. Imagine a see-saw between births and deaths. At first both are high and roughly balance out (Stage 1). Then medicine and sanitation improve, deaths drop fast while births stay high, and the population explodes (Stage 2, the fastest-growing stage of all). Eventually people have fewer children too as they move to cities and get educated, and growth slows back down (Stage 3). Finally both settle low (Stage 4), and in some countries births actually fall below deaths, causing the population to shrink and age (Stage 5).",
           "Real countries sit at very different points on this model right now. Niger has the highest fertility in the world and looks closest to the old Stage 1 pattern. Japan is the textbook Stage 5 case, its population is already shrinking because more people die each year than are born. Thailand sits in between, aging fast but not shrinking yet. The gap between Japan's life expectancy (85) and a country like the Philippines (70) shows why you can never talk about 'Asia' as if it's one uniform place demographically."
@@ -745,7 +829,7 @@ const DATA = {
         notes: [
           "Demography comes from Greek: demos (the people) plus graphein (to write). It is literally the study of writing about the people, meaning counting them and tracking how their numbers change.",
           "<strong>Formal demography</strong> is the math side: births, deaths, migration, life tables, projections. It answers <em>what</em> is happening to population numbers. <strong>Population studies</strong> (social demography) borrows from economics and sociology to answer <em>why</em> it is happening and what it means for society.",
-          "Four building blocks used everywhere in this field: <strong>Count</strong> (a plain number, e.g. 480,000 births), <strong>Proportion</strong> (a part compared to the whole that contains it, e.g. 20% of the population is over 60), <strong>Ratio</strong> (two separate, non-overlapping groups compared, e.g. 96 males per 100 females), <strong>Rate</strong> (how fast something happens relative to a population at risk, usually per 1,000 per year, e.g. crude birth rate).",
+          "Four building blocks used everywhere in this field:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span><strong>Count</strong>, a plain number, e.g. 480,000 births.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Proportion</strong>, a part compared to the whole that contains it, e.g. 20% of the population is over 60.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Ratio</strong>, two separate, non-overlapping groups compared, e.g. 96 males per 100 females.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Rate</strong>, how fast something happens relative to a population at risk, usually per 1,000 per year, e.g. crude birth rate.</div></div>",
           "<span class='f'>CBR = (B / P) \u00d7 1,000</span>B is the number of live births in a year, P is the mid-year population (the population count around the middle of that year, used as the best single estimate of the population <em>during</em> the whole year).<br><br><strong>Worked example:</strong> A country records 480,000 live births with a mid-year population of 60,000,000. CBR = (480,000 / 60,000,000) \u00d7 1,000 = 8 births per 1,000 people.",
           "<span class='f'>OADR = (Pop 65+ / Pop 15\u201364) \u00d7 100</span>This is a ratio, not a proportion, because the numerator (elderly) and denominator (working age) are two completely separate, non-overlapping groups.<br><br><strong>Worked example:</strong> 8,200,000 people aged 65+ and 42,000,000 aged 15\u201364. OADR = (8,200,000 / 42,000,000) \u00d7 100 \u2248 19.5 dependents per 100 working-age people.",
           "The <strong>Demographic Transition Model</strong> describes a pattern most countries pass through as they develop, tracked through birth and death rates moving over five stages.<div class='stage-list'><div class='stage-row'><span class='stage-tag'>Stage 1</span>Both high, slow growth.</div><div class='stage-row'><span class='stage-tag'>Stage 2</span>Deaths fall fast (sanitation, medicine) while births stay high, rapid growth.</div><div class='stage-row'><span class='stage-tag'>Stage 3</span>Births finally start falling too (urbanization, education, contraception), growth slows.</div><div class='stage-row'><span class='stage-tag'>Stage 4</span>Both low, slow or stable growth.</div><div class='stage-row'><span class='stage-tag'>Stage 5</span>A newer, debated addition. Births fall below replacement level, population may shrink and age rapidly.</div></div>",
@@ -1296,7 +1380,7 @@ const DATA = {
   }
 };
 
-let active = { type: "section", id: "f1" };
+let active = { type: "home" };
 
 const expandedSubjects = {};
 
@@ -1304,8 +1388,8 @@ function renderTOC(){
   const toc = document.getElementById('toc');
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   const themeLabel = isDark ? '\u2600 Light mode' : '\u263D Dark mode';
-  let html = '<div class="toc-brand">PopStudies26</div><div class="toc-sub">Year 1 study reference, built as we go</div><button id="theme-toggle" onclick="toggleTheme()">' + themeLabel + '</button>';
-  html += '<div class="toc-semester">Semester 1</div>';
+  let html = '<div class="toc-brand" data-home="1">PopStudies26</div><div class="toc-sub">Year 1 study reference, built as we go</div><button id="theme-toggle" onclick="toggleTheme()">' + themeLabel + '</button>';
+  html += '<div class="toc-semester ' + (active.type==='semester'?'active-semester':'') + '" data-semester="1">Semester 1</div>';
   for(const key in DATA){
     const subj = DATA[key];
     const isActiveSubject = active.type==='overview' && active.id===key;
@@ -1339,6 +1423,8 @@ function renderTOC(){
       render();
     });
   });
+  toc.querySelector('.toc-brand[data-home]').addEventListener('click', function(){ active = {type:'home'}; render(); });
+  toc.querySelector('.toc-semester[data-semester]').addEventListener('click', function(){ active = {type:'semester', id:'1'}; render(); });
 }
 
 function findSection(id){
@@ -1355,6 +1441,38 @@ function driveLinkHTML(key, label){
     return '<a href="' + link + '" target="_blank" rel="noopener">' + label + '</a>';
   }
   return '<span style="color:#B5AF9E;">' + label + ' (add your Drive link in the code to make this clickable)</span>';
+}
+
+function renderHome(){
+  let html = '<div class="eyebrow">PopStudies26</div><h1 class="section-title">Welcome</h1>';
+  html += '<div class="subject-intro">This is a study reference built for the MA Population Policy and Human Development program at Chulalongkorn University, meant for checking a formula or re-reading a summary on your phone between classes or on the commute. Everything here follows the lecture slides directly, organized by semester, subject, and session.</div>';
+  html += '<div class="fun-fact"><span class="fun-fact-tag">Worth knowing</span>The world’s population passed 8 billion people in November 2022, according to the UN. Roughly everything in this program, fertility, mortality, migration, policy, is really about understanding how that number moves and what it means for the people behind it.</div>';
+  html += '<h2 class="block-title block-notes">Semesters</h2>';
+  html += '<div class="semester-card" data-semester="1"><div class="semester-card-title">Semester 1</div><div class="semester-card-sub">5 subjects · First Trimester 2026</div></div>';
+  document.getElementById('main-inner').innerHTML = html;
+  document.querySelector('.semester-card[data-semester]').addEventListener('click', function(){ active = {type:'semester', id:'1'}; render(); });
+}
+
+function renderSemester(id){
+  let html = '<div class="eyebrow">Semester ' + id + '</div><h1 class="section-title">Subjects</h1>';
+  html += '<div class="subject-intro">Five courses this trimester, shared across the same room and the same cohort. Pick one to see its sessions.</div>';
+  html += '<div class="subject-grid">';
+  for(const key in DATA){
+    const subj = DATA[key];
+    const count = subj.sections.length;
+    const teaser = subj.intro ? subj.intro.split('.')[0] + '.' : 'Materials not uploaded yet.';
+    html += '<div class="subject-card" data-overview="' + key + '"><div class="subject-card-title">' + subj.label + '</div><div class="subject-card-teaser">' + teaser + '</div><div class="subject-card-count">' + (count ? count + ' sessions' : 'no sessions yet') + '</div></div>';
+  }
+  html += '</div>';
+  document.getElementById('main-inner').innerHTML = html;
+  document.querySelectorAll('.subject-card[data-overview]').forEach(function(el){
+    el.addEventListener('click', function(){
+      const key = el.dataset.overview;
+      expandedSubjects[key] = true;
+      active = {type:'overview', id: key};
+      render();
+    });
+  });
 }
 
 function renderOverview(key){
@@ -1540,7 +1658,9 @@ applyTheme(getTheme());
 
 function render(){
   renderTOC();
-  if(active.type === 'overview'){ renderOverview(active.id); }
+  if(active.type === 'home'){ renderHome(); }
+  else if(active.type === 'semester'){ renderSemester(active.id); }
+  else if(active.type === 'overview'){ renderOverview(active.id); }
   else { renderSection(active.id); }
   window.scrollTo(0,0);
   const mainInner = document.getElementById('main-inner');
