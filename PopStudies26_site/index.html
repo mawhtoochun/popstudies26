@@ -126,6 +126,42 @@
     padding:8px 0 4px;
   }
 
+  #gate{
+    position:fixed; inset:0; background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    z-index:1000;
+  }
+  #gate-box{
+    background:#fff; border:1px solid var(--line);
+    padding:40px 36px; max-width:340px; width:90%;
+    text-align:center;
+  }
+  #gate-box h2{
+    font-size:20px; color:var(--ink); margin:0 0 6px;
+    font-family:'Iowan Old Style',Georgia,serif;
+  }
+  #gate-box p{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:13.5px; color:#8A8578; margin:0 0 20px;
+  }
+  #gate-box input{
+    width:100%; padding:10px 12px; font-size:15px;
+    border:1px solid var(--line); margin-bottom:12px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    box-sizing:border-box;
+  }
+  #gate-box button{
+    width:100%; padding:10px; font-size:14.5px; font-weight:600;
+    background:var(--teal); color:#fff; border:none; cursor:pointer;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  #gate-box button:hover{background:#25534F;}
+  #gate-error{
+    color:#B34A3C; font-size:13px; margin-top:10px; height:16px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  #app{display:none;}
+
   ul.materials{list-style:none;margin:0;padding:0;}
   ul.materials li{
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -229,8 +265,20 @@
 </head>
 <body>
 
+<div id="gate">
+  <div id="gate-box">
+    <h2>PopStudies26</h2>
+    <p>Enter the class password to continue</p>
+    <input type="password" id="gate-input" placeholder="Password">
+    <button onclick="checkPassword()">Enter</button>
+    <div id="gate-error"></div>
+  </div>
+</div>
+
+<div id="app">
 <nav class="toc" id="toc"></nav>
 <main id="main"></main>
+</div>
 
 <script>
 const DRIVE_LINKS = {
@@ -540,7 +588,30 @@ function render(){
   window.scrollTo(0,0);
 }
 
-render();
+const SITE_PASSWORD = "pstudies7777";
+
+function checkPassword(){
+  const input = document.getElementById('gate-input').value;
+  const err = document.getElementById('gate-error');
+  if(input === SITE_PASSWORD){
+    sessionStorage.setItem('popstudies26_unlocked', 'yes');
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    render();
+  } else {
+    err.textContent = 'Wrong password, try again.';
+  }
+}
+
+document.getElementById('gate-input').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') checkPassword();
+});
+
+if(sessionStorage.getItem('popstudies26_unlocked') === 'yes'){
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  render();
+}
 </script>
 
 </body>
