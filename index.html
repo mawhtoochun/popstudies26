@@ -227,8 +227,59 @@
   h1.section-title{
     font-size:29px;
     color:var(--ink);
-    margin:0 0 30px;
+    margin:0 0 24px;
     line-height:1.25;
+  }
+  .tab-bar{
+    display:flex;
+    gap:4px;
+    margin:0 0 30px;
+    border-bottom:2px solid var(--line);
+    overflow-x:auto;
+  }
+  .tab-btn{
+    padding:11px 18px;
+    background:none;
+    border:none;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:var(--fdef-text);
+    cursor:pointer;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+    transition:color 0.18s ease, border-color 0.18s ease;
+  }
+  .tab-btn:hover{color:var(--teal);}
+  .tab-btn.active{color:var(--teal); border-bottom-color:var(--teal);}
+  .tab-panel{animation:fadeInUp 0.28s ease;}
+  .subject-intro{
+    font-size:16.5px;
+    line-height:1.68;
+    color:var(--charcoal);
+    max-width:680px;
+    margin:0 0 18px;
+  }
+  .fun-fact{
+    background:var(--amber-tint);
+    border-left:3px solid var(--amber);
+    padding:14px 16px;
+    font-size:14.5px;
+    line-height:1.6;
+    margin:0 0 8px;
+  }
+  .fun-fact-tag{
+    display:block;
+    font-family:'SF Mono','JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:var(--amber);
+    margin-bottom:6px;
   }
   h2.block-title{
     font-size:13px;
@@ -579,6 +630,8 @@ const DATA = {
   statistics: {
     label: "Research Methodology and Data Analytics",
     textbook: "Gravetter & Wallnau, Statistics for the Behavioral Sciences (9th ed.)",
+    intro: "Every other subject in this program eventually asks you to trust a number, a survey result, a p-value, a claim that one country's fertility rate is \"significantly\" different from another's. This course is what lets you actually check that claim instead of taking it on faith. It builds up from the basics (what a distribution even is) through z-scores and probability, ending at the tool most research papers lean on: the distribution of sample means.",
+    funFact: "A z-score of 2 or higher looks unremarkable written down, but it means a result sits in roughly the top 2 to 3 percent of a normal distribution, rare enough that most researchers would call it statistically significant.",
     sections: [
       {
         id: "s1", title: "Ch.1 \u2014 Introduction to Statistics",
@@ -676,6 +729,8 @@ const DATA = {
   fundamental: {
     label: "Fundamental Demographic Analysis",
     textbook: "No single assigned textbook noted yet, lecture slides are the primary source.",
+    intro: "This is the core toolkit of the whole degree: the counts, ratios, and rates that every population argument eventually gets built out of. The six sessions move from basic definitions through data sources, age-sex structure, mortality, life tables, and fertility, tracing roughly the same path a country walks as it develops, from high births and deaths down to today's aging, shrinking populations in places like Japan.",
+    funFact: "Japan's birth rate now sits at around 8 per 1,000 people against a death rate of around 12 per 1,000, meaning its population shrinks from natural change alone, before migration is even counted.",
     sections: [
       {
         id: "f1", title: "Session 1 \u2014 Introduction to Demography",
@@ -992,6 +1047,8 @@ const DATA = {
   econ: {
     label: "Public Economics and Policy",
     textbook: "Ihori, T. (2017). Principles of public finance. Springer Singapore. Stiglitz, J. E., & Rosengard, J. K. (2015). Economics of the public sector (4th international student ed.). WW Norton & Company.",
+    intro: "Population policy is not free. Every idea in this course, universal health coverage, old age allowances, gender equality laws, ultimately has to be paid for, argued over, and weighed against what else the money could have done. This subject covers why governments intervene at all, how a baht of government spending ripples through the whole economy, and how taxation decisions quietly trade off efficiency against fairness.",
+    funFact: "The richest 1% of people in Thailand hold about 67% of the country's wealth, a stark starting point for the whole debate over what governments should and shouldn't redistribute.",
     sections: [
       {
         id: "ec1", title: "Lecture 1 — Role and Structure of the Public Sector",
@@ -1304,6 +1361,13 @@ function renderOverview(key){
   const subj = DATA[key];
   let html = '<div class="eyebrow">Subject overview</div><h1 class="section-title">' + subj.label + '</h1>';
 
+  if(subj.intro){
+    html += '<div class="subject-intro">' + subj.intro + '</div>';
+  }
+  if(subj.funFact){
+    html += '<div class="fun-fact"><span class="fun-fact-tag">Worth knowing</span>' + subj.funFact + '</div>';
+  }
+
   html += '<h2 class="block-title block-materials">Materials</h2><ul class="materials">';
   const hasLocalFiles = subj.sections.some(function(s){ return s.filePath; });
   if(hasLocalFiles){
@@ -1332,64 +1396,102 @@ function renderOverview(key){
   });
 }
 
+const sectionTabs = {};
+
+function sectionTabList(subj, sec){
+  const tabs = [{key:'slides', label:'Slides'}];
+  if(sec.summary && sec.summary.length) tabs.push({key:'summary', label:'Summary'});
+  tabs.push({key:'notes', label:'Notes'});
+  if(sec.formulas && sec.formulas.length) tabs.push({key:'formulas', label:'Formulas'});
+  tabs.push({key:'exercises', label:'Exercises'});
+  return tabs;
+}
+
+function tabContentHTML(tabKey, subj, sec){
+  if(tabKey === 'slides'){
+    let html = '<h2 class="block-title block-materials">Materials</h2><ul class="materials">';
+    if(sec.filePath){
+      html += '<li>' + sec.lecture + '<button class="view-btn" onclick="openPdf(\'' + sec.filePath + '\')">View slides</button><span class="mat-tag">PDF</span></li>';
+    } else {
+      html += '<li>' + sec.lecture + '<span class="mat-tag">SLIDES (not hosted yet)</span></li>';
+    }
+    if(sec.textbookRef){
+      html += '<li>' + subj.textbook + '<span class="mat-tag">' + sec.textbookRef.toUpperCase() + '</span></li>';
+    }
+    html += '</ul>';
+    html += '<div id="pdf-panel"><div id="pdf-panel-bar">'
+      + '<button class="pdf-panel-btn" onclick="closePdf()">Close viewer</button>'
+      + '<button class="pdf-panel-btn" onclick="fullscreenPdf()">Full screen</button>'
+      + '<a class="pdf-panel-btn" id="pdf-open-tab" href="" target="_blank" rel="noopener">Open in new tab</a>'
+      + '</div><iframe id="pdf-frame" src=""></iframe></div>';
+    return html;
+  }
+  if(tabKey === 'summary'){
+    let html = '<h2 class="block-title block-summary">Summary \u2014 start here</h2><div class="summary-box">';
+    sec.summary.forEach(function(p){ html += '<p>' + p + '</p>'; });
+    html += '</div>';
+    return html;
+  }
+  if(tabKey === 'notes'){
+    let html = '<h2 class="block-title block-notes">Notes</h2>';
+    if(sec.notes.length){
+      html += '<ul class="notes">';
+      sec.notes.forEach(function(n){ html += '<li>' + n + '</li>'; });
+      html += '</ul>';
+    } else {
+      html += '<div class="empty-note">Not covered yet. Ask Claude to add this session\'s notes once we go through it.</div>';
+    }
+    return html;
+  }
+  if(tabKey === 'formulas'){
+    let html = '<h2 class="block-title block-formulas">Formulas</h2><ul class="formulas">';
+    sec.formulas.forEach(function(f){
+      html += '<li><span class="fname">' + f.name + '</span><span class="fx">' + f.expr + '</span><span class="fdef">' + f.def + '</span></li>';
+    });
+    html += '</ul>';
+    return html;
+  }
+  if(tabKey === 'exercises'){
+    let html = '<h2 class="block-title block-exercises">Exercises</h2>';
+    if(sec.exercises.length){
+      sec.exercises.forEach(function(item){
+        html += '<div class="quiz-item"><div class="quiz-q">' + item.q + '<span class="quiz-toggle">reveal</span></div><div class="quiz-a">' + item.a + '</div></div>';
+      });
+    } else {
+      html += '<div class="empty-note">No exercises added yet.</div>';
+    }
+    return html;
+  }
+  return '';
+}
+
 function renderSection(id){
   const found = findSection(id);
   if(!found) return;
   const subj = found.subj;
   const sec = found.sec;
 
+  const tabs = sectionTabList(subj, sec);
+  if(!sectionTabs[id] || !tabs.some(function(t){ return t.key === sectionTabs[id]; })){
+    sectionTabs[id] = tabs.some(function(t){ return t.key==='summary'; }) ? 'summary' : 'slides';
+  }
+  const activeTab = sectionTabs[id];
+
   let html = '<div class="eyebrow">' + subj.label + '</div><h1 class="section-title">' + sec.title + '</h1>';
 
-  html += '<h2 class="block-title block-materials">Materials</h2><ul class="materials">';
-  if(sec.filePath){
-    html += '<li>' + sec.lecture + '<button class="view-btn" onclick="openPdf(\'' + sec.filePath + '\')">View slides</button><span class="mat-tag">PDF</span></li>';
-  } else {
-    html += '<li>' + sec.lecture + '<span class="mat-tag">SLIDES (not hosted yet)</span></li>';
-  }
-  if(sec.textbookRef){
-    html += '<li>' + subj.textbook + '<span class="mat-tag">' + sec.textbookRef.toUpperCase() + '</span></li>';
-  }
-  html += '</ul>';
+  html += '<div class="tab-bar">';
+  tabs.forEach(function(t){
+    html += '<button class="tab-btn ' + (t.key===activeTab?'active':'') + '" data-tab="' + t.key + '">' + t.label + '</button>';
+  });
+  html += '</div>';
 
-  html += '<div id="pdf-panel"><div id="pdf-panel-bar">'
-    + '<button class="pdf-panel-btn" onclick="closePdf()">Close viewer</button>'
-    + '<button class="pdf-panel-btn" onclick="fullscreenPdf()">Full screen</button>'
-    + '<a class="pdf-panel-btn" id="pdf-open-tab" href="" target="_blank" rel="noopener">Open in new tab</a>'
-    + '</div><iframe id="pdf-frame" src=""></iframe></div>';
-
-  if(sec.summary && sec.summary.length){
-    html += '<h2 class="block-title block-summary">Summary \u2014 start here</h2><div class="summary-box">';
-    sec.summary.forEach(function(p){ html += '<p>' + p + '</p>'; });
-    html += '</div>';
-  }
-
-  html += '<h2 class="block-title block-notes">Notes</h2>';
-  if(sec.notes.length){
-    html += '<ul class="notes">';
-    sec.notes.forEach(function(n){ html += '<li>' + n + '</li>'; });
-    html += '</ul>';
-  } else {
-    html += '<div class="empty-note">Not covered yet. Ask Claude to add this session\'s notes once we go through it.</div>';
-  }
-
-  if(sec.formulas && sec.formulas.length){
-    html += '<h2 class="block-title block-formulas">Formulas</h2><ul class="formulas">';
-    sec.formulas.forEach(function(f){
-      html += '<li><span class="fname">' + f.name + '</span><span class="fx">' + f.expr + '</span><span class="fdef">' + f.def + '</span></li>';
-    });
-    html += '</ul>';
-  }
-
-  html += '<h2 class="block-title block-exercises">Exercises</h2>';
-  if(sec.exercises.length){
-    sec.exercises.forEach(function(item){
-      html += '<div class="quiz-item"><div class="quiz-q">' + item.q + '<span class="quiz-toggle">reveal</span></div><div class="quiz-a">' + item.a + '</div></div>';
-    });
-  } else {
-    html += '<div class="empty-note">No exercises added yet.</div>';
-  }
+  html += '<div class="tab-panel">' + tabContentHTML(activeTab, subj, sec) + '</div>';
 
   document.getElementById('main-inner').innerHTML = html;
+
+  document.querySelectorAll('.tab-btn[data-tab]').forEach(function(el){
+    el.addEventListener('click', function(){ sectionTabs[id] = el.dataset.tab; render(); });
+  });
   document.querySelectorAll('.quiz-item').forEach(function(el){
     el.querySelector('.quiz-q').addEventListener('click', function(){
       el.classList.toggle('open');
