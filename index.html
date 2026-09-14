@@ -643,6 +643,83 @@
     margin:0 0 8px;
   }
   .example-box p:last-child{margin-bottom:0;}
+  .ws-instructions{
+    background:var(--surface-alt);
+    border-left:3px solid #3A5A8C;
+    padding:16px 18px;
+    margin:0 0 22px;
+    font-size:15px;
+    line-height:1.65;
+  }
+  .ws-instructions-label{
+    display:block;
+    font-family:'SF Mono','JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:#3A5A8C;
+    margin-bottom:6px;
+  }
+  .ws-data{margin:0 0 20px;}
+  .ws-data-title{
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:10px;
+    font-size:14.5px;
+  }
+  .ws-questions-title{margin-top:28px;}
+  table.ws-table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--surface-alt);
+    border:1px solid #3A5A8C;
+  }
+  table.ws-table td{
+    padding:10px 14px;
+    border-bottom:1px solid var(--line);
+    font-size:13.5px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  table.ws-table tr:last-child td{border-bottom:none;}
+  table.ws-table td:first-child{color:var(--fdef-text);}
+  table.ws-table td:last-child{
+    font-family:'SF Mono','JetBrains Mono',monospace;
+    font-weight:700;
+    color:var(--ink);
+    text-align:right;
+    white-space:nowrap;
+  }
+  .ws-q-tag{
+    display:inline-block;
+    font-family:'SF Mono','JetBrains Mono',monospace;
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    padding:2px 7px;
+    margin-right:8px;
+    vertical-align:middle;
+  }
+  .quiz-item.ws-formula{border-left-color:var(--amber); background:var(--amber-tint);}
+  .quiz-item.ws-formula .quiz-toggle{color:var(--amber);}
+  .quiz-item.ws-formula .ws-q-tag{background:var(--amber); color:#fff;}
+  .quiz-item.ws-interpretation{border-left-color:var(--teal); background:var(--teal-tint);}
+  .quiz-item.ws-interpretation .quiz-toggle{color:var(--teal);}
+  .quiz-item.ws-interpretation .ws-q-tag{background:var(--teal); color:#fff;}
+  .exercise-search{
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+    padding:10px 14px;
+    margin:0 0 16px;
+    font-size:14.5px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--charcoal);
+  }
+  .exercise-search:focus{outline:none; border-color:var(--teal);}
   .stage-list{
     display:flex;
     flex-direction:column;
@@ -1072,7 +1149,28 @@ const DATA = {
           {q: "Why might Thailand's CDR be rising over time even if age-specific mortality is actually improving?", a: "Because Thailand's population is aging. An older age structure mechanically pushes the crude rate upward, independent of whether survival at each specific age is getting better."},
           {q: "What WHO classification system is used to code cause of death internationally?", a: "ICD-11, the International Classification of Diseases."},
           {q: "A news report says 'Country X has a lower death rate than Country Y, so it must have better healthcare.' What question should you ask before accepting this claim?", a: "Whether the comparison accounts for age structure. A lower crude death rate can simply reflect a younger population rather than genuinely better health outcomes, so you'd want to see age-specific or standardized rates before concluding anything about healthcare quality."}
-        ]
+        ],
+        worksheet: {
+          instructions: "This worksheet uses one shared dataset, real 2024 Thailand and Japan mortality data, across every question below. Work through the formula questions in order, since later questions build on earlier results, then finish with a short written interpretation. This mirrors the real exam format: a data sheet followed by chained calculations and an interpretation prompt, not isolated one-off questions.",
+          dataSheets: [
+            {title: "Data Sheet \u2014 Thailand and Japan Mortality, 2024", rows: [
+              {label: "Thailand total deaths (2024)", value: "647,349"},
+              {label: "Thailand mid-year population (2024)", value: "\u2248 71,700,000"},
+              {label: "Thailand life expectancy at birth", value: "77.1 years"},
+              {label: "Thailand female / male life expectancy", value: "81.4 / 72.9 years"},
+              {label: "Thailand share of population aged 65+", value: "\u2248 15.4%"},
+              {label: "Thailand age-standardized death rate (WHO World Standard)", value: "5.27 per 1,000"},
+              {label: "Japan age-standardized death rate (same standard)", value: "2.62 per 1,000"},
+              {label: "Expected Thai deaths if Thailand had Japan's age-specific mortality", value: "351,896"}
+            ]}
+          ],
+          questions: [
+            {type: "formula", prompt: "Using the total deaths and mid-year population from the data sheet, calculate Thailand's Crude Death Rate (CDR).", answer: "<span class='f'>CDR = (647,349 / 71,700,000) \u00d7 1,000 \u2248 9.03 deaths per 1,000 people</span>"},
+            {type: "formula", prompt: "Using the observed deaths and expected deaths from the data sheet, calculate Thailand's Standardized Mortality Ratio (SMR) relative to Japan's mortality risk.", answer: "<span class='f'>SMR = (647,349 / 351,896) \u00d7 100 \u2248 184</span>"},
+            {type: "formula", prompt: "Using the two age-standardized death rates given, calculate how many times higher Thailand's standardized mortality risk is compared to Japan's.", answer: "<span class='f'>5.27 / 2.62 \u2248 1.99, roughly 2 times higher</span>"},
+            {type: "interpretation", prompt: "Thailand's crude death rate is roughly 3.5 times a typical rate for Japan, but your SMR and standardized-rate calculations above show a real risk gap closer to 2 times. In 2 to 3 sentences, explain why these two comparisons give such different answers, and which one you would trust for a fair health comparison between the two countries.", answer: "Thailand's raw crude death rate is inflated by the fact that Thailand already has an older population than Japan's, since roughly 15.4% of Thais are aged 65 and over. Age alone raises mortality risk regardless of how healthy a country's health system is, so the crude rate mixes real health risk together with this age structure effect. Once age structure is held constant, through standardization (SMR of about 184, standardized rates roughly 2 times higher), the real, fair comparison shows Thailand still has a genuine, meaningful mortality disadvantage against Japan, just not as extreme as the raw crude rates alone would suggest. The standardized comparison is the one to trust."}
+          ]
+        }
       },
       {
         id: "f5", title: "Session 5 \u2014 Life Tables",
@@ -1849,6 +1947,7 @@ function sectionTabList(subj, sec){
   tabs.push({key:'notes', label:'Notes'});
   if(sec.formulas && sec.formulas.length) tabs.push({key:'formulas', label:'Formulas'});
   tabs.push({key:'exercises', label:'Exercises'});
+  if(sec.worksheet) tabs.push({key:'worksheet', label:'Worksheet'});
   return tabs;
 }
 
@@ -1910,12 +2009,31 @@ function tabContentHTML(tabKey, subj, sec){
   if(tabKey === 'exercises'){
     let html = '<h2 class="block-title block-exercises">Exercises</h2>';
     if(sec.exercises.length){
+      html += '<input type="text" id="exercise-search" class="exercise-search" placeholder="Search these exercises...">';
+      html += '<div id="exercise-no-results" class="empty-note" style="display:none;">No exercises match that search.</div>';
       sec.exercises.forEach(function(item){
-        html += '<div class="quiz-item"><div class="quiz-q">' + item.q + '<span class="quiz-toggle">reveal</span></div><div class="quiz-a">' + item.a + '</div></div>';
+        html += '<div class="quiz-item" data-search="' + (item.q + ' ' + item.a).toLowerCase().replace(/"/g,'&quot;') + '"><div class="quiz-q">' + item.q + '<span class="quiz-toggle">reveal</span></div><div class="quiz-a">' + item.a + '</div></div>';
       });
     } else {
       html += '<div class="empty-note">No exercises added yet.</div>';
     }
+    return html;
+  }
+  if(tabKey === 'worksheet'){
+    const ws = sec.worksheet;
+    let html = '<h2 class="block-title block-exercises">Worksheet</h2>';
+    html += '<div class="ws-instructions"><span class="ws-instructions-label">Instructions</span>' + ws.instructions + '</div>';
+    ws.dataSheets.forEach(function(sheet){
+      html += '<div class="ws-data"><div class="ws-data-title">' + sheet.title + '</div><table class="ws-table">';
+      sheet.rows.forEach(function(r){ html += '<tr><td>' + r.label + '</td><td>' + r.value + '</td></tr>'; });
+      html += '</table></div>';
+    });
+    html += '<div class="ws-data-title ws-questions-title">Practice Questions</div>';
+    ws.questions.forEach(function(q, i){
+      const typeClass = q.type === 'interpretation' ? 'ws-interpretation' : 'ws-formula';
+      const typeLabel = q.type === 'interpretation' ? 'Interpretation' : 'Formula';
+      html += '<div class="quiz-item ' + typeClass + '"><div class="quiz-q"><span class="ws-q-text"><span class="ws-q-tag">' + typeLabel + '</span>' + (i+1) + '. ' + q.prompt + '</span><span class="quiz-toggle">reveal</span></div><div class="quiz-a">' + q.answer + '</div></div>';
+    });
     return html;
   }
   return '';
@@ -1955,6 +2073,20 @@ function renderSection(id){
       el.querySelector('.quiz-toggle').textContent = el.classList.contains('open') ? 'hide' : 'reveal';
     });
   });
+  const exerciseSearch = document.getElementById('exercise-search');
+  if(exerciseSearch){
+    exerciseSearch.addEventListener('input', function(){
+      const q = exerciseSearch.value.trim().toLowerCase();
+      const items = document.querySelectorAll('.quiz-item[data-search]');
+      let anyVisible = false;
+      items.forEach(function(el){
+        const match = el.dataset.search.indexOf(q) !== -1;
+        el.hidden = !match;
+        if(match) anyVisible = true;
+      });
+      document.getElementById('exercise-no-results').style.display = anyVisible ? 'none' : 'block';
+    });
+  }
   document.querySelector('.back-link[data-back]').addEventListener('click', function(){
     expandedSubjects[found.subjKey] = true;
     active = {type:'overview', id: found.subjKey};
