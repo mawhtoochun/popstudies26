@@ -572,7 +572,7 @@
     transform:translateY(-2px);
     box-shadow:0 6px 16px rgba(var(--shadow-color),0.16);
   }
-  ul.notes li .f{
+  .f{
     display:block;
     font-family:'SF Mono','JetBrains Mono',monospace;
     font-size:15px;
@@ -599,6 +599,50 @@
     color:var(--teal);
     font-weight:700;
   }
+  .def-list{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    background:var(--surface);
+    border-left:3px solid var(--line);
+    padding:10px 12px;
+    margin:0 0 10px;
+  }
+  .def-row{
+    font-family:'SF Mono','JetBrains Mono',monospace;
+    font-size:13.5px;
+    line-height:1.5;
+  }
+  .def-row .def-sym{
+    font-weight:700;
+    color:var(--ink);
+  }
+  .example-box{
+    background:var(--amber-tint);
+    border-left:3px solid var(--amber);
+    padding:12px 14px;
+    margin:0 0 10px;
+  }
+  .example-label{
+    display:block;
+    font-family:'SF Mono','JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:var(--amber);
+    margin-bottom:8px;
+  }
+  .example-box .f{
+    background:var(--surface);
+  }
+  .example-box p{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:14px;
+    line-height:1.6;
+    margin:0 0 8px;
+  }
+  .example-box p:last-child{margin-bottom:0;}
   .stage-list{
     display:flex;
     flex-direction:column;
@@ -753,17 +797,29 @@ const DATA = {
           "Demography comes from Greek: demos (the people) plus graphein (to write). It is literally the study of writing about the people, meaning counting them and tracking how their numbers change.",
           "<strong>Formal demography</strong> is the math side: births, deaths, migration, life tables, projections. It answers <em>what</em> is happening to population numbers. <strong>Population studies</strong> (social demography) borrows from economics and sociology to answer <em>why</em> it is happening and what it means for society.",
           "Four building blocks used everywhere in this field:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span><strong>Count</strong>, a plain number, e.g. 480,000 births.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Proportion</strong>, a part compared to the whole that contains it, e.g. 20% of the population is over 60.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Ratio</strong>, two separate, non-overlapping groups compared, e.g. 96 males per 100 females.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Rate</strong>, how fast something happens relative to a population at risk, usually per 1,000 per year, e.g. crude birth rate.</div></div>",
-          "<span class='f'>CBR = (B / P) \u00d7 1,000</span>B is the number of live births in a year, P is the mid-year population (the population count around the middle of that year, used as the best single estimate of the population <em>during</em> the whole year).<br><br><strong>Worked example:</strong> A country records 480,000 live births with a mid-year population of 60,000,000. CBR = (480,000 / 60,000,000) \u00d7 1,000 = 8 births per 1,000 people.",
-          "<span class='f'>OADR = (Pop 65+ / Pop 15\u201364) \u00d7 100</span>This is a ratio, not a proportion, because the numerator (elderly) and denominator (working age) are two completely separate, non-overlapping groups.<br><br><strong>Worked example:</strong> 8,200,000 people aged 65+ and 42,000,000 aged 15\u201364. OADR = (8,200,000 / 42,000,000) \u00d7 100 \u2248 19.5 dependents per 100 working-age people.",
+          "The Crude Birth Rate turns raw births into a rate per 1,000 people, using the mid-year population as the best single estimate of the population across the whole year. See the Formulas tab for the full calculation.",
+          "The Old-Age Dependency Ratio is a ratio, not a proportion, because the elderly count and the working-age count are two separate, non-overlapping groups. See the Formulas tab for the full calculation.",
           "The <strong>Demographic Transition Model</strong> describes a pattern most countries pass through as they develop, tracked through birth and death rates moving over five stages.<div class='stage-list'><div class='stage-row'><span class='stage-tag'>Stage 1</span>Both high, slow growth.</div><div class='stage-row'><span class='stage-tag'>Stage 2</span>Deaths fall fast (sanitation, medicine) while births stay high, rapid growth.</div><div class='stage-row'><span class='stage-tag'>Stage 3</span>Births finally start falling too (urbanization, education, contraception), growth slows.</div><div class='stage-row'><span class='stage-tag'>Stage 4</span>Both low, slow or stable growth.</div><div class='stage-row'><span class='stage-tag'>Stage 5</span>A newer, debated addition. Births fall below replacement level, population may shrink and age rapidly.</div></div>",
-          "<div style='background:#fff;border:1px solid var(--line);padding:18px;margin:6px 0;'><svg viewBox='0 0 600 260' style='width:100%;height:auto;'><line x1='50' y1='220' x2='570' y2='220' stroke='#888' stroke-width='1'/><line x1='50' y1='30' x2='50' y2='220' stroke='#888' stroke-width='1'/><polyline points='60,58 180,58 300,130 420,176.8 540,191.2' fill='none' stroke='#1F5C57' stroke-width='2.5'/><polyline points='60,58 180,148 300,184 420,184 540,176.8' fill='none' stroke='#8A2E24' stroke-width='2.5'/><circle cx='60' cy='58' r='3.5' fill='#1F5C57'/><circle cx='180' cy='58' r='3.5' fill='#1F5C57'/><circle cx='300' cy='130' r='3.5' fill='#1F5C57'/><circle cx='420' cy='176.8' r='3.5' fill='#1F5C57'/><circle cx='540' cy='191.2' r='3.5' fill='#1F5C57'/><circle cx='60' cy='58' r='3.5' fill='#8A2E24'/><circle cx='180' cy='148' r='3.5' fill='#8A2E24'/><circle cx='300' cy='184' r='3.5' fill='#8A2E24'/><circle cx='420' cy='184' r='3.5' fill='#8A2E24'/><circle cx='540' cy='176.8' r='3.5' fill='#8A2E24'/><text x='60' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 1</text><text x='180' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 2</text><text x='300' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 3</text><text x='420' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 4</text><text x='540' y='240' font-size='12' text-anchor='middle' fill='#2A2823'>Stage 5</text><text x='30' y='60' font-size='11' text-anchor='middle' fill='#2A2823'>high</text><text x='30' y='195' font-size='11' text-anchor='middle' fill='#2A2823'>low</text><rect x='400' y='38' width='12' height='12' fill='#1F5C57'/><text x='417' y='48' font-size='12' fill='#2A2823'>Birth rate</text><rect x='500' y='38' width='12' height='12' fill='#8A2E24'/><text x='517' y='48' font-size='12' fill='#2A2823'>Death rate</text></svg><p style='font-family:-apple-system,sans-serif;font-size:12.5px;color:#8A8578;margin:8px 0 0;'>Illustrative pattern (not a specific country) showing why Stage 2 produces the fastest growth: the widest gap between the two lines.</p></div>",
+          "<div style='background:var(--surface);border:1px solid var(--line);padding:18px;margin:6px 0;'><svg viewBox='0 0 600 260' style='width:100%;height:auto;'><line x1='50' y1='220' x2='570' y2='220' style='stroke:var(--line);stroke-width:1'/><line x1='50' y1='30' x2='50' y2='220' style='stroke:var(--line);stroke-width:1'/><polyline points='60,58 180,58 300,130 420,176.8 540,191.2' fill='none' style='stroke:var(--teal);stroke-width:2.5'/><polyline points='60,58 180,148 300,184 420,184 540,176.8' fill='none' style='stroke:var(--coral);stroke-width:2.5'/><circle cx='60' cy='58' r='3.5' style='fill:var(--teal)'/><circle cx='180' cy='58' r='3.5' style='fill:var(--teal)'/><circle cx='300' cy='130' r='3.5' style='fill:var(--teal)'/><circle cx='420' cy='176.8' r='3.5' style='fill:var(--teal)'/><circle cx='540' cy='191.2' r='3.5' style='fill:var(--teal)'/><circle cx='60' cy='58' r='3.5' style='fill:var(--coral)'/><circle cx='180' cy='148' r='3.5' style='fill:var(--coral)'/><circle cx='300' cy='184' r='3.5' style='fill:var(--coral)'/><circle cx='420' cy='184' r='3.5' style='fill:var(--coral)'/><circle cx='540' cy='176.8' r='3.5' style='fill:var(--coral)'/><text x='60' y='240' font-size='12' text-anchor='middle' style='fill:var(--charcoal)'>Stage 1</text><text x='180' y='240' font-size='12' text-anchor='middle' style='fill:var(--charcoal)'>Stage 2</text><text x='300' y='240' font-size='12' text-anchor='middle' style='fill:var(--charcoal)'>Stage 3</text><text x='420' y='240' font-size='12' text-anchor='middle' style='fill:var(--charcoal)'>Stage 4</text><text x='540' y='240' font-size='12' text-anchor='middle' style='fill:var(--charcoal)'>Stage 5</text><text x='30' y='60' font-size='11' text-anchor='middle' style='fill:var(--charcoal)'>high</text><text x='30' y='195' font-size='11' text-anchor='middle' style='fill:var(--charcoal)'>low</text><rect x='400' y='38' width='12' height='12' style='fill:var(--teal)'/><text x='417' y='48' font-size='12' style='fill:var(--charcoal)'>Birth rate</text><rect x='500' y='38' width='12' height='12' style='fill:var(--coral)'/><text x='517' y='48' font-size='12' style='fill:var(--charcoal)'>Death rate</text></svg><p style='font-family:-apple-system,sans-serif;font-size:12.5px;color:var(--fdef-text);margin:8px 0 0;'>Illustrative pattern (not a specific country) showing why Stage 2 produces the fastest growth: the widest gap between the two lines.</p></div>",
           "Real countries mapped onto the model today (World Population Review, 2026 classification): <strong>Stage 2</strong> (still high birth rates, falling death rates): Niger, Ethiopia, Pakistan, DR Congo, Yemen, most of sub-Saharan Africa and parts of the Middle East. <strong>Stage 3</strong> (falling birth rates, slowing growth): India, Indonesia, Egypt, Mexico, Brazil. <strong>Stage 4</strong> (both low): most of Western Europe, the US, South Korea. <strong>Stage 5</strong> (below replacement, shrinking): Japan, Italy, Germany, Spain, Russia, South Korea.",
           "Niger is worth noting specifically: no country today is a perfectly pure Stage 1 case, but Niger's pyramid, extremely wide base, fertility above 6 children per woman, comes closest to what Stage 1 historically looked like, which is why it is usually classified as early Stage 2 rather than Stage 1 itself.",
           "Japan is the textbook Stage 5 case: birth rate around 8 per 1,000 against a death rate around 12 per 1,000, meaning the population is now shrinking from natural change alone, independent of migration."
         ],
         formulas: [
-          {name: "Crude Birth Rate (CBR)", expr: "CBR = (B / P) \u00d7 1,000", def: "B = live births in a year. P = mid-year population. Reads as births per 1,000 people."},
-          {name: "Old-Age Dependency Ratio (OADR)", expr: "OADR = (Pop 65+ / Pop 15\u201364) \u00d7 100", def: "Pop 65+ = elderly count. Pop 15\u201364 = working-age count. Reads as dependents per 100 working-age people."}
+          {name: "Crude Birth Rate (CBR)", expr: "CBR = (B / P) \u00d7 1,000",
+            symbols: [
+              {sym: "B", def: "the number of live births in a year"},
+              {sym: "P", def: "the mid-year population (the population count around the middle of that year, used as the best single estimate of the population during the whole year)"}
+            ],
+            example: "<p>A country records 480,000 live births with a mid-year population of 60,000,000.</p><span class='f'>CBR = (480,000 / 60,000,000) \u00d7 1,000 = 8 births per 1,000 people</span>"
+          },
+          {name: "Old-Age Dependency Ratio (OADR)", expr: "OADR = (Pop 65+ / Pop 15\u201364) \u00d7 100",
+            symbols: [
+              {sym: "Pop 65+", def: "the count of people aged 65 and over"},
+              {sym: "Pop 15\u201364", def: "the count of people of working age, 15 to 64"}
+            ],
+            example: "<p>8,200,000 people are aged 65 and over. 42,000,000 people are aged 15 to 64.</p><span class='f'>OADR = (8,200,000 / 42,000,000) \u00d7 100 \u2248 19.5 dependents per 100 working-age people</span>"
+          }
         ],
         exercises: [
           {q: "In your own words, what does formal demography study versus what population studies adds on top of that?", a: "Formal demography studies the mechanics of population change (births, deaths, migration) using math and statistics. Population studies adds the why, pulling in economics, sociology, and other fields to explain causes and consequences."},
@@ -799,17 +855,42 @@ const DATA = {
           "One sneaky data quality problem is age heaping, people rounding their age to a number ending in 0 or 5 instead of giving their exact age, especially in surveys where literacy or record-keeping is weaker. Whipple's Index catches this by checking how many people in a sample reported suspiciously round ages. A score of 100 means no rounding problem at all. A score way above that, like 150 or more, means a lot of people are just guessing round numbers instead of stating their real age, which can throw off any analysis that depends on exact ages."
         ],
         notes: [
-          "<span class='f'>P2 = P1 + B \u2212 D + IM \u2212 OM</span>P1 and P2 are start and end population, B and D are births and deaths, IM and OM are in and out migration.",
-          "<span class='f'>P2 = P1 \u00d7 e^(rn)</span>e is about 2.71828, r is growth rate as a decimal, n is years.",
-          "Rule of 70: doubling time is about 70 divided by r, using r as a plain percent number, not a decimal.",
-          "Four official sources: Census (universal but slow and costly), CRVS (continuous vital records), Sample surveys (detailed, sampling error), Population registers (continuous, needs strong ID systems).",
-          "Whipple's Index checks age heaping. WI = 100 means no heaping, over 175 means very rough data."
+          "The balancing equation ties population change to births, deaths, and migration in one line. See the Formulas tab for the full calculation.",
+          "Exponential growth compounds continuously rather than in fixed yearly steps, which is why the formula uses e instead of simple multiplication. See the Formulas tab for the full calculation.",
+          "The Rule of 70 gives a quick estimate of doubling time. See the Formulas tab for the full calculation.",
+          "Four official data sources, each with its own tradeoff:<div class='point-list'><div class='point-row'><span class='point-arrow'>\u2192</span><strong>Census</strong>, counts everyone, very accurate but slow and costly (every 5 to 10 years).</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>CRVS</strong> (Civil Registration and Vital Statistics), continuous vital records, but not every event gets registered.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>Sample surveys</strong>, detailed, but come with sampling error.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>Population registers</strong>, continuous, but need a strong national ID system to work well.</div></div>",
+          "Whipple's Index checks age heaping, people rounding their reported age to a number ending in 0 or 5. See the Formulas tab for the full calculation."
         ],
         formulas: [
-          {name: "Population Balancing Equation", expr: "P2 = P1 + B \u2212 D + IM \u2212 OM", def: "P1/P2 = start/end population. B/D = births/deaths. IM/OM = in/out migration."},
-          {name: "Exponential Population Growth", expr: "P2 = P1 \u00d7 e^(rn)", def: "e \u2248 2.71828. r = growth rate as a decimal. n = years."},
-          {name: "Rule of 70 (Doubling Time)", expr: "Doubling time \u2248 70 / r", def: "r = growth rate as a plain percent number, not a decimal."},
-          {name: "Whipple's Index (Age Heaping)", expr: "WI = (5 \u00d7 ages ending 0/5, 25\u201360) / (all ages 23\u201362) \u00d7 100", def: "Checks age heaping. 100 = no heaping. Over 175 = very rough data."}
+          {name: "Population Balancing Equation", expr: "P2 = P1 + B \u2212 D + IM \u2212 OM",
+            symbols: [
+              {sym: "P1, P2", def: "the population at the start and end of the period"},
+              {sym: "B, D", def: "births and deaths during the period"},
+              {sym: "IM, OM", def: "in-migration and out-migration during the period"}
+            ],
+            example: "<p>A population starts at 1,000,000. During the year: 15,000 births, 9,000 deaths, 6,000 moved in, 4,000 moved out.</p><span class='f'>P2 = 1,000,000 + 15,000 \u2212 9,000 + 6,000 \u2212 4,000 = 1,008,000</span>"
+          },
+          {name: "Exponential Population Growth", expr: "P2 = P1 \u00d7 e^(rn)",
+            symbols: [
+              {sym: "e", def: "the mathematical constant, approximately 2.71828"},
+              {sym: "r", def: "the growth rate, as a decimal (2% = 0.02)"},
+              {sym: "n", def: "the number of years"}
+            ],
+            example: "<p>A population of 10,000,000 grows at 2% per year (r = 0.02) for 10 years (n = 10).</p><span class='f'>P2 = 10,000,000 \u00d7 e^(0.02\u00d710) = 10,000,000 \u00d7 e^0.2 \u2248 12,214,000</span>"
+          },
+          {name: "Rule of 70 (Doubling Time)", expr: "Doubling time \u2248 70 / r",
+            symbols: [
+              {sym: "r", def: "the growth rate, as a plain percent number, not a decimal (use 5 for 5%, not 0.05)"}
+            ],
+            example: "<p>A population grows at 5% per year.</p><span class='f'>Doubling time \u2248 70 / 5 = 14 years</span>"
+          },
+          {name: "Whipple's Index (Age Heaping)", expr: "WI = (5 \u00d7 ages ending 0/5, 25\u201360) / (all ages 23\u201362) \u00d7 100",
+            symbols: [
+              {sym: "ages ending 0/5, 25\u201360", def: "the count of people aged 25 to 60 who reported an age ending in 0 or 5"},
+              {sym: "all ages 23\u201362", def: "the total count of people aged 23 to 62 in the sample"}
+            ],
+            example: "<p>A survey of 8,000 people aged 23 to 62 finds that 1,840 reported an age ending in 0 or 5.</p><span class='f'>WI = (5 \u00d7 1,840 / 8,000) \u00d7 100 = 115</span>"
+          }
         ],
         exercises: [
           {q: "A city has 500,000 residents on Jan 1. During the year: 4,500 births, 5,000 deaths, 12,000 moved in, 3,000 moved out. What's the population on Dec 31?", a: "P2 = 500,000 + 4,500 \u2212 5,000 + 12,000 \u2212 3,000 = 508,500."},
@@ -840,27 +921,50 @@ const DATA = {
         summary: [
           "This session covers three connected ideas: how to build a population pyramid without messing it up, several formulas that all compare age groups to each other, and the 'demographic dividend', the idea that a shrinking dependency burden can actually boost a country's economy.",
           "A population pyramid is just a picture showing how many people are at each age, split by sex, males on the left, females on the right, youngest at the bottom, oldest at the top. There's a classic mistake to avoid: each bar's length has to be calculated as a percentage of the TOTAL population, not as a percentage of all males or all females separately. If you divide by the sex-specific total instead, both sides are forced to add up to 100% on their own, which completely hides any real difference in how many men versus women there actually are.",
-          "<div style='background:#fff;border:1px solid var(--line);padding:18px;margin:6px 0;'><svg viewBox='0 0 600 380' style='width:100%;height:auto;max-width:420px;display:block;margin:0 auto;'><text x='150' y='30' font-size='13' text-anchor='middle' fill='#2A2823' font-weight='700'>Males</text><text x='450' y='30' font-size='13' text-anchor='middle' fill='#2A2823' font-weight='700'>Females</text><line x1='300' y1='45' x2='300' y2='330' stroke='#888' stroke-width='1'/><text x='300' y='60' font-size='10' text-anchor='middle' fill='#2A2823'>60+</text><rect x='262' y='65' width='38' height='28' fill='#3A5A8C'/><rect x='300' y='65' width='45' height='28' fill='#8A2E24'/><text x='300' y='108' font-size='10' text-anchor='middle' fill='#2A2823'>45-59</text><rect x='232' y='113' width='68' height='28' fill='#3A5A8C'/><rect x='300' y='113' width='72' height='28' fill='#8A2E24'/><text x='300' y='156' font-size='10' text-anchor='middle' fill='#2A2823'>30-44</text><rect x='195' y='161' width='105' height='28' fill='#3A5A8C'/><rect x='300' y='161' width='105' height='28' fill='#8A2E24'/><text x='300' y='204' font-size='10' text-anchor='middle' fill='#2A2823'>15-29</text><rect x='158' y='209' width='142' height='28' fill='#3A5A8C'/><rect x='300' y='209' width='138' height='28' fill='#8A2E24'/><text x='300' y='252' font-size='10' text-anchor='middle' fill='#2A2823'>0-14</text><rect x='130' y='257' width='170' height='28' fill='#3A5A8C'/><rect x='300' y='257' width='161' height='28' fill='#8A2E24'/></svg><p style='font-family:-apple-system,sans-serif;font-size:12.5px;color:#8A8578;margin:8px 0 0;text-align:center;'>Illustrative pyramid: wide base, narrow top, typical of a young, fast-growing population. Bar length = % of the TOTAL population, not % of the same-sex total.</p></div>",
+          "<div style='background:var(--surface);border:1px solid var(--line);padding:18px;margin:6px 0;'><svg viewBox='0 0 600 380' style='width:100%;height:auto;max-width:420px;display:block;margin:0 auto;'><text x='150' y='30' font-size='13' text-anchor='middle' style='fill:var(--charcoal)' font-weight='700'>Males</text><text x='450' y='30' font-size='13' text-anchor='middle' style='fill:var(--charcoal)' font-weight='700'>Females</text><line x1='300' y1='45' x2='300' y2='330' style='stroke:var(--line);stroke-width:1'/><text x='300' y='60' font-size='10' text-anchor='middle' style='fill:var(--charcoal)'>60+</text><rect x='262' y='65' width='38' height='28' style='fill:var(--teal)'/><rect x='300' y='65' width='45' height='28' style='fill:var(--coral)'/><text x='300' y='108' font-size='10' text-anchor='middle' style='fill:var(--charcoal)'>45-59</text><rect x='232' y='113' width='68' height='28' style='fill:var(--teal)'/><rect x='300' y='113' width='72' height='28' style='fill:var(--coral)'/><text x='300' y='156' font-size='10' text-anchor='middle' style='fill:var(--charcoal)'>30-44</text><rect x='195' y='161' width='105' height='28' style='fill:var(--teal)'/><rect x='300' y='161' width='105' height='28' style='fill:var(--coral)'/><text x='300' y='204' font-size='10' text-anchor='middle' style='fill:var(--charcoal)'>15-29</text><rect x='158' y='209' width='142' height='28' style='fill:var(--teal)'/><rect x='300' y='209' width='138' height='28' style='fill:var(--coral)'/><text x='300' y='252' font-size='10' text-anchor='middle' style='fill:var(--charcoal)'>0-14</text><rect x='130' y='257' width='170' height='28' style='fill:var(--teal)'/><rect x='300' y='257' width='161' height='28' style='fill:var(--coral)'/></svg><p style='font-family:-apple-system,sans-serif;font-size:12.5px;color:var(--fdef-text);margin:8px 0 0;text-align:center;'>Illustrative pyramid: wide base, narrow top, typical of a young, fast-growing population. Bar length = % of the TOTAL population, not % of the same-sex total.</p></div>",
           "Sex ratio and sex ratio at birth both just compare male counts to female counts, one for the whole population, one specifically for babies born in a year. The normal biological range at birth is about 104 to 106 boys per 100 girls, a number so consistent across human history that any big departure from it is a red flag worth investigating.",
           "The three dependency ratios all follow the same idea: how many dependents (children, or elderly, or both combined) exist for every 100 working-age people. A country with a youth-heavy burden and a country with an elderly-heavy burden can have the exact same headline dependency number, but they need completely different policies, one needs more schools, the other needs more pensions and elder healthcare. The Aging Index just directly compares elderly people to children, so once it crosses 100, there are officially more old people than young people in that country.",
           "The demographic dividend is one of the more hopeful ideas in demography. As fertility falls, a bigger share of the population ends up in the working ages, simply because fewer children are being born to sit outside the workforce. More workers per dependent can mean more economic output per person, even before anyone gets more productive, this is the first dividend, and it's purely mechanical and temporary. As people live longer, they also tend to save more for a longer retirement and invest more in skills, which can create a second, longer-lasting wave of growth, the second dividend, but only if a country's financial and education systems are strong enough to actually put those savings to good use."
         ],
         notes: [
           "Pyramid rule: always divide by the total population, never the same-sex subtotal, or it hides real sex imbalance.",
-          "<span class='f'>SR = (Males / Females) \u00d7 100</span><span class='f'>SRB = (Male births / Female births) \u00d7 100</span>, normal range about 104 to 106.",
-          "<span class='f'>Youth DR = (Pop 0\u201314 / Pop 15\u201364) \u00d7 100</span><span class='f'>Old-Age DR = (Pop 65+ / Pop 15\u201364) \u00d7 100</span>Total DR = Youth DR plus Old-Age DR.",
-          "<span class='f'>Aging Index = (Pop 65+ / Pop 0\u201314) \u00d7 100</span>Over 100 means elderly outnumber children.",
+          "Sex ratio and sex ratio at birth both compare male counts to female counts. Normal biological range at birth is about 104 to 106 boys per 100 girls. See the Formulas tab for both calculations.",
+          "The three dependency ratios (youth, old-age, total) all compare a dependent group to the working-age population. See the Formulas tab for all three calculations.",
+          "The Aging Index compares elderly people directly to children. Over 100 means elderly outnumber children. See the Formulas tab for the calculation.",
           "First dividend: working age share rises as fertility falls, temporary. Second dividend: longer lifespans push saving and skill building, can persist longer.",
-          "Growth contribution formula: annual growth equals (support ratio end divided by support ratio start), raised to the power of 1 over n years, minus 1."
+          "The growth contribution formula measures how much of a country's annual growth the first dividend explains. See the Formulas tab for the calculation."
         ],
         formulas: [
-          {name: "Sex Ratio (SR)", expr: "SR = (Males / Females) \u00d7 100", def: "Reads as males per 100 females."},
-          {name: "Sex Ratio at Birth (SRB)", expr: "SRB = (Male births / Female births) \u00d7 100", def: "Normal biological range \u2248 104\u2013106."},
-          {name: "Youth Dependency Ratio", expr: "Youth DR = (Pop 0\u201314 / Pop 15\u201364) \u00d7 100", def: "Children per 100 working-age people."},
-          {name: "Old-Age Dependency Ratio", expr: "Old-Age DR = (Pop 65+ / Pop 15\u201364) \u00d7 100", def: "Elderly per 100 working-age people."},
-          {name: "Total Dependency Ratio", expr: "Total DR = Youth DR + Old-Age DR", def: "All dependents per 100 working-age people."},
-          {name: "Aging Index", expr: "Aging Index = (Pop 65+ / Pop 0\u201314) \u00d7 100", def: "Over 100 means elderly outnumber children."},
-          {name: "First Dividend Growth Contribution", expr: "annual growth = (support ratio end / support ratio start)^(1/n) \u2212 1", def: "n = years between the two points. Measures the first dividend's contribution to growth."}
+          {name: "Sex Ratio (SR)", expr: "SR = (Males / Females) \u00d7 100",
+            symbols: [{sym: "Males", def: "the total male population"}, {sym: "Females", def: "the total female population"}],
+            example: "<p>A country has 48,000,000 males and 50,000,000 females.</p><span class='f'>SR = (48,000,000 / 50,000,000) \u00d7 100 = 96 males per 100 females</span>"
+          },
+          {name: "Sex Ratio at Birth (SRB)", expr: "SRB = (Male births / Female births) \u00d7 100",
+            symbols: [{sym: "Male births", def: "the number of boys born in a year"}, {sym: "Female births", def: "the number of girls born in a year"}],
+            def: "Normal biological range \u2248 104\u2013106.",
+            example: "<p>A country records 515,000 male births and 490,000 female births.</p><span class='f'>SRB = (515,000 / 490,000) \u00d7 100 \u2248 105.1</span>"
+          },
+          {name: "Youth Dependency Ratio", expr: "Youth DR = (Pop 0\u201314 / Pop 15\u201364) \u00d7 100",
+            symbols: [{sym: "Pop 0\u201314", def: "the count of children aged 0 to 14"}, {sym: "Pop 15\u201364", def: "the count of working-age people, 15 to 64"}],
+            example: "<p>A country has 8,400,000 people aged 0 to 14 and 15,600,000 aged 15 to 64.</p><span class='f'>Youth DR = (8,400,000 / 15,600,000) \u00d7 100 \u2248 53.8 children per 100 working-age people</span>"
+          },
+          {name: "Old-Age Dependency Ratio", expr: "Old-Age DR = (Pop 65+ / Pop 15\u201364) \u00d7 100",
+            symbols: [{sym: "Pop 65+", def: "the count of people aged 65 and over"}, {sym: "Pop 15\u201364", def: "the count of working-age people, 15 to 64"}],
+            example: "<p>The same country has 2,600,000 people aged 65 and over, against 15,600,000 aged 15 to 64.</p><span class='f'>Old-Age DR = (2,600,000 / 15,600,000) \u00d7 100 \u2248 16.7 elderly per 100 working-age people</span>"
+          },
+          {name: "Total Dependency Ratio", expr: "Total DR = Youth DR + Old-Age DR",
+            symbols: [{sym: "Youth DR", def: "the youth dependency ratio"}, {sym: "Old-Age DR", def: "the old-age dependency ratio"}],
+            example: "<p>Using the two results above, Youth DR = 53.8 and Old-Age DR = 16.7.</p><span class='f'>Total DR = 53.8 + 16.7 = 70.5 dependents per 100 working-age people</span>"
+          },
+          {name: "Aging Index", expr: "Aging Index = (Pop 65+ / Pop 0\u201314) \u00d7 100",
+            symbols: [{sym: "Pop 65+", def: "the count of people aged 65 and over"}, {sym: "Pop 0\u201314", def: "the count of children aged 0 to 14"}],
+            def: "Over 100 means elderly outnumber children.",
+            example: "<p>A country has 12% of its population aged 0 to 14 and 18% aged 65 and over.</p><span class='f'>Aging Index = (18.0 / 12.0) \u00d7 100 = 150</span><p>Above 100, so elderly outnumber children.</p>"
+          },
+          {name: "First Dividend Growth Contribution", expr: "annual growth = (support ratio end / support ratio start)^(1/n) \u2212 1",
+            symbols: [{sym: "support ratio end, start", def: "the working-age share of the population at the end and start of the period"}, {sym: "n", def: "the number of years between the two points"}],
+            example: "<p>A country's working-age share rises from 60% to 70% over 30 years.</p><span class='f'>annual growth = (0.70 / 0.60)^(1/30) \u2212 1 \u2248 0.0051, about 0.51% per year</span>"
+          }
         ],
         exercises: [
           {q: "Why must population pyramid percentages be calculated against the total population, not the male or female subtotal separately?", a: "Dividing by the sex-specific subtotal forces both sides to add up to 100% independently, which hides any real imbalance between the number of men and women and breaks the left-right comparison."},
@@ -898,21 +1002,54 @@ const DATA = {
         notes: [
           "The <strong>Crude Death Rate (CDR)</strong> is the simplest mortality measure, but it mixes actual mortality risk with age structure. An older population shows a higher CDR than a younger one even when age-specific risks are identical, which is why CDR is easy to compute but easy to misread.",
           "The <strong>Age-Specific Mortality Rate (ASMR)</strong> fixes this by computing mortality separately for each age band, removing the age-mixing problem within each group. The full set of ASMRs is also the building block for life tables (Session 5).",
-          "<strong>Direct standardization</strong> applies a shared standard population's age weights to each population's own age-specific rates, producing an Age-Standardized Death Rate (ASDR) in the same units as a crude rate. <strong>Worked example (real data):</strong> Thailand's crude death rate is 9.03 per 1,000, but once standardized to the WHO World Standard Population, it drops to 5.27. Japan's standardized rate on the same standard is 2.62. Thailand's real risk gap versus Japan is roughly double, once age structure is held constant, not the nearly 3.5x gap the raw crude rates would suggest.",
-          "<strong>Indirect standardization</strong> is used when a study population's own age-specific rates are unreliable or based on small numbers. Instead, you apply a standard population's known rates to your study population's age structure, producing 'expected deaths', then compare to actually observed deaths as a Standardized Mortality Ratio (SMR). <strong>Worked example (real data):</strong> if Thailand experienced Japan's age-specific mortality, it would be 'expected' to have about 351,896 deaths in 2024. Thailand's actual observed deaths were 647,349. SMR = (647,349 / 351,896) \u00d7 100 \u2248 184, meaning Thailand experienced roughly 84% more deaths than it would under Japan's mortality risk, a genuine health gap, not an artifact of Thailand's different age structure.",
-          "Three common misconceptions worth avoiding: (1) A standardized rate is NOT the population's 'real' observed rate, it's a constructed, hypothetical number for fair comparison. (2) Two standardized rates are only comparable if they used the SAME standard population. (3) An SMR of 100 doesn't mean 'average health' in any absolute sense, it means average relative to whichever standard population was chosen as the reference.",
-          "<span class='f'>Cause-specific mortality rate</span> = (Deaths from cause C / Mid-year population) \u00d7 100,000, usually per 100,000 to keep numbers readable for less-common causes. <span class='f'>Proportional mortality</span> = (Deaths from cause C / Total deaths) \u00d7 100, useful for describing the mix of causes but sensitive to the size of the denominator, so it should never substitute for a real population-based rate.",
-          "<strong>DALYs (Disability-Adjusted Life Years)</strong> = YLL (Years of Life Lost to premature death) + YLD (Years Lived with Disability). YLD requires a disability weight from 0 (full health) to 1 (equivalent to death) for each health state. <strong>Worked example:</strong> a death causing 50 years of life lost (YLL=50), plus 100 people living with moderate hearing loss (disability weight 0.02) for 1 year each (YLD = 100 \u00d7 1 \u00d7 0.02 = 2). DALYs = 50 + 2 = 52. A second example: YLL = 24, and 40 people living 8 years with a condition weighted 0.15 (YLD = 40 \u00d7 8 \u00d7 0.15 = 48). DALYs = 24 + 48 = 72.",
-          "Thailand's 2024\u20132026 mortality snapshot (real data): crude death rate 9.0\u20139.1 per 1,000, life expectancy at birth 77.1 years, with a large female/male gap (81.4 vs 72.9 years). Thailand's 65+ share is already about 15.4% of the population, which mechanically pushes CDR upward even where age-specific survival is actually improving, exactly the distortion standardization is built to correct for.",
-          "Three Asian countries sit at three different points on the epidemiological transition: <strong>Japan</strong> (85.2 years life expectancy) is late/post-transition, aged and chronic-disease-dominant. <strong>Thailand</strong> (77.1 years) is late transition, rapidly aging and NCD-dominant but still catching up to Japan. <strong>Philippines</strong> (70.2 years) is mid-transition, younger with more residual communicable-disease burden. A single 'Asia' mortality profile would badly misrepresent all three."
+          "<strong>Direct standardization</strong> applies a shared standard population's age weights to each population's own age-specific rates, producing an Age-Standardized Death Rate (ASDR) in the same units as a crude rate. See the Formulas tab for a real worked example comparing Thailand and Japan.",
+          "<strong>Indirect standardization</strong> is used when a study population's own age-specific rates are unreliable or based on small numbers. Instead, you apply a standard population's known rates to your study population's age structure, producing 'expected deaths', then compare to actually observed deaths as a Standardized Mortality Ratio (SMR). See the Formulas tab for a real worked example.",
+          "Three common misconceptions worth avoiding:<div class='point-list'><div class='point-row'><span class='point-arrow'>\u2192</span>A standardized rate is not the population's real observed rate, it is a constructed, hypothetical number built for fair comparison.</div><div class='point-row'><span class='point-arrow'>\u2192</span>Two standardized rates are only comparable if they used the same standard population.</div><div class='point-row'><span class='point-arrow'>\u2192</span>An SMR of 100 does not mean average health in any absolute sense, it means average relative to whichever standard population was chosen as the reference.</div></div>",
+          "Cause-specific mortality rate and proportional mortality both describe deaths from one specific cause, but answer different questions: one is a real rate against the population, the other just describes the mix of causes among deaths that already happened. See the Formulas tab for both calculations.",
+          "<strong>DALYs (Disability-Adjusted Life Years)</strong> combine years lost to early death with years lived in less than full health. See the Formulas tab for the full breakdown and two worked examples.",
+          "Thailand's mortality snapshot (2024\u20132026 data):<div class='point-list'><div class='point-row'><span class='point-arrow'>\u2192</span>Crude death rate: 9.0 to 9.1 per 1,000.</div><div class='point-row'><span class='point-arrow'>\u2192</span>Life expectancy at birth: 77.1 years.</div><div class='point-row'><span class='point-arrow'>\u2192</span>Female life expectancy: 81.4 years. Male life expectancy: 72.9 years.</div><div class='point-row'><span class='point-arrow'>\u2192</span>Share of population aged 65+: about 15.4%.</div></div>A larger elderly share mechanically pushes CDR upward even where age-specific survival is actually improving, exactly the distortion standardization is built to correct for.",
+          "Three Asian countries sit at three different points on the epidemiological transition (life expectancy figures, 2024\u20132026 data):<div class='point-list'><div class='point-row'><span class='point-arrow'>\u2192</span><strong>Japan</strong>, 85.2 years, late or post-transition, aged and chronic-disease-dominant.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>Thailand</strong>, 77.1 years, late transition, rapidly aging and NCD-dominant but still catching up to Japan.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>Philippines</strong>, 70.2 years, mid-transition, younger with more residual communicable-disease burden.</div></div>A single 'Asia' mortality profile would badly misrepresent all three."
         ],
         formulas: [
-          {name: "Crude Death Rate (CDR)", expr: "CDR = (Total deaths / Mid-year population) \u00d7 1,000", def: "The simplest mortality indicator. Distorted by age structure, so use with caution when comparing populations."},
-          {name: "Age-Specific Mortality Rate (ASMR)", expr: "ASMR(x) = (Deaths to persons aged x / Mid-year population aged x) \u00d7 1,000", def: "Computed separately per age band. Removes the age-mixing problem within that band."},
-          {name: "Standardized Mortality Ratio (SMR)", expr: "SMR = (Observed deaths / Expected deaths) \u00d7 100", def: "Expected deaths = \u03a3(Standard ASMR at age x \u00d7 Study population at age x). SMR above 100 means excess mortality relative to the standard used."},
-          {name: "Cause-Specific Mortality Rate", expr: "Cause-specific mortality rate = (Deaths from cause C / Mid-year population) \u00d7 100,000", def: "Usually per 100,000 to keep less-common causes readable."},
-          {name: "Proportional Mortality", expr: "Proportional mortality = (Deaths from cause C / Total deaths) \u00d7 100", def: "Describes the mix of causes. Sensitive to the size of total deaths, so it is not a substitute for a population-based rate."},
-          {name: "Disability-Adjusted Life Years (DALYs)", expr: "DALYs = YLL + YLD", def: "YLL = Years of Life Lost to premature death. YLD = Years Lived with Disability (duration \u00d7 disability weight, 0 to 1)."}
+          {name: "Crude Death Rate (CDR)", expr: "CDR = (Total deaths / Mid-year population) \u00d7 1,000",
+            symbols: [{sym: "Total deaths", def: "all deaths recorded in a year"}, {sym: "Mid-year population", def: "the population count around the middle of that year"}],
+            def: "The simplest mortality indicator. Distorted by age structure, so use with caution when comparing populations.",
+            example: "<p>A country records 550,000 total deaths with a mid-year population of 61,000,000.</p><span class='f'>CDR = (550,000 / 61,000,000) \u00d7 1,000 \u2248 9.0 deaths per 1,000 people</span>"
+          },
+          {name: "Age-Specific Mortality Rate (ASMR)", expr: "ASMR(x) = (Deaths to persons aged x / Mid-year population aged x) \u00d7 1,000",
+            symbols: [{sym: "Deaths to persons aged x", def: "deaths within one specific age band"}, {sym: "Mid-year population aged x", def: "the mid-year population within that same age band"}],
+            def: "Computed separately per age band. Removes the age-mixing problem within that band.",
+            example: "<p>Among people aged 65 and over, there are 300,000 deaths against a population of 10,000,000.</p><span class='f'>ASMR(65+) = (300,000 / 10,000,000) \u00d7 1,000 = 30.0 deaths per 1,000 people aged 65+</span>"
+          },
+          {name: "Standardized Mortality Ratio (SMR)", expr: "SMR = (Observed deaths / Expected deaths) \u00d7 100",
+            symbols: [
+              {sym: "Observed deaths", def: "the actual number of deaths in the study population"},
+              {sym: "Expected deaths", def: "the sum, across age groups, of the standard population's age-specific rate multiplied by the study population's count in that age group"}
+            ],
+            def: "SMR above 100 means excess mortality relative to the standard used.",
+            example: "<p>Real data: if Thailand experienced Japan's age-specific mortality, it would be expected to have about 351,896 deaths in 2024. Thailand's actual observed deaths were 647,349.</p><span class='f'>SMR = (647,349 / 351,896) \u00d7 100 \u2248 184</span><p>Thailand experienced roughly 84% more deaths than it would under Japan's mortality risk, a genuine health gap, not an artifact of Thailand's different age structure.</p>"
+          },
+          {name: "Direct Standardization (worked example)", expr: "ASDR = \u03a3(Standard population weight at age x \u00d7 study population's own rate at age x)",
+            symbols: [{sym: "Standard population weight at age x", def: "the age structure share taken from a shared reference population, e.g. the WHO World Standard Population"}, {sym: "study population's own rate at age x", def: "the age-specific mortality rate actually observed in the population being studied"}],
+            example: "<p>Real data: Thailand's crude death rate is 9.03 per 1,000. Standardized to the WHO World Standard Population, it drops to 5.27. Japan's standardized rate on the same standard is 2.62.</p><span class='f'>Thailand : Japan \u2248 5.27 : 2.62 \u2248 2 times higher</span><p>Once age structure is held constant, Thailand's real risk gap versus Japan is roughly double, not the nearly 3.5 times gap the raw crude rates alone would suggest.</p>"
+          },
+          {name: "Cause-Specific Mortality Rate", expr: "Cause-specific mortality rate = (Deaths from cause C / Mid-year population) \u00d7 100,000",
+            symbols: [{sym: "Deaths from cause C", def: "deaths attributed to one specific cause"}, {sym: "Mid-year population", def: "the total mid-year population, not just people with that condition"}],
+            def: "Usually per 100,000 to keep less-common causes readable.",
+            example: "<p>A country records 45,000 deaths from heart disease with a mid-year population of 60,000,000.</p><span class='f'>Cause-specific rate = (45,000 / 60,000,000) \u00d7 100,000 = 75 deaths per 100,000 people</span>"
+          },
+          {name: "Proportional Mortality", expr: "Proportional mortality = (Deaths from cause C / Total deaths) \u00d7 100",
+            symbols: [{sym: "Deaths from cause C", def: "deaths attributed to one specific cause"}, {sym: "Total deaths", def: "all deaths from any cause"}],
+            def: "Describes the mix of causes. Sensitive to the size of total deaths, so it is not a substitute for a population-based rate.",
+            example: "<p>A country records 80,000 cancer deaths out of 550,000 total deaths.</p><span class='f'>Proportional mortality = (80,000 / 550,000) \u00d7 100 \u2248 14.5% of all deaths</span>"
+          },
+          {name: "Disability-Adjusted Life Years (DALYs)", expr: "DALYs = YLL + YLD",
+            symbols: [
+              {sym: "YLL", def: "Years of Life Lost to premature death"},
+              {sym: "YLD", def: "Years Lived with Disability, equal to duration times a disability weight from 0 (full health) to 1 (equivalent to death)"}
+            ],
+            example: "<p>A death causes 50 years of life lost (YLL = 50). 100 people live with moderate hearing loss (disability weight 0.02) for 1 year each.</p><span class='f'>YLD = 100 \u00d7 1 \u00d7 0.02 = 2</span><span class='f'>DALYs = 50 + 2 = 52</span><p><strong>Second example:</strong> YLL = 24. 40 people live 8 years with a condition weighted 0.15.</p><span class='f'>YLD = 40 \u00d7 8 \u00d7 0.15 = 48</span><span class='f'>DALYs = 24 + 48 = 72</span>"
+          }
         ],
         exercises: [
           {q: "Calculate the CDR: 550,000 total deaths, mid-year population 61,000,000.", a: "CDR = (550,000 / 61,000,000) \u00d7 1,000 \u2248 9.0 deaths per 1,000 people."},
@@ -943,7 +1080,7 @@ const DATA = {
         summary: [
           "A life table can feel intimidating with all its subscripts and Greek-letter-adjacent notation, but the underlying idea is simple: imagine 100,000 imaginary babies born on the same day, and you follow this pretend group through life, applying real mortality rates at each age to see how many are still alive at every stage. It's like a simulation, not real people, but built from real death rates, used to summarize an entire population's mortality pattern into one clean, connected table.",
           "The whole table is really just six linked steps, each one feeding the next, like a chain of dominoes. You start with the observed death rate at each age (nMx). That gets converted into a true probability of dying within that age interval (nqx). From there you can calculate how many of your original 100,000 are still alive at each age (lx), how many died in each interval (ndx), how many person-years the group lived through in that interval (nLx), and finally how many years are left to live on average at each age (ex), which is life expectancy.",
-          "<div style='background:#fff;border:1px solid var(--line);padding:18px;margin:6px 0;'><svg viewBox='0 0 600 130' style='width:100%;height:auto;'><g font-family='-apple-system,sans-serif' font-size='12' text-anchor='middle'><rect x='5' y='40' width='85' height='50' fill='#EEF2F8' stroke='#3A5A8C'/><text x='47' y='62' fill='#2A2823' font-weight='700'>nMx</text><text x='47' y='76' fill='#8A8578' font-size='9'>death rate</text><path d='M95,65 L118,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='120' y='40' width='85' height='50' fill='#EEF2F8' stroke='#3A5A8C'/><text x='162' y='62' fill='#2A2823' font-weight='700'>nqx</text><text x='162' y='76' fill='#8A8578' font-size='9'>probability</text><path d='M210,65 L233,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='235' y='40' width='75' height='50' fill='#EEF2F8' stroke='#3A5A8C'/><text x='272' y='62' fill='#2A2823' font-weight='700'>lx</text><text x='272' y='76' fill='#8A8578' font-size='9'>survivors</text><path d='M310,65 L333,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='335' y='40' width='75' height='50' fill='#EEF2F8' stroke='#3A5A8C'/><text x='372' y='62' fill='#2A2823' font-weight='700'>ndx</text><text x='372' y='76' fill='#8A8578' font-size='9'>deaths</text><path d='M410,65 L433,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='435' y='40' width='75' height='50' fill='#EEF2F8' stroke='#3A5A8C'/><text x='472' y='55' fill='#2A2823' font-weight='700'>nLx, Tx</text><text x='472' y='76' fill='#8A8578' font-size='9'>person-yrs</text><path d='M510,65 L533,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='535' y='40' width='60' height='50' fill='#3A5A8C'/><text x='565' y='62' fill='#fff' font-weight='700'>ex</text><text x='565' y='76' fill='#dfe6f2' font-size='9'>life exp.</text></g><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto'><path d='M0 0L10 5L0 10z' fill='#3A5A8C'/></marker></defs></svg><p style='font-family:-apple-system,sans-serif;font-size:12.5px;color:#8A8578;margin:8px 0 0;text-align:center;'>The life table pipeline: each step feeds directly into the next, ending in life expectancy.</p></div>",
+          "<div style='background:var(--surface);border:1px solid var(--line);padding:18px;margin:6px 0;'><svg viewBox='0 0 600 130' style='width:100%;height:auto;'><g font-family='-apple-system,sans-serif' font-size='12' text-anchor='middle'><rect x='5' y='40' width='85' height='50' style='fill:var(--surface-alt);stroke:#3A5A8C'/><text x='47' y='62' style='fill:var(--charcoal)' font-weight='700'>nMx</text><text x='47' y='76' style='fill:var(--fdef-text)' font-size='9'>death rate</text><path d='M95,65 L118,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='120' y='40' width='85' height='50' style='fill:var(--surface-alt);stroke:#3A5A8C'/><text x='162' y='62' style='fill:var(--charcoal)' font-weight='700'>nqx</text><text x='162' y='76' style='fill:var(--fdef-text)' font-size='9'>probability</text><path d='M210,65 L233,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='235' y='40' width='75' height='50' style='fill:var(--surface-alt);stroke:#3A5A8C'/><text x='272' y='62' style='fill:var(--charcoal)' font-weight='700'>lx</text><text x='272' y='76' style='fill:var(--fdef-text)' font-size='9'>survivors</text><path d='M310,65 L333,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='335' y='40' width='75' height='50' style='fill:var(--surface-alt);stroke:#3A5A8C'/><text x='372' y='62' style='fill:var(--charcoal)' font-weight='700'>ndx</text><text x='372' y='76' style='fill:var(--fdef-text)' font-size='9'>deaths</text><path d='M410,65 L433,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='435' y='40' width='75' height='50' style='fill:var(--surface-alt);stroke:#3A5A8C'/><text x='472' y='55' style='fill:var(--charcoal)' font-weight='700'>nLx, Tx</text><text x='472' y='76' style='fill:var(--fdef-text)' font-size='9'>person-yrs</text><path d='M510,65 L533,65' stroke='#3A5A8C' stroke-width='1.5' marker-end='url(#ah)'/><rect x='535' y='40' width='60' height='50' fill='#3A5A8C'/><text x='565' y='62' fill='#fff' font-weight='700'>ex</text><text x='565' y='76' fill='#dfe6f2' font-size='9'>life exp.</text></g><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto'><path d='M0 0L10 5L0 10z' fill='#3A5A8C'/></marker></defs></svg><p style='font-family:-apple-system,sans-serif;font-size:12.5px;color:var(--fdef-text);margin:8px 0 0;text-align:center;'>The life table pipeline: each step feeds directly into the next, ending in life expectancy.</p></div>",
           "The single most quoted number to come out of this whole process is e0, life expectancy at birth. Interestingly, e0 is often slightly lower than e1 (life expectancy at exactly age 1) whenever infant mortality is meaningfully high, because surviving that risky first year already removes the most dangerous period from the picture, boosting the expected years remaining for everyone who made it past their first birthday.",
           "There are two special exceptions built into the formulas worth remembering: age 0 gets its own slightly different formula because infant deaths cluster unevenly within that first year, and the very last open-ended age group (like '85 and older') also needs a different formula since there's no defined upper boundary to work with.",
           "You can also flip the whole table around and think of it as a snapshot of a real, unchanging 'stationary population', imagine a place where the same number of babies are born every single year, exactly matching the life table's survival pattern, and the total population size never changes. Under that lens, the person-years numbers become an actual population count at each age, and life expectancy at birth becomes simply the average age at which people in that imaginary, permanently stable place die."
@@ -951,26 +1088,58 @@ const DATA = {
         notes: [
           "A life table follows a hypothetical 'synthetic cohort' of people (conventionally starting at 100,000, called the <strong>radix</strong>, l0) through life, applying a fixed set of age-specific mortality rates to see how many survive to each age. It's the single most important tool for summarizing a population's mortality pattern into one connected pipeline.",
           "Notation: <strong>x, n</strong> means the interval starts at exact age x and spans n years. Standard tables use n=1 for age 0, n=4 for ages 1\u20134, then n=5 for every 5-year band after that, ending in an open interval like 85+.",
-          "The pipeline has six linked steps, each one feeding the next: <strong>nMx</strong> (observed death rate) \u2192 <strong>nqx</strong> (probability of dying in the interval) \u2192 <strong>lx</strong> (survivors to that age) \u2192 <strong>ndx</strong> (deaths in the interval) \u2192 <strong>nLx</strong> (person-years lived in the interval) \u2192 <strong>Tx</strong> (person-years remaining) \u2192 <strong>ex</strong> (life expectancy).",
-          "<span class='f'>nMx = nDx / nNx</span>, the observed deaths in an age band divided by the mid-period population in that band.",
-          "<span class='f'>nqx = (n \u00b7 nMx) / (1 + (n \u2212 nax) \u00b7 nMx)</span> converts the observed rate into a true probability of dying before reaching the next age. nqx must always lie between 0 and 1, and the very last open interval always has \u221eqx = 1 by definition (everyone eventually dies).",
+          "The pipeline has six linked steps, each one feeding the next:<div class='point-list'><div class='point-row'><span class='point-arrow'>\u2192</span><strong>nMx</strong>, the observed death rate.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>nqx</strong>, the probability of dying in the interval.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>lx</strong>, survivors to that age.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>ndx</strong>, deaths in the interval.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>nLx</strong>, person-years lived in the interval.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>Tx</strong>, person-years remaining.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>ex</strong>, life expectancy.</div></div>",
+          "nMx is the observed death rate in an age band. See the Formulas tab for the calculation.",
+          "nqx converts the observed rate into a true probability of dying before reaching the next age. It must always lie between 0 and 1, and the very last open interval always has \u221eqx = 1 by definition, since everyone eventually dies. See the Formulas tab for the calculation.",
           "<strong>nax</strong> is the average number of years lived in the interval by those who die in it. For most intervals a rough n/2 works, but ages 1\u20134 is a well-known exception: deaths concentrate toward the younger end of that band, so a(1\u20134) \u2248 1.5, not the naive 2.0.",
-          "<span class='f'>lx+n = lx \u00d7 (1 \u2212 nqx)</span> builds survivors forward from the radix. <span class='f'>ndx = lx \u2212 lx+n = lx \u00d7 nqx</span> gives deaths within the interval.",
-          "<span class='f'>nLx = n \u00d7 lx+n + nax \u00d7 ndx</span> is the general formula for person-years lived in an interval, but it has two special cases: at age 0, <strong>L0 = l1 + a0 \u00d7 d0</strong>. At the final open interval, there's no upper bound, so instead <strong>L\u03c9 = l\u03c9 / M\u03c9</strong>.",
-          "<span class='f'>Tx = \u03a3 nLy for all y \u2265 x</span> is computed as a reverse cumulative sum, starting at the oldest open interval and working back down to age 0. <span class='f'>ex = Tx / lx</span> is life expectancy at age x, with e0 (life expectancy at birth) being the single most widely reported mortality summary statistic in the world.",
-          "<strong>Full worked example</strong> (radix l0 = 100,000): starting from nMx values of 0.0200 (age 0\u20131), 0.0015 (1\u20134), 0.0008 (5\u20139), 0.0007 (10\u201314), and 0.0012 (15\u201319), the pipeline produces: l1 = 98,028, l5 = 97,442, l10 = 97,053, l15 = 96,714, l20 = 96,135. Deaths in each interval (ndx): 1,972 / 586 / 389 / 339 / 579. Person-years (nLx): 98,619 / 390,646 / 486,236 / 484,416 / 482,121, with the open interval L\u03c9 = 96,135 / 0.0200 = 4,806,750 person-years. The final result: <strong>e0 = 67.49 years</strong>.",
-          "Notice e1 (67.8) is actually slightly higher than e0 (67.49) in this example. That's a classic life-table pattern whenever infant mortality is meaningfully elevated: once you survive the risky first year, your expected remaining years of life goes up, since you've already cleared the highest-risk period. After that, ex declines fairly steadily with age: e5=64.2, e10=59.5, e15=54.7, e20=50.0.",
+          "lx+n (survivors to the next age) and ndx (deaths in the interval) build forward from the radix, one age band at a time. See the Formulas tab for both calculations.",
+          "nLx (person-years lived in the interval) has two special cases: a different formula at age 0, and a different formula at the final open interval, since there is no upper bound to work with there. See the Formulas tab for all three.",
+          "Tx (person-years remaining) is a reverse cumulative sum, starting at the oldest open interval and working back down to age 0. ex (life expectancy at age x) then divides Tx by lx. e0, life expectancy at birth, is the single most widely reported mortality summary statistic in the world. See the Formulas tab for both calculations.",
           "A life table can also be read as a <strong>stationary population</strong>: imagine a real population with constant annual births exactly matching the cohort's lx at every age, and zero growth. Under that lens, nLx becomes a real population count at each age, Tx becomes the total stationary population aged x and above, and e0 becomes the mean age at death in that stationary population.",
-          "Three different 'typical' ages from the same table: the <strong>median</strong> age at death is where lx = l0/2 (half the cohort has died). The <strong>modal</strong> age is wherever ndx is largest (the single age band with the most deaths). The <strong>mean</strong> age at death is simply e0."
+          "Three different 'typical' ages come out of the same table:<div class='point-list'><div class='point-row'><span class='point-arrow'>\u2192</span>The <strong>median</strong> age at death is where lx = l0/2, half the cohort has died.</div><div class='point-row'><span class='point-arrow'>\u2192</span>The <strong>modal</strong> age is wherever ndx is largest, the single age band with the most deaths.</div><div class='point-row'><span class='point-arrow'>\u2192</span>The <strong>mean</strong> age at death is simply e0.</div></div>"
         ],
         formulas: [
-          {name: "Age-Specific Death Rate, Life Table (nMx)", expr: "nMx = nDx / nNx", def: "Observed death rate: deaths in the age band divided by mid-period population in that band."},
-          {name: "Probability of Dying in the Interval (nqx)", expr: "nqx = (n \u00b7 nMx) / (1 + (n \u2212 nax) \u00b7 nMx)", def: "Probability of dying before reaching age x+n. Must lie between 0 and 1."},
-          {name: "Survivors to Next Age (lx+n)", expr: "lx+n = lx \u00d7 (1 \u2212 nqx)", def: "Survivors to the next age, built forward from the radix l0 = 100,000."},
-          {name: "Deaths in the Interval (ndx)", expr: "ndx = lx \u2212 lx+n = lx \u00d7 nqx", def: "Deaths occurring within the interval."},
-          {name: "Person-Years Lived in the Interval (nLx)", expr: "nLx = n \u00d7 lx+n + nax \u00d7 ndx", def: "Person-years lived in the interval. Special cases: L0 = l1 + a0\u00d7d0 at age 0, L\u03c9 = l\u03c9/M\u03c9 at the open interval."},
-          {name: "Total Person-Years Remaining (Tx)", expr: "Tx = \u03a3 nLy for all y \u2265 x", def: "Total person-years remaining, summed from the oldest interval down to age x."},
-          {name: "Life Expectancy at Age x (ex)", expr: "ex = Tx / lx", def: "Life expectancy at age x. e0 = life expectancy at birth, the most widely reported mortality measure."}
+          {name: "Age-Specific Death Rate, Life Table (nMx)", expr: "nMx = nDx / nNx",
+            symbols: [{sym: "nDx", def: "the observed deaths in the age band"}, {sym: "nNx", def: "the mid-period population in that same age band"}],
+            example: "<p>An age band records 1,200 deaths and 600,000 person-years.</p><span class='f'>nMx = 1,200 / 600,000 = 0.0020</span>"
+          },
+          {name: "Probability of Dying in the Interval (nqx)", expr: "nqx = (n \u00b7 nMx) / (1 + (n \u2212 nax) \u00b7 nMx)",
+            symbols: [
+              {sym: "n", def: "the width of the age interval, in years"},
+              {sym: "nMx", def: "the observed death rate for that interval"},
+              {sym: "nax", def: "the average years lived in the interval by those who die in it"}
+            ],
+            def: "Must lie between 0 and 1.",
+            example: "<p>Ages 1 to 4 (n = 4): nMx = 0.0015, nax = 2.5.</p><span class='f'>nqx = (4 \u00d7 0.0015) / (1 + (4 \u2212 2.5) \u00d7 0.0015) = 0.006 / 1.00225 \u2248 0.0060</span>"
+          },
+          {name: "Survivors to Next Age (lx+n)", expr: "lx+n = lx \u00d7 (1 \u2212 nqx)",
+            symbols: [{sym: "lx", def: "survivors at the start of the interval"}, {sym: "nqx", def: "the probability of dying during the interval"}],
+            def: "Built forward from the radix l0 = 100,000.",
+            example: "<p>l1 = 98,028 and nqx = 0.0060 for the next interval.</p><span class='f'>lx+n = 98,028 \u00d7 (1 \u2212 0.0060) \u2248 97,440</span>"
+          },
+          {name: "Deaths in the Interval (ndx)", expr: "ndx = lx \u2212 lx+n = lx \u00d7 nqx",
+            symbols: [{sym: "lx", def: "survivors at the start of the interval"}, {sym: "lx+n", def: "survivors at the end of the interval"}],
+            example: "<p>l10 = 97,053 and l15 = 96,714.</p><span class='f'>ndx = 97,053 \u2212 96,714 = 339</span>"
+          },
+          {name: "Person-Years Lived in the Interval (nLx)", expr: "nLx = n \u00d7 lx+n + nax \u00d7 ndx",
+            symbols: [
+              {sym: "n", def: "the width of the age interval, in years"},
+              {sym: "lx+n", def: "survivors at the end of the interval"},
+              {sym: "nax", def: "the average years lived in the interval by those who die in it"},
+              {sym: "ndx", def: "deaths within the interval"}
+            ],
+            def: "Special cases: at age 0, L0 = l1 + a0 \u00d7 d0. At the final open interval, L\u03c9 = l\u03c9 / M\u03c9.",
+            example: "<p>Ages 15 to 19 (n = 5): l20 = 96,135, nax = 2.5, ndx = 579.</p><span class='f'>nLx = 5 \u00d7 96,135 + 2.5 \u00d7 579 = 480,675 + 1,447.5 \u2248 482,123</span><p><strong>Open interval example:</strong> l\u03c9 = 96,135 and M\u03c9 = 0.0200.</p><span class='f'>L\u03c9 = 96,135 / 0.0200 = 4,806,750 person-years</span>"
+          },
+          {name: "Total Person-Years Remaining (Tx)", expr: "Tx = \u03a3 nLy for all y \u2265 x",
+            symbols: [{sym: "nLy", def: "person-years lived in each interval from x up through the oldest open interval"}],
+            def: "Computed as a reverse cumulative sum, starting at the oldest interval and working back down to age x."
+          },
+          {name: "Life Expectancy at Age x (ex)", expr: "ex = Tx / lx",
+            symbols: [{sym: "Tx", def: "total person-years remaining from age x onward"}, {sym: "lx", def: "survivors to age x"}],
+            def: "e0 = life expectancy at birth, the most widely reported mortality measure.",
+            example: "<p>T0 \u2248 6,749,000 and l0 = 100,000.</p><span class='f'>e0 = 6,749,000 / 100,000 \u2248 67.49 years</span>"
+          }
         ],
         exercises: [
           {q: "In your own words, what does lx represent?", a: "The number of people from the original synthetic cohort who survive to exact age x."},
@@ -1006,24 +1175,53 @@ const DATA = {
           "Thailand's own family planning story is genuinely remarkable: contraceptive use jumped from under 15% of women in 1970 to nearly 80% by the early 2010s, one of the fastest transitions anywhere in Asia. But the headline number only tells part of the story, a country can report a high contraceptive prevalence rate built mostly on unreliable traditional methods (with failure rates of 13 to 20% per year) or built on highly effective modern methods (often under 1% failure), and those two scenarios deliver very different real protection against unintended pregnancy, even if the top-line percentage looks the same on paper."
         ],
         notes: [
-          "The <strong>Child-Woman Ratio (CWR)</strong> is a rough, indirect fertility measure used when birth registration is poor, since it only needs census age data (no vital registration needed): children aged 0\u20134 compared to women aged 15\u201349.",
-          "CBR (from Session 1) mixes fertility with total population structure, including men, children, and the elderly, none of whom can give birth. The <strong>General Fertility Rate (GFR)</strong> fixes this by dividing births only by women of reproductive age. <strong>Worked example:</strong> population 1,000,000, women aged 15\u201349 = 260,000, births = 14,000/year. CBR = 14.0 per 1,000 total population, but GFR = (14,000/260,000) \u00d7 1,000 = 53.8 per 1,000 women 15\u201349, a much more precise fertility signal.",
-          "The <strong>Age-Specific Fertility Rate (ASFR, written nFx)</strong> narrows this further to one 5-year age band of women at a time. <strong>Worked example:</strong> age 20\u201324, births = 5,175, women = 115,000. ASFR = (5,175/115,000) \u00d7 1,000 = 45.0 births per 1,000 women aged 20\u201324.",
-          "<strong>Total Fertility Rate (TFR)</strong> sums every ASFR across all reproductive ages and scales by the interval width, producing the single most quoted fertility statistic: the average number of children a woman would have if she experienced the current ASFRs at every age of her reproductive life. <strong>Worked example (low-fertility Southeast Asian setting):</strong> summing all ASFRs gives 228.5. TFR = 5 \u00d7 228.5/1,000 = 1.14 children per woman. <strong>Second worked example (Philippines-style schedule):</strong> summed ASFRs = 390. TFR = 5 \u00d7 390/1,000 = 1.95 \u2248 1.9 children per woman.",
+          "The <strong>Child-Woman Ratio (CWR)</strong> is a rough, indirect fertility measure used when birth registration is poor, since it only needs census age data (no vital registration needed): children aged 0\u20134 compared to women aged 15\u201349. See the Formulas tab for the calculation.",
+          "CBR (from Session 1) mixes fertility with total population structure, including men, children, and the elderly, none of whom can give birth. The <strong>General Fertility Rate (GFR)</strong> fixes this by dividing births only by women of reproductive age. See the Formulas tab for a worked example.",
+          "The <strong>Age-Specific Fertility Rate (ASFR, written nFx)</strong> narrows this further to one 5-year age band of women at a time. See the Formulas tab for a worked example.",
+          "<strong>Total Fertility Rate (TFR)</strong> sums every ASFR across all reproductive ages and scales by the interval width, producing the single most quoted fertility statistic: the average number of children a woman would have if she experienced the current ASFRs at every age of her reproductive life. See the Formulas tab for two worked examples.",
           "<strong>Mean Age at Childbearing (MAC)</strong> is a weighted average of age, using each age band's ASFR as the weight, showing the typical age at which childbearing happens in that population, not just how much of it happens.",
-          "Real 2026 TFR comparisons: <strong>South Korea</strong>, TFR = 0.75 (2024, a small uptick after a record-low 0.72 in 2023), driven by extreme housing and private-education costs plus long working hours. <strong>Philippines</strong>, TFR = 1.9 (2022), down from 2.7 in 2017, a rapid decline but still just below replacement, the highest of the countries compared in this dataset.",
-          "The <strong>Bongaarts model</strong> explains WHY a population's actual TFR is lower than its biological maximum (total fecundity, TF \u2248 15.3), by multiplying four 'proximate determinant' indexes, each ranging from 0 (maximum inhibition of fertility) to 1 (no inhibiting effect): <strong>Cm</strong> falls when fewer women are married or in union during reproductive ages (the dominant lever in contemporary East and Southeast Asia, where marriage is being delayed or foregone). <strong>Cc</strong> falls as contraceptive prevalence and effectiveness rise (the dominant lever mid-transition). <strong>Ca</strong> falls as induced abortion rates rise (East Asia relied heavily on this in the 1960s\u20131980s, alongside rising contraception). <strong>Ci</strong> falls as postpartum infecundability lengthens, mainly through longer breastfeeding, historically the single biggest natural brake on fertility in pre-transition, low-contraception settings like sub-Saharan Africa before modern contraception spread.",
-          "<strong>Contraceptive Prevalence Rate (CPR)</strong> is the percentage of women 15\u201349 currently using any contraceptive method. <strong>Modern CPR</strong> restricts this to clinically effective modern methods. <strong>Unmet need</strong> is the gap: fecund, sexually active women who want to stop or delay childbearing but aren't using any method. <strong>Demand satisfied</strong> is the share of total demand (current modern users + unmet need) actually met with modern methods, a core SDG 3.7 indicator.",
+          "Real 2026 TFR comparisons:<div class='point-list'><div class='point-row'><span class='point-arrow'>\u2192</span><strong>South Korea</strong>, TFR = 0.75 (2024, a small uptick after a record-low 0.72 in 2023), driven by extreme housing and private-education costs plus long working hours.</div><div class='point-row'><span class='point-arrow'>\u2192</span><strong>Philippines</strong>, TFR = 1.9 (2022), down from 2.7 in 2017, a rapid decline but still just below replacement, the highest of the countries compared in this dataset.</div></div>",
+          "The <strong>Bongaarts model</strong> explains why a population's actual TFR is lower than its biological maximum (total fecundity, TF \u2248 15.3), by multiplying four 'proximate determinant' indexes, each ranging from 0 (maximum inhibition of fertility) to 1 (no inhibiting effect). See the Formulas tab for the full breakdown of all four indexes and a worked example.",
+          "<strong>Contraceptive Prevalence Rate (CPR)</strong> is the percentage of women 15\u201349 currently using any contraceptive method. <strong>Modern CPR</strong> restricts this to clinically effective modern methods. <strong>Unmet need</strong> is the gap: fecund, sexually active women who want to stop or delay childbearing but aren't using any method. <strong>Demand satisfied</strong> is the share of total demand (current modern users plus unmet need) actually met with modern methods, a core SDG 3.7 indicator.",
           "Method mix matters as much as the headline CPR number: modern methods (pill, IUD, implant, injectable, sterilization, condom) have use-failure rates from under 1% (sterilization, IUD, implant) up to about 7\u201313% (pill, condom). Traditional methods (rhythm, withdrawal) run 13\u201320%+ per year, meaning the same CPR number built on traditional methods buys far less real protection.",
           "Thailand's real family-planning history is a standout case: CPR rose from just 14.8% in 1970 to roughly 79% by the early 2010s, one of Asia's fastest transitions, driven initially by a strong national program and sustained by universal health coverage since 2002. Unmet need fell from 11.7% (1987) to about 6.2% (2016), real progress but not zero, particularly among adolescents and some rural populations. Thailand's method mix is overwhelmingly modern (sterilization and the pill historically dominant), which is a key reason its Cc index fell so far, so fast."
         ],
         formulas: [
-          {name: "Child-Woman Ratio (CWR)", expr: "CWR = (Children aged 0\u20134 / Women aged 15\u201349) \u00d7 1,000", def: "Rough, indirect fertility measure usable even without vital registration data."},
-          {name: "General Fertility Rate (GFR)", expr: "GFR = (Total live births / Mid-year women aged 15\u201349) \u00d7 1,000", def: "More precise than CBR since the denominator is only women of reproductive age."},
-          {name: "Age-Specific Fertility Rate (ASFR)", expr: "nFx (ASFR) = (Births to women aged x to x+n / Mid-year women aged x to x+n) \u00d7 1,000", def: "Fertility rate for one specific 5-year age band of women."},
-          {name: "Total Fertility Rate (TFR)", expr: "TFR = n \u00d7 \u03a3(nFx) / 1,000", def: "Sum every ASFR, multiply by the age-interval width (typically n=5). Average children per woman under current age-specific rates."},
-          {name: "Mean Age at Childbearing (MAC)", expr: "MAC = \u03a3(x_mid \u00d7 nFx) / \u03a3(nFx)", def: "Weighted average age at childbearing, using each age band's midpoint weighted by its ASFR."},
-          {name: "Bongaarts Proximate Determinants Model", expr: "TFR = Cm \u00d7 Cc \u00d7 Ca \u00d7 Ci \u00d7 TF", def: "Bongaarts model. Each index ranges 0 to 1. TF = total fecundity \u2248 15.3."}
+          {name: "Child-Woman Ratio (CWR)", expr: "CWR = (Children aged 0\u20134 / Women aged 15\u201349) \u00d7 1,000",
+            symbols: [{sym: "Children aged 0\u20134", def: "children under age 5 from census data"}, {sym: "Women aged 15\u201349", def: "women of reproductive age from census data"}],
+            def: "Rough, indirect fertility measure usable even without vital registration data.",
+            example: "<p>A census counts 180,000 children aged 0 to 4 and 300,000 women aged 15 to 49.</p><span class='f'>CWR = (180,000 / 300,000) \u00d7 1,000 = 600 children per 1,000 women</span>"
+          },
+          {name: "General Fertility Rate (GFR)", expr: "GFR = (Total live births / Mid-year women aged 15\u201349) \u00d7 1,000",
+            symbols: [{sym: "Total live births", def: "births in a year"}, {sym: "Mid-year women aged 15\u201349", def: "the mid-year count of women of reproductive age"}],
+            def: "More precise than CBR since the denominator is only women of reproductive age.",
+            example: "<p>A population of 1,000,000 has 260,000 women aged 15 to 49 and 14,000 births per year.</p><span class='f'>GFR = (14,000 / 260,000) \u00d7 1,000 = 53.8 per 1,000 women 15\u201349</span><p>The CBR for the same population is only 14.0 per 1,000 total population, a much blunter signal.</p>"
+          },
+          {name: "Age-Specific Fertility Rate (ASFR)", expr: "nFx (ASFR) = (Births to women aged x to x+n / Mid-year women aged x to x+n) \u00d7 1,000",
+            symbols: [{sym: "Births to women aged x to x+n", def: "births to mothers within one 5-year age band"}, {sym: "Mid-year women aged x to x+n", def: "the mid-year count of women in that same age band"}],
+            def: "Fertility rate for one specific 5-year age band of women.",
+            example: "<p>Among women aged 20 to 24: 5,175 births, 115,000 women.</p><span class='f'>ASFR = (5,175 / 115,000) \u00d7 1,000 = 45.0 births per 1,000 women aged 20\u201324</span>"
+          },
+          {name: "Total Fertility Rate (TFR)", expr: "TFR = n \u00d7 \u03a3(nFx) / 1,000",
+            symbols: [{sym: "n", def: "the width of each age interval, typically 5 years"}, {sym: "\u03a3(nFx)", def: "the sum of every ASFR across all reproductive ages"}],
+            def: "Average children per woman under current age-specific rates.",
+            example: "<p>Low-fertility Southeast Asian setting: summing all ASFRs gives 228.5.</p><span class='f'>TFR = 5 \u00d7 228.5 / 1,000 = 1.14 children per woman</span><p><strong>Second example</strong> (Philippines-style schedule): summed ASFRs = 390.</p><span class='f'>TFR = 5 \u00d7 390 / 1,000 = 1.95 \u2248 1.9 children per woman</span>"
+          },
+          {name: "Mean Age at Childbearing (MAC)", expr: "MAC = \u03a3(x_mid \u00d7 nFx) / \u03a3(nFx)",
+            symbols: [{sym: "x_mid", def: "the midpoint age of each age band"}, {sym: "nFx", def: "the ASFR for that age band, used as the weight"}],
+            def: "Weighted average age at childbearing, using each age band's midpoint weighted by its ASFR."
+          },
+          {name: "Bongaarts Proximate Determinants Model", expr: "TFR = Cm \u00d7 Cc \u00d7 Ca \u00d7 Ci \u00d7 TF",
+            symbols: [
+              {sym: "Cm", def: "the index of marriage, falls when fewer women are married or in union during reproductive ages (the dominant lever in contemporary East and Southeast Asia)"},
+              {sym: "Cc", def: "the index of contraception, falls as contraceptive prevalence and effectiveness rise (the dominant lever mid-transition)"},
+              {sym: "Ca", def: "the index of induced abortion, falls as abortion rates rise (East Asia relied heavily on this in the 1960s to 1980s)"},
+              {sym: "Ci", def: "the index of postpartum infecundability, falls as breastfeeding duration lengthens (historically the biggest natural brake in pre-transition settings like sub-Saharan Africa)"},
+              {sym: "TF", def: "total fecundity, the biological maximum, \u2248 15.3"}
+            ],
+            def: "Each index ranges from 0 (maximum inhibition of fertility) to 1 (no inhibiting effect).",
+            example: "<p>Cm = 0.65, Cc = 0.55, Ca = 0.98, Ci = 0.85, TF = 15.3.</p><span class='f'>TFR = 0.65 \u00d7 0.55 \u00d7 0.98 \u00d7 0.85 \u00d7 15.3 \u2248 4.56 children per woman</span>"
+          }
         ],
         exercises: [
           {q: "Calculate the GFR: 14,000 births, 260,000 women aged 15\u201349.", a: "GFR = (14,000/260,000) \u00d7 1,000 = 53.8 births per 1,000 women aged 15\u201349."},
@@ -1307,6 +1505,14 @@ const DATA = {
       {
         id: "dp1", title: "Ch.1 — Introduction to Statistics",
         lecture: "Stats 2026 lecture_1_2026.pdf", textbookRef: "Chapter 1",
+        summary: [
+          "This chapter sets up the vocabulary that every later chapter assumes you already know. A population is everyone you actually care about, the full group. A sample is a smaller group you actually measure, standing in for that population because measuring everyone is usually impossible or too expensive.",
+          "That distinction carries through into two more pairs of words. A parameter describes a population, a statistic describes a sample, they're the same kind of number, just describing a different sized group. Descriptive statistics just summarizes what you found in front of you. Inferential statistics uses a sample to make an educated guess about the whole population you couldn't fully measure.",
+          "One idea trips people up constantly: sampling error. If you take a sample and its average doesn't exactly match the true population average, that's not a mistake you made, it's a normal, expected gap that happens just because a sample is smaller than the whole population.",
+          "Variables come in two flavors. A discrete variable has no meaningful values in between its steps, like number of siblings, you can't have 2.5 siblings. A continuous variable can take any value, including fractions, like height. Continuous scores also have real limits that stretch half a unit above and below the recorded number, since a height of 170cm actually represents anything from 169.5 to 170.5.",
+          "Scales of measurement rank from weakest to strongest in how much information they carry. Nominal scales are just labels with no order, like eye color. Ordinal scales have a ranked order but no consistent gap between ranks, like first, second, third place. Interval scales have equal spacing between values but no true zero, like temperature in Celsius. Ratio scales have equal spacing and a true zero, like height or weight, meaning zero really means none.",
+          "Finally, correlational studies can find that two things move together, but they can never prove that one causes the other. Only a true experiment, where a researcher deliberately manipulates one variable and controls the rest, can support a cause and effect claim."
+        ],
         notes: [
           "Population = everyone you care about. Sample = smaller group you measure to represent it. Parameter describes a population, statistic describes a sample.",
           "Descriptive stats just summarizes what you found. Inferential stats uses a sample to guess about the whole population.",
@@ -1322,12 +1528,27 @@ const DATA = {
       {
         id: "dp2", title: "Ch.2 — Frequency Distributions",
         lecture: "Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 2",
+        summary: [
+          "A frequency distribution is just an organized count of how often each score shows up in a dataset, turning a messy pile of raw numbers into something you can actually read. Instead of staring at 200 individual scores, you see how many people got each score, or fall in each range of scores.",
+          "Proportion and percentage are the two easiest ways to describe a frequency without needing the total sample size in your head. A proportion is just that frequency divided by the total number of people. Multiply the proportion by 100 and you get a percentage, the same information in a more familiar form.",
+          "When scores span a wide range, you group them into class intervals rather than listing every single value. There are a few rules of thumb for doing this well: keep every interval the same width, start each interval at a multiple of that width, and aim for around 10 or fewer intervals total, using a clean width like 2, 5, 10, or 20 rather than an awkward number.",
+          "One subtle but exam-relevant trap: the label on an interval (its apparent limits, like 20 to 29) is not quite the same as its real limits (19.5 to 29.5). Real limits are exactly 1 unit narrower on each side than the apparent limits, and they matter because they're what you actually use in later calculations like the median of grouped data.",
+          "Two chart types look similar but mean different things. A histogram is for numeric, continuous data, and its bars touch each other, since the scale flows continuously with no real gaps. A bar graph is for nominal or ordinal, category based data, and its bars have gaps between them, since the categories are separate and unordered by nature.",
+          "Skew describes an asymmetric distribution, and it is always named after the direction of the tail, not where most of the scores pile up. A tail stretching to the right means positive skew, even though most scores actually cluster on the left. A tail stretching to the left means negative skew."
+        ],
         notes: [
-          "<span class='f'>p = f / N</span> where f is frequency and N is total people. Percentage = p times 100.",
-          "Grouped table rules: equal interval widths, bottom of each interval a multiple of the width, 10 or fewer intervals, round widths like 2, 5, 10, 20.",
+          "Percentage is just a proportion scaled up. See the Formulas tab for the calculation.",
+          "Grouped table rules:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span>Equal interval widths.</div><div class='point-row'><span class='point-arrow'>→</span>The bottom of each interval should be a multiple of the width.</div><div class='point-row'><span class='point-arrow'>→</span>Aim for 10 or fewer intervals total.</div><div class='point-row'><span class='point-arrow'>→</span>Use a clean, round width, like 2, 5, 10, or 20.</div></div>",
           "Apparent limits (the label, e.g. 20 to 29) are 1 unit narrower than real limits (19.5 to 29.5).",
           "Histogram is for numeric data, bars touch. Bar graph is for nominal or ordinal data, gaps between bars.",
           "Skew is named by the direction of the tail, not where scores pile up. Tail right means positive skew, tail left means negative skew."
+        ],
+        formulas: [
+          {name: "Proportion", expr: "p = f / N",
+            symbols: [{sym: "f", def: "the frequency, how many times a score or category occurs"}, {sym: "N", def: "the total number of people or scores"}],
+            def: "Percentage = p × 100.",
+            example: "<p>A class of 40 students has 8 students who scored an A.</p><span class='f'>p = 8 / 40 = 0.20, or 20%</span>"
+          }
         ],
         exercises: [
           {q: "Interval labeled 20 to 29. Real limits?", a: "19.5 to 29.5."}
@@ -1336,12 +1557,28 @@ const DATA = {
       {
         id: "dp3", title: "Ch.3 — Central Tendency",
         lecture: "Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 3",
+        summary: [
+          "Central tendency asks one simple question: what's a typical, representative score in this dataset? There are three different answers, and picking the right one matters more than people expect.",
+          "The mean is the familiar arithmetic average, add up every score and divide by how many there are. Its biggest strength is that it uses every single score in the calculation, but that's also its weakness: one extreme outlier can drag the mean a long way from where most of the data actually sits.",
+          "The median only cares about order, it's simply the middle score once everything is sorted. Because it ignores how far away extreme scores are, only their rank, the median resists outliers in a way the mean can't. This is exactly why income statistics are usually reported as medians, one billionaire in the data would drag a mean income figure wildly upward without the median budging much at all.",
+          "The mode is just the single most frequently occurring score, and it's the only one of the three that works for nominal, category based data, like the most common eye color in a room, where mean and median don't even make sense.",
+          "Comparing the mean to the median tells you about skew without even drawing a graph. If the mean is bigger than the median, the distribution has positive skew, a few unusually high scores are pulling the mean upward. If the mean is smaller than the median, that's negative skew, a few unusually low scores are pulling it downward."
+        ],
         notes: [
-          "<span class='f'>μ = ΣX / N</span> for a population, <span class='f'>M = ΣX / n</span> for a sample. ΣX means sum of scores.",
           "Mean is sensitive to every score. Adding a constant shifts the mean by that constant. Multiplying scales the mean the same way.",
           "Median only cares about order, so it resists extreme scores. Mean gets pulled toward outliers.",
           "Mode is the most frequent score. Only measure that works with nominal, category based data.",
           "Mean minus Median greater than 0 means positive skew. Mean minus Median less than 0 means negative skew."
+        ],
+        formulas: [
+          {name: "Population Mean", expr: "μ = ΣX / N",
+            symbols: [{sym: "ΣX", def: "the sum of every score in the population"}, {sym: "N", def: "the number of scores in the population"}],
+            example: "<p>A population has scores 4, 6, 8, 10, 12 (N = 5).</p><span class='f'>μ = (4+6+8+10+12) / 5 = 40 / 5 = 8</span>"
+          },
+          {name: "Sample Mean", expr: "M = ΣX / n",
+            symbols: [{sym: "ΣX", def: "the sum of every score in the sample"}, {sym: "n", def: "the number of scores in the sample"}],
+            example: "<p>A sample has scores 5, 7, 9 (n = 3).</p><span class='f'>M = (5+7+9) / 3 = 21 / 3 = 7</span>"
+          }
         ],
         exercises: [
           {q: "Income data has one billionaire, everyone else modest. Mean or median is more typical?", a: "Median. The billionaire drags the mean up, median ignores how extreme it is."}
@@ -1350,12 +1587,31 @@ const DATA = {
       {
         id: "dp4", title: "Ch.4 — Variability",
         lecture: "Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 4",
+        summary: [
+          "If central tendency tells you where the middle of a dataset is, variability tells you how spread out the scores are around that middle. Two datasets can have the exact same mean while looking completely different, one tightly bunched together, one scattered wide, and variability is what captures that difference.",
+          "The whole calculation is really just one pipeline of steps, each one building on the last. First find each score's deviation, how far it sits from the mean. Square every deviation, so negatives don't cancel out positives. Add up all those squared deviations to get the Sum of Squares, SS. Divide SS by the number of scores to get variance. Take the square root of variance to get the standard deviation, which brings the number back into the same units as the original scores.",
+          "There's one small but important twist for samples. When calculating a sample's variance, you divide by n minus 1 instead of n. This is because a sample, just by being smaller than the full population, tends to underestimate how spread out the population really is, dividing by a slightly smaller number corrects for that bias.",
+          "Two simple rules are worth memorizing for how variability reacts to changes in the data. Adding the same constant to every score shifts the whole distribution but does not change how spread out it is, so the standard deviation stays exactly the same. Multiplying every score by a constant stretches or shrinks the spread by that same factor, so the standard deviation gets multiplied by it too."
+        ],
         notes: [
           "The pipeline: deviation (X minus mean), square it, sum it (SS), divide by N or n minus 1 (variance), square root (SD).",
-          "<span class='f'>SS = Σ(X − μ)²</span> or <span class='f'>SS = ΣX² − (ΣX)²/N</span>.",
-          "Population: <span class='f'>σ² = SS/N</span>, <span class='f'>σ = √(SS/N)</span>Sample: <span class='f'>s² = SS/(n−1)</span>, <span class='f'>s = √(SS/(n−1))</span>.",
           "Sample uses n minus 1 (degrees of freedom) because samples underestimate true spread, dividing by n would bias variance too low.",
           "Adding a constant to every score leaves SD unchanged. Multiplying every score multiplies SD by that constant too."
+        ],
+        formulas: [
+          {name: "Sum of Squares (SS)", expr: "SS = Σ(X − μ)²  or  SS = ΣX² − (ΣX)²/N",
+            symbols: [{sym: "X", def: "each individual score"}, {sym: "μ", def: "the mean of the scores"}, {sym: "ΣX²", def: "the sum of each score squared"}, {sym: "(ΣX)²", def: "the sum of the scores, then squared"}],
+            def: "Both versions give the same result. The second is often faster by hand.",
+            example: "<p>Scores: 2, 4, 6 (μ = 4).</p><span class='f'>SS = (2−4)² + (4−4)² + (6−4)² = 4 + 0 + 4 = 8</span>"
+          },
+          {name: "Population Variance and Standard Deviation", expr: "σ² = SS / N,  σ = √(SS / N)",
+            symbols: [{sym: "SS", def: "the sum of squares"}, {sym: "N", def: "the number of scores in the population"}],
+            example: "<p>SS = 8, N = 4.</p><span class='f'>σ² = 8 / 4 = 2</span><span class='f'>σ = √2 ≈ 1.41</span>"
+          },
+          {name: "Sample Variance and Standard Deviation", expr: "s² = SS / (n−1),  s = √(SS / (n−1))",
+            symbols: [{sym: "SS", def: "the sum of squares"}, {sym: "n−1", def: "sample size minus 1, the degrees of freedom"}],
+            example: "<p>SS = 32, n = 5.</p><span class='f'>s² = 32 / (5−1) = 32 / 4 = 8</span><span class='f'>s = √8 ≈ 2.83</span>"
+          }
         ],
         exercises: [
           {q: "Sample has SS = 32, n = 5. Sample variance?", a: "s² = 32/4 = 8."}
@@ -1364,33 +1620,78 @@ const DATA = {
       {
         id: "dp5", title: "Ch.5 — z-Scores",
         lecture: "Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 5",
+        summary: [
+          "A raw score on its own doesn't tell you much. Scoring 75 sounds fine, but is it good or bad? It depends entirely on the mean and spread of everyone else's scores. A z-score fixes this by converting any raw score into a single, universal unit: how many standard deviations above or below the mean that score sits.",
+          "The sign of a z-score tells you direction, positive means above the mean, negative means below it. The size of the number tells you distance, a z-score of 2 is twice as far from the mean as a z-score of 1, measured in standard deviation units rather than raw points.",
+          "Because z-scores strip away the original units entirely, they let you compare scores from completely different scales, like comparing a test score to a height measurement, since both get converted into the same standardized language of standard deviations from the mean.",
+          "This process also works in reverse: if you know a z-score and the original mean and standard deviation, you can solve backward to recover the exact raw score it came from. And any full distribution of z-scores always has a mean of exactly 0 and a standard deviation of exactly 1, regardless of what the original distribution looked like, which is exactly why they're so useful for comparison."
+        ],
         notes: [
-          "<span class='f'>z = (X − μ) / σ</span> for a population, <span class='f'>z = (X − M) / s</span> for a sample. Sign shows above or below mean, number shows distance in SD units.",
-          "Solve for raw score: <span class='f'>X = μ + zσ</span>.",
+          "z-scores convert a raw score into standard deviation units from the mean. Sign shows above or below mean, number shows distance in SD units. See the Formulas tab for both the population and sample versions.",
           "A z-distribution always has mean 0 and SD 1, same shape as the original.",
           "Standardizing to a new mean and SD: convert X to z first, then new X = new mean plus z times new SD."
+        ],
+        formulas: [
+          {name: "z-Score (population)", expr: "z = (X − μ) / σ",
+            symbols: [{sym: "X", def: "the raw score"}, {sym: "μ", def: "the population mean"}, {sym: "σ", def: "the population standard deviation"}],
+            example: "<p>X = 80, μ = 70, σ = 5.</p><span class='f'>z = (80 − 70) / 5 = 2</span>"
+          },
+          {name: "z-Score (sample)", expr: "z = (X − M) / s",
+            symbols: [{sym: "X", def: "the raw score"}, {sym: "M", def: "the sample mean"}, {sym: "s", def: "the sample standard deviation"}],
+            example: "<p>X = 60, M = 70, s = 5.</p><span class='f'>z = (60 − 70) / 5 = −2</span>"
+          },
+          {name: "Solving for the Raw Score", expr: "X = μ + zσ",
+            symbols: [{sym: "μ", def: "the mean"}, {sym: "z", def: "the z-score"}, {sym: "σ", def: "the standard deviation"}],
+            example: "<p>μ = 70, σ = 5, z = 1.5.</p><span class='f'>X = 70 + (1.5 × 5) = 77.5</span>"
+          }
         ],
         exercises: []
       },
       {
         id: "dp6", title: "Ch.6 — Probability",
         lecture: "Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 6",
+        summary: [
+          "Probability is just a formal way of answering: out of everything that could happen, how likely is this one specific outcome? It's calculated as the number of outcomes that count as a match, divided by the total number of possible outcomes.",
+          "For this to work properly with real samples, random sampling needs two conditions to hold. Every person or item needs an equal chance of being selected, and the probability needs to stay constant across every draw, which in practice means sampling with replacement, putting each item back before the next draw so the odds never shift partway through.",
+          "This chapter's real payoff is connecting probability directly back to z-scores. Since a normal distribution's shape is completely known, you can convert any raw score into a z-score, then look up what proportion of the distribution falls above, below, or between certain points, which is exactly the same thing as asking for a probability.",
+          "Percentile rank uses this same idea in a more everyday way: it's simply the percentage of people who scored at or below a given score, telling you where that score stands relative to everyone else."
+        ],
         notes: [
-          "<span class='f'>p(A) = outcomes classified as A / total possible outcomes</span>.",
           "Random sampling needs equal chance per person and constant probability across draws, meaning sampling with replacement.",
           "To find probability for a raw score, convert to z first, then look up the proportion.",
           "Percentile rank is the percent of people scoring at or below that score."
+        ],
+        formulas: [
+          {name: "Simple Probability", expr: "p(A) = outcomes classified as A / total possible outcomes",
+            symbols: [{sym: "outcomes classified as A", def: "the number of outcomes that count as the event you're asking about"}, {sym: "total possible outcomes", def: "every possible outcome in the situation"}],
+            example: "<p>A deck has 52 cards, 13 of which are hearts.</p><span class='f'>p(heart) = 13 / 52 = 0.25, or 25%</span>"
+          }
         ],
         exercises: []
       },
       {
         id: "dp7", title: "Ch.7 — Distribution of Sample Means",
         lecture: "Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 7",
+        summary: [
+          "This chapter asks a slightly different question than the earlier ones: instead of describing individual scores, what happens if you took every possible sample of a certain size from a population, and looked at the mean of each sample? The distribution of sample means is exactly that, a distribution built not from raw scores, but from sample means themselves.",
+          "The Central Limit Theorem is the single most important result behind this idea. It says that no matter what shape the original population has, as sample size grows, the distribution of sample means gets closer and closer to a normal, bell-shaped distribution. This is already true if the original population is normal, or once the sample size reaches about 30 or more, even if the original population is oddly shaped.",
+          "This distribution has its own spread, called the standard error, which behaves in a very intuitive way: the bigger your sample size, the smaller the standard error, which means sample means cluster more tightly around the true population mean. A bigger sample gives you a more reliable, less variable estimate.",
+          "Everything you already know about z-scores carries over here too, just applied to sample means instead of individual scores. This lets you ask questions like how likely a particular sample mean is, which is the exact foundation that inferential statistics, and every research paper's claim of statistical significance, is built on."
+        ],
         notes: [
           "Distribution of sample means is every possible sample mean (M) from samples of size n, for a given population.",
           "Central Limit Theorem: for any population, as n grows, the distribution of sample means becomes normal. Already true if population is normal or n is 30 or more.",
-          "<span class='f'>Standard error = σ / √n</span>Bigger n means smaller standard error, means M clusters closer to the true mean.",
-          "<span class='f'>z = (M − μ) / standard error</span> for a sample mean."
+          "Bigger n means smaller standard error, means M clusters closer to the true mean. See the Formulas tab for the calculation."
+        ],
+        formulas: [
+          {name: "Standard Error", expr: "standard error = σ / √n",
+            symbols: [{sym: "σ", def: "the population standard deviation"}, {sym: "n", def: "the sample size"}],
+            example: "<p>σ = 20, n = 25.</p><span class='f'>standard error = 20 / √25 = 20 / 5 = 4</span>"
+          },
+          {name: "z-Score for a Sample Mean", expr: "z = (M − μ) / standard error",
+            symbols: [{sym: "M", def: "the sample mean"}, {sym: "μ", def: "the population mean"}, {sym: "standard error", def: "σ / √n, the standard deviation of the distribution of sample means"}],
+            example: "<p>M = 74, μ = 70, standard error = 4.</p><span class='f'>z = (74 − 70) / 4 = 1</span>"
+          }
         ],
         exercises: []
       }
@@ -1590,7 +1891,18 @@ function tabContentHTML(tabKey, subj, sec){
   if(tabKey === 'formulas'){
     let html = '<h2 class="block-title block-formulas">Formulas</h2><ul class="formulas">';
     sec.formulas.forEach(function(f){
-      html += '<li><span class="fname">' + f.name + '</span><span class="fx">' + f.expr + '</span><span class="fdef">' + f.def + '</span></li>';
+      html += '<li><span class="fname">' + f.name + '</span><span class="fx">' + f.expr + '</span>';
+      if(f.symbols && f.symbols.length){
+        html += '<div class="def-list">';
+        f.symbols.forEach(function(s){ html += '<div class="def-row"><span class="def-sym">' + s.sym + '</span> = ' + s.def + '</div>'; });
+        html += '</div>';
+      } else if(f.def){
+        html += '<span class="fdef">' + f.def + '</span>';
+      }
+      if(f.example){
+        html += '<div class="example-box"><span class="example-label">Example</span>' + f.example + '</div>';
+      }
+      html += '</li>';
     });
     html += '</ul>';
     return html;
