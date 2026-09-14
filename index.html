@@ -64,6 +64,27 @@
   }
   ::selection{background:var(--teal-tint);}
 
+  html{
+    scrollbar-width:thin;
+    scrollbar-color:var(--line) transparent;
+  }
+  ::-webkit-scrollbar{width:10px; height:10px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{
+    background:var(--line);
+    border-radius:6px;
+    border:2px solid var(--paper);
+    background-clip:padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover{background:var(--teal);}
+
+  nav.toc::-webkit-scrollbar-thumb{
+    background:#3A3E52;
+    border:2px solid var(--sidebar-bg);
+    background-clip:padding-box;
+  }
+  nav.toc::-webkit-scrollbar-thumb:hover{background:#6FCFC4;}
+
   nav.toc{
     width:250px;
     flex-shrink:0;
@@ -76,6 +97,8 @@
     top:0;
     box-shadow:6px 0 24px rgba(0,0,0,0.18);
     z-index:5;
+    scrollbar-width:thin;
+    scrollbar-color:#3A3E52 transparent;
   }
   .toc-brand{
     font-size:19px;
