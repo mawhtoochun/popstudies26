@@ -2146,7 +2146,7 @@ function renderSection(id){
   document.getElementById('main-inner').innerHTML = html;
 
   document.querySelectorAll('.tab-btn[data-tab]').forEach(function(el){
-    el.addEventListener('click', function(){ sectionTabs[id] = el.dataset.tab; render(); });
+    el.addEventListener('click', function(){ sectionTabs[id] = el.dataset.tab; renderSection(id); playFadeIn(); });
   });
   document.querySelectorAll('.quiz-item').forEach(function(el){
     el.querySelector('.quiz-q').addEventListener('click', function(){
@@ -2213,6 +2213,13 @@ function toggleTheme(){
 }
 applyTheme(getTheme());
 
+function playFadeIn(){
+  const mainInner = document.getElementById('main-inner');
+  mainInner.classList.remove('fade-in');
+  void mainInner.offsetWidth;
+  mainInner.classList.add('fade-in');
+}
+
 function render(){
   renderTOC();
   if(active.type === 'home'){ renderHome(); }
@@ -2220,10 +2227,7 @@ function render(){
   else if(active.type === 'overview'){ renderOverview(active.id); }
   else { renderSection(active.id); }
   window.scrollTo(0,0);
-  const mainInner = document.getElementById('main-inner');
-  mainInner.classList.remove('fade-in');
-  void mainInner.offsetWidth;
-  mainInner.classList.add('fade-in');
+  playFadeIn();
 }
 
 const SITE_PASSWORD = "pstudies7777";
