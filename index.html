@@ -27,6 +27,9 @@
     --quiz-hover:#F0D6D0;
     --quiz-border:#E0BCB4;
     --shadow-color:220,210,190;
+    --slides-accent:#5B6472;
+    --slides-tint:#EDEFF2;
+    --body-font-weight:400;
     --body-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
   [data-theme="dark"]{
@@ -50,6 +53,9 @@
     --quiz-hover:#3D2A28;
     --quiz-border:#4A3630;
     --shadow-color:0,0,0;
+    --slides-accent:#9AA3B2;
+    --slides-tint:#242833;
+    --body-font-weight:450;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -57,6 +63,7 @@
     background:var(--paper);
     color:var(--charcoal);
     font-family:var(--body-font);
+    font-weight:var(--body-font-weight);
     display:flex;
     min-height:100vh;
     cursor:default;
@@ -398,7 +405,7 @@
     padding:7px 12px;
     display:inline-block;
   }
-  h2.block-materials{background:var(--amber);}
+  h2.block-materials{background:var(--slides-accent);}
   h2.block-summary{background:#3A5A8C;}
   h2.block-notes{background:var(--teal);}
   h2.block-exercises{background:var(--coral);}
@@ -511,8 +518,8 @@
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     font-size:14.5px;
     padding:12px 14px;
-    background:var(--amber-tint);
-    border-left:3px solid var(--amber);
+    background:var(--slides-tint);
+    border-left:3px solid var(--slides-accent);
     margin-bottom:8px;
     display:flex;
     justify-content:space-between;
@@ -527,7 +534,7 @@
   }
   ul.materials li button.view-btn{
     color:#fff;
-    background:var(--amber);
+    background:var(--slides-accent);
     border:none;
     text-decoration:none;
     font-weight:600;
@@ -537,17 +544,17 @@
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     transition:background 0.18s ease, transform 0.18s ease;
   }
-  ul.materials li button.view-btn:hover{background:#6E4718; transform:scale(1.05);}
+  ul.materials li button.view-btn:hover{background:var(--ink); transform:scale(1.05);}
   .mat-tag{
     font-family:'SF Mono',monospace;
     font-size:10.5px;
-    color:#A3875A;
+    color:var(--slides-accent);
     white-space:nowrap;
   }
   #pdf-panel{
     display:none;
     margin:14px 0 26px;
-    border:2px solid var(--amber);
+    border:2px solid var(--slides-accent);
     box-shadow:0 10px 30px rgba(var(--shadow-color),0.22);
     animation:fadeInUp 0.3s ease;
   }
@@ -564,7 +571,7 @@
     display:flex;
   }
   .pdf-panel-btn{
-    background:var(--amber);
+    background:var(--slides-accent);
     color:#fff;
     border:none;
     border-left:1px solid rgba(255,255,255,0.3);
