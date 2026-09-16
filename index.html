@@ -2076,6 +2076,128 @@ const DATA = {
           {q: "What does r² = 0.09 indicate about a treatment's effect size?", a: "A medium effect size. The treatment accounts for about 9% of the total variability in scores."},
           {q: "Why should a significant t-test result be reported alongside an effect size measure like r²?", a: "A significant result only shows that an effect is unlikely to be due to chance; it does not indicate how large or meaningful that effect actually is. Reporting r² alongside it shows how much of the total variability in scores the treatment actually explains, distinguishing a substantial effect from a small but statistically detectable one."}
         ]
+      },
+      {
+        id: "dp10", title: "Ch.10 — The t Test for Two Independent Samples",
+        lecture: "Stats 2019 lecture 6 (to print).pdf", filePath: "materials/datapolicy/Stats 2019 lecture 6 (to print).pdf", textbookRef: "Chapter 10",
+        summary: [
+          "Most research actually compares two groups against each other, not just one sample against a known population. This chapter covers the case where the two groups are made up of completely different, unrelated people, an independent-measures design, sometimes called a between-subjects design.",
+          "The logic is a direct extension of the one-sample t-test from the last chapter. Instead of comparing one sample mean to a hypothesized population mean, this test compares the difference between two sample means (M1 − M2) to a hypothesized population difference (usually zero, meaning the null hypothesis claims the two populations have the same mean).",
+          "The tricky part is the denominator, the estimated standard error. Since there are now two samples, each with its own variance, you need a single, fair combined estimate of variability. Simply using each sample's own variance separately is only unbiased if both samples are the same size. The fix is the pooled variance, which combines both samples' sum of squares and degrees of freedom into one shared estimate, weighting each sample by how much data it actually contributed. Degrees of freedom for the whole test is just the two samples' individual degrees of freedom added together (df = n1 + n2 − 2).",
+          "As with the one-sample test, a significant result on its own does not tell you how big the difference actually is, so it should be paired with an effect size measure, either Cohen's d or r², and often a confidence interval for the true population mean difference. If that confidence interval contains zero, the difference is not significant; if it doesn't contain zero, the difference is significant.",
+          "This test also comes with three assumptions worth knowing: the observations within each sample must be independent, both populations should be normally distributed, and, distinctively for this test, both populations should have equal variances (homogeneity of variance). Hartley's F-max test checks that last assumption directly, by comparing the largest and smallest sample variances; a value near 1.00 means the variances are similar, a large value signals a real violation of the assumption."
+        ],
+        notes: [
+          "Independent-measures (between-subjects) design: two completely separate, unrelated groups of participants, one score per person. Contrast with a repeated-measures (within-subjects) design, covered next chapter.",
+          "H0: μ1 − μ2 = 0 (no difference between the two population means). H1: μ1 − μ2 ≠ 0 (there is a difference).",
+          "The t statistic follows the same basic structure as always: (sample statistic − hypothesized parameter) divided by the estimated standard error. See the Formulas tab for the full independent-measures version.",
+          "Pooled variance combines both samples' sum of squares into one shared, unbiased estimate, needed because using each sample's own variance separately is only unbiased when both samples are the same size. See the Formulas tab for the calculation.",
+          "Degrees of freedom for this test: df = df1 + df2 = (n1 − 1) + (n2 − 1) = n1 + n2 − 2.",
+          "Effect size for this test uses either Cohen's d (mean difference divided by the pooled standard deviation) or r² (percentage of variance explained). See the Formulas tab for both.",
+          "A confidence interval for μ1 − μ2 is built the same way as the one-sample case, centered on the observed difference M1 − M2. If the interval contains zero, the difference is not significant; if it excludes zero, the difference is significant.",
+          "Three assumptions for this test:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span>Observations within each sample are independent.</div><div class='point-row'><span class='point-arrow'>→</span>Both populations sampled from are normally distributed.</div><div class='point-row'><span class='point-arrow'>→</span>Both populations have equal variances (homogeneity of variance).</div></div>",
+          "Hartley's F-max test checks the homogeneity of variance assumption directly: a value near 1.00 means similar variances, a large value signals a real violation. See the Formulas tab for the calculation."
+        ],
+        formulas: [
+          {name: "Independent-Measures t Statistic", expr: "t = [(M1 − M2) − (μ1 − μ2)] / s(M1−M2)",
+            symbols: [{sym: "M1, M2", def: "the two sample means"}, {sym: "μ1 − μ2", def: "the population mean difference claimed by H0, usually 0"}, {sym: "s(M1−M2)", def: "the estimated standard error of the difference between the two means"}],
+            example: "<p>H0 claims μ1 − μ2 = 0. Two samples have M1 = 55, M2 = 48, with an estimated standard error of 3.5.</p><span class='f'>t = [(55 − 48) − 0] / 3.5 = 7 / 3.5 = 2.00</span>"
+          },
+          {name: "Pooled Variance", expr: "sp² = (SS1 + SS2) / (df1 + df2)",
+            symbols: [{sym: "SS1, SS2", def: "the sum of squares for sample 1 and sample 2"}, {sym: "df1, df2", def: "the degrees of freedom for each sample (n1−1 and n2−1)"}],
+            example: "<p>Sample 1: SS1 = 190, n1 = 10. Sample 2: SS2 = 170, n2 = 10.</p><span class='f'>sp² = (190 + 170) / ((10−1)+(10−1)) = 360 / 18 = 20</span>"
+          },
+          {name: "Estimated Standard Error (pooled)", expr: "s(M1−M2) = √(sp²/n1 + sp²/n2)",
+            symbols: [{sym: "sp²", def: "the pooled variance"}, {sym: "n1, n2", def: "the sample sizes"}],
+            example: "<p>sp² = 20, n1 = n2 = 10.</p><span class='f'>s(M1−M2) = √(20/10 + 20/10) = √4 = 2</span>"
+          },
+          {name: "Cohen's d (independent-measures)", expr: "d = (M1 − M2) / sp",
+            symbols: [{sym: "M1 − M2", def: "the observed difference between sample means"}, {sym: "sp", def: "the pooled standard deviation, √sp²"}],
+            def: "d = 0.2 small, 0.5 medium, 0.8 large effect, same benchmarks as the one-sample case.",
+            example: "<p>M1 − M2 = 7, sp² = 20 so sp = √20 ≈ 4.47.</p><span class='f'>d = 7 / 4.47 ≈ 1.57</span><p>A very large effect.</p>"
+          },
+          {name: "Percentage of Variance Explained", expr: "r² = t² / (t² + df)",
+            symbols: [{sym: "t", def: "the t statistic"}, {sym: "df", def: "the degrees of freedom, n1+n2−2"}],
+            def: "r² = 0.01 small, 0.09 medium, 0.25 large effect.",
+            example: "<p>t = 2.00, df = 18.</p><span class='f'>r² = 2.00² / (2.00² + 18) = 4 / 22 ≈ 0.18</span><p>A medium-to-large effect.</p>"
+          },
+          {name: "Hartley's F-max Test", expr: "F-max = s²(largest) / s²(smallest)",
+            symbols: [{sym: "s²(largest)", def: "the larger of the two sample variances"}, {sym: "s²(smallest)", def: "the smaller of the two sample variances"}],
+            def: "Checks the homogeneity of variance assumption. A value near 1.00 means the variances are similar; a large value signals the assumption may be violated.",
+            example: "<p>Sample 1 has s² = 25. Sample 2 has s² = 21.</p><span class='f'>F-max = 25 / 21 ≈ 1.19</span><p>Close to 1.00, so the equal-variance assumption looks reasonable.</p>"
+          }
+        ],
+        exercises: [
+          {q: "What is the key difference between an independent-measures design and a repeated-measures design?", a: "In an independent-measures design, the two groups being compared are made up of completely different, unrelated people. In a repeated-measures design (next chapter), the same people are measured in both conditions."},
+          {q: "State the null and alternative hypotheses for a standard (two-tailed) independent-measures t-test.", a: "H0: μ1 − μ2 = 0 (no difference between the population means). H1: μ1 − μ2 ≠ 0 (there is a difference)."},
+          {q: "Why is pooled variance needed instead of just averaging the two sample variances?", a: "Simply using each sample's own variance separately (or a plain average) is only an unbiased estimate when both samples are exactly the same size. Pooled variance combines both samples' sum of squares and degrees of freedom, correctly weighting each sample by how much data it contributed, giving an unbiased estimate regardless of whether the sample sizes are equal."},
+          {q: "Two samples each have n = 10. Sample 1 has SS1 = 190, Sample 2 has SS2 = 170. Calculate the pooled variance and the degrees of freedom.", a: "df = (10−1)+(10−1) = 18. sp² = (190+170)/18 = 360/18 = 20."},
+          {q: "Using the pooled variance of 20 from the previous question (n1=n2=10), calculate the estimated standard error of M1−M2.", a: "s(M1−M2) = √(20/10 + 20/10) = √4 = 2."},
+          {q: "M1 = 55, M2 = 48, and the estimated standard error is 2. Calculate the independent-measures t statistic (H0: μ1−μ2=0).", a: "t = (55−48−0)/2 = 7/2 = 3.5."},
+          {q: "Calculate Cohen's d given M1−M2 = 7 and pooled variance sp² = 20.", a: "sp = √20 ≈ 4.47. d = 7/4.47 ≈ 1.57, a very large effect."},
+          {q: "A test gives t = 3.5 with df = 18. Calculate r² and classify the effect size.", a: "r² = 3.5²/(3.5²+18) = 12.25/30.25 ≈ 0.40, a large effect (above the 0.25 threshold)."},
+          {q: "What does Hartley's F-max test check, and what does a value near 1.00 mean?", a: "It checks the homogeneity of variance assumption, that both populations being compared have equal variances. A value near 1.00 means the two sample variances are similar, supporting the assumption; a large value suggests the assumption may be violated."},
+          {q: "State the three assumptions required for an independent-measures t-test.", a: "Observations within each sample must be independent; both populations sampled from must be normally distributed; and both populations must have equal variances (homogeneity of variance)."},
+          {q: "A 95% confidence interval for μ1−μ2 is calculated as 3.2 to 10.8. Is the difference between the groups statistically significant? Why?", a: "Yes, significant. The interval does not contain zero, meaning zero is not a plausible value for the true population mean difference, so the null hypothesis of no difference can be rejected."},
+          {q: "Why does a larger mean difference between two samples tend to produce a larger, more significant t statistic?", a: "The mean difference (M1−M2) is the numerator of the t statistic. A bigger numerator, holding the estimated standard error constant, produces a larger t value, making it more likely to fall in the critical region and be judged significant."}
+        ]
+      },
+      {
+        id: "dp11", title: "Ch.11 — The t Test for Two Related Samples",
+        lecture: "Stats 2019 lecture 6 (to print).pdf", filePath: "materials/datapolicy/Stats 2019 lecture 6 (to print).pdf", textbookRef: "Chapter 11",
+        summary: [
+          "This chapter covers the other way to compare two sets of scores: when the two scores in each pair come from the same person, or from two people deliberately matched to be similar. This is a repeated-measures (within-subjects) design when it's literally the same people measured twice, or a matched-subjects design when it's two different people paired up on relevant traits. Statistically, both are treated the exact same way, matched-subjects designs simply need twice as many people to get the same number of pairs.",
+          "The clever trick behind this test is that it doesn't work with the two sets of raw scores directly, it works with the difference between each pair, D = X2 − X1. Once you have one difference score per person (or pair), the whole problem collapses back into something you've already seen: a one-sample t-test, just applied to the D scores instead of raw X scores, testing whether the mean difference (MD) is significantly different from a hypothesized value, almost always zero.",
+          "This design comes with real, practical advantages. Because the same people (or closely matched people) appear in both conditions, it needs fewer participants overall, it directly tracks change over time, and it removes a whole source of noise, individual differences between people, that would otherwise blur the comparison in an independent-measures design. That's also why the variance of the difference scores matters so much: when a treatment's effect is consistent across people, the difference scores cluster tightly together and the effect is easy to detect; when the effect is inconsistent, the difference scores scatter widely and even a real effect can fail to reach significance.",
+          "The design isn't free of downsides though. Because the same people are measured twice, something other than the treatment could cause scores to change between the two measurements (simple time passing, practice, fatigue), and taking part in the first condition can influence performance in the second (an order effect). Counterbalancing, deliberately varying which condition each person does first, is the standard way to control for order effects."
+        ],
+        notes: [
+          "Repeated-measures (within-subjects) design: the same individuals are measured in both conditions. Matched-subjects design: two different individuals, matched on relevant variables, are paired up. Both are analyzed identically, but matched-subjects needs twice as many people for the same number of pairs.",
+          "The test works on difference scores, not raw scores. See the Formulas tab for the difference score and mean difference calculations.",
+          "H0: μD = 0 (no average difference between the two conditions in the population). H1: μD ≠ 0 (there is a difference).",
+          "The related-samples t statistic has the same basic structure as the one-sample t-test, just applied to D scores instead of X scores. See the Formulas tab for the full formula.",
+          "Variability of the difference scores reflects consistency: when a treatment's effect is the same size for everyone, difference scores cluster tightly (low variability) and the effect is easier to detect. When the effect size varies a lot person to person, difference scores scatter widely (high variability), and even a real effect can fail to reach significance.",
+          "Effect size for this test uses either Cohen's d (mean difference divided by the sample standard deviation of D) or r², same interpretation benchmarks as the independent-measures test. See the Formulas tab.",
+          "Advantages of repeated-measures designs:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span>Requires fewer subjects overall.</div><div class='point-row'><span class='point-arrow'>→</span>Can directly study change over time.</div><div class='point-row'><span class='point-arrow'>→</span>Removes the influence of individual differences between people, reducing variability.</div></div>",
+          "Disadvantages of repeated-measures designs: something other than the treatment (simple time passing, practice, fatigue) could cause scores to change between measurements, and doing the first condition can influence performance in the second (order effects). Counterbalancing (varying which condition each person does first) controls for order effects.",
+          "Assumptions: observations within each treatment condition must be independent, and the population of difference scores should be normally distributed (this matters less once n is above about 30)."
+        ],
+        formulas: [
+          {name: "Difference Score", expr: "D = X2 − X1",
+            symbols: [{sym: "X1", def: "a person's score in the first condition"}, {sym: "X2", def: "the same person's score in the second condition"}],
+            example: "<p>A person scores 42 before a training program (X1) and 50 after (X2).</p><span class='f'>D = 50 − 42 = 8</span>"
+          },
+          {name: "Mean Difference", expr: "MD = ΣD / n",
+            symbols: [{sym: "ΣD", def: "the sum of all the difference scores"}, {sym: "n", def: "the number of pairs (people or matched pairs)"}],
+            example: "<p>Difference scores of 5 people: 8, 6, 10, 4, 7 (n = 5).</p><span class='f'>MD = (8+6+10+4+7) / 5 = 35 / 5 = 7</span>"
+          },
+          {name: "Related-Samples t Statistic", expr: "t = (MD − μD) / sMD",
+            symbols: [{sym: "MD", def: "the sample mean of the difference scores"}, {sym: "μD", def: "the population mean difference claimed by H0, usually 0"}, {sym: "sMD", def: "the estimated standard error of MD, √(s²/n)"}],
+            example: "<p>H0 claims μD = 0. MD = 7, sMD = 2, n = 5 (df = 4).</p><span class='f'>t = (7 − 0) / 2 = 3.5</span>"
+          },
+          {name: "Cohen's d (related-samples)", expr: "d = MD / s",
+            symbols: [{sym: "MD", def: "the mean difference"}, {sym: "s", def: "the sample standard deviation of the difference scores"}],
+            example: "<p>MD = 7, s = 4.</p><span class='f'>d = 7 / 4 = 1.75</span><p>A very large effect.</p>"
+          },
+          {name: "Percentage of Variance Explained", expr: "r² = t² / (t² + df)",
+            symbols: [{sym: "t", def: "the t statistic"}, {sym: "df", def: "n − 1, where n is the number of pairs"}],
+            def: "Same benchmarks as before: r² = 0.01 small, 0.09 medium, 0.25 large.",
+            example: "<p>t = 3.5, df = 4.</p><span class='f'>r² = 3.5² / (3.5² + 4) = 12.25 / 16.25 ≈ 0.75</span><p>A very large effect.</p>"
+          }
+        ],
+        exercises: [
+          {q: "What is the difference between a repeated-measures design and a matched-subjects design, and how are they analyzed?", a: "In a repeated-measures design, the same individuals are measured in both conditions. In a matched-subjects design, two different individuals are paired up based on relevant characteristics, with one placed in each condition. Both designs are analyzed with the exact same statistical method, but a matched-subjects design needs twice as many participants to produce the same number of pairs."},
+          {q: "A person scores 65 before a treatment and 78 after. Calculate the difference score D (using D = X2 − X1).", a: "D = 78 − 65 = 13."},
+          {q: "Five people have difference scores of 4, 6, 5, 7, 3. Calculate the mean difference MD.", a: "MD = (4+6+5+7+3)/5 = 25/5 = 5."},
+          {q: "H0 claims μD = 0. A sample has MD = 5 and an estimated standard error of 1.5. Calculate the t statistic.", a: "t = (5−0)/1.5 ≈ 3.33."},
+          {q: "Why does the related-samples t-test use difference scores instead of the two sets of raw scores directly?", a: "Using difference scores reduces the problem to a familiar one-sample t-test: instead of comparing two separate distributions, you're testing whether a single set of D scores has a mean significantly different from zero (or another hypothesized value), which also automatically removes the effect of stable individual differences between people."},
+          {q: "Why does low variability among difference scores make a treatment effect easier to detect?", a: "Low variability means the difference scores cluster tightly around the mean difference, indicating the treatment had a consistent effect across people. This produces a smaller standard error (the denominator of the t statistic), which makes the t value larger and easier to detect as significant."},
+          {q: "Name two advantages of a repeated-measures design over an independent-measures design.", a: "Any two of: it requires fewer subjects overall, it can directly study change over time, and it removes the influence of individual differences between people, reducing variability in the data."},
+          {q: "What is an order effect, and how can it be controlled?", a: "An order effect is when participating in the first treatment condition influences performance in the second condition (e.g. practice or fatigue), rather than the second condition's own true effect. It can be controlled through counterbalancing, deliberately varying which condition different participants complete first."},
+          {q: "Calculate Cohen's d given MD = 5 and a sample standard deviation of difference scores s = 3.", a: "d = 5/3 ≈ 1.67, a very large effect."},
+          {q: "A related-samples test gives t = 3.33 with df = 4. Calculate r².", a: "r² = 3.33²/(3.33²+4) = 11.09/15.09 ≈ 0.73, a very large effect."},
+          {q: "What assumption about the difference scores (D values) is required for this test, and when does it matter less?", a: "The population distribution of difference scores must be normally distributed. This assumption matters less, and can largely be ignored, once the sample size is relatively large (n > 30)."}
+        ]
       }
     ]
   }
