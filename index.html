@@ -1683,14 +1683,16 @@ const DATA = {
     sections: [
       {
         id: "dp1", title: "Ch.1 — Introduction to Statistics",
-        lecture: "Stats 2026 lecture_1_2026.pdf", textbookRef: "Chapter 1",
+        lecture: "Stats 2026 lecture_1_2026.pdf", filePath: "materials/datapolicy/Stats 2026 lecture_1_2026.pdf", textbookRef: "Chapter 1",
         summary: [
           "This chapter sets up the vocabulary that every later chapter assumes you already know. A population is everyone you actually care about, the full group. A sample is a smaller group you actually measure, standing in for that population because measuring everyone is usually impossible or too expensive.",
           "That distinction carries through into two more pairs of words. A parameter describes a population, a statistic describes a sample, they're the same kind of number, just describing a different sized group. Descriptive statistics just summarizes what you found in front of you. Inferential statistics uses a sample to make an educated guess about the whole population you couldn't fully measure.",
           "One idea trips people up constantly: sampling error. If you take a sample and its average doesn't exactly match the true population average, that's not a mistake you made, it's a normal, expected gap that happens just because a sample is smaller than the whole population.",
           "Variables come in two flavors. A discrete variable has no meaningful values in between its steps, like number of siblings, you can't have 2.5 siblings. A continuous variable can take any value, including fractions, like height. Continuous scores also have real limits that stretch half a unit above and below the recorded number, since a height of 170cm actually represents anything from 169.5 to 170.5.",
           "Scales of measurement rank from weakest to strongest in how much information they carry. Nominal scales are just labels with no order, like eye color. Ordinal scales have a ranked order but no consistent gap between ranks, like first, second, third place. Interval scales have equal spacing between values but no true zero, like temperature in Celsius. Ratio scales have equal spacing and a true zero, like height or weight, meaning zero really means none.",
-          "Finally, correlational studies can find that two things move together, but they can never prove that one causes the other. Only a true experiment, where a researcher deliberately manipulates one variable and controls the rest, can support a cause and effect claim."
+          "When a study looks at two variables together instead of one, there are two different ways to structure it, and telling them apart matters. The correlational method measures two things about the same group of people and looks for a pattern between them, but it can only ever show that a relationship exists, never that one thing causes the other. Comparing groups is different: here, one variable defines the groups themselves (like a treatment group and a control group), and a second variable is measured to compare across those groups.",
+          "Only a true experiment, where a researcher deliberately manipulates one variable and controls everything else, can support a cause and effect claim. The variable the researcher manipulates is the independent variable, since nothing in the study influences its value. The variable that gets measured to see the effect is the dependent variable, since its value is thought to depend on the independent variable. Researchers rule out other explanations through control: randomly assigning people to groups, matching groups on key traits, or holding other conditions constant, and by comparing an experimental condition (which gets the real treatment) against a control condition (which gets no treatment or a neutral placebo) as a baseline.",
+          "Not every two-group comparison is a true experiment though. In non-experimental designs, like comparing pre-existing groups the researcher didn't assign (non-equivalent groups) or measuring the same people before and after time has passed (pre-test/post-test), the researcher cannot fully control who ends up in which group or what else changed over time. These still compare groups, but the grouping variable is called quasi-independent rather than truly independent, since it wasn't under the researcher's control."
         ],
         notes: [
           "Population = everyone you care about. Sample = smaller group you measure to represent it. Parameter describes a population, statistic describes a sample.",
@@ -1698,15 +1700,25 @@ const DATA = {
           "Sampling error is the natural, expected gap between a sample statistic and the true population value. Not a mistake.",
           "Discrete variable has no in-between values (siblings). Continuous variable can be any value including fractions (height). Real limits sit half a unit above and below a continuous score.",
           "Scales of measurement, weakest to strongest: Nominal (labels only), Ordinal (ranked order), Interval (equal spacing, no true zero), Ratio (equal spacing plus true zero).",
-          "Correlational studies find relationships but never prove causation. Experiments manipulate an independent variable and can show cause and effect."
+          "Two data structures for studying a relationship between variables:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span><strong>Correlational method</strong>, one group, two variables measured on each person, looking for a pattern. Can show a relationship exists, never that one causes the other.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Comparing groups</strong>, one variable defines the groups, a second variable is measured and compared across them. Used by both experimental and non-experimental studies.</div></div>",
+          "In a true experiment, the <strong>independent variable</strong> is the one the researcher manipulates (no other variable in the study influences its value). The <strong>dependent variable</strong> is the one measured to assess the effect (its value is thought to depend on the independent variable).",
+          "Control in an experiment: random assignment, matching subjects, or holding other variables constant. The <strong>control condition</strong> gets no treatment or a neutral placebo, as a baseline. The <strong>experimental condition</strong> gets the real treatment.",
+          "Non-experimental designs (non-equivalent groups, pre-test/post-test) still compare groups, but the researcher cannot fully control group assignment or the passage of time, so the grouping variable is called quasi-independent rather than truly independent.",
+          "Correlational studies find relationships but never prove causation. Experiments manipulate an independent variable and can show cause and effect.",
+          "Summation notation: ΣX means sum the scores. Order of operations matters: do anything in parentheses, squaring, and multiplication/division first, then do the summation (addition), same as regular math order of operations."
         ],
         exercises: [
-          {q: "30 students out of 1,000 are measured and the average reported. Descriptive or inferential?", a: "Descriptive. Just describing the sample measured, not generalizing to all 1,000."}
+          {q: "30 students out of 1,000 are measured and the average reported. Descriptive or inferential?", a: "Descriptive. Just describing the sample measured, not generalizing to all 1,000."},
+          {q: "A researcher measures both hours of sleep and exam scores for the same group of 50 students, looking for a pattern. Which data structure is this, and what can it show?", a: "The correlational method. It can show that a relationship exists between sleep and exam scores, but it cannot prove that more sleep causes better scores."},
+          {q: "A researcher randomly assigns participants to a new medication group or a placebo group, then measures recovery time. What is the independent variable, and what is the dependent variable?", a: "Independent variable: which treatment the participant received (medication or placebo). Dependent variable: recovery time, since it is measured to see the effect of the treatment."},
+          {q: "Why is random assignment considered a method of control in an experiment?", a: "Randomly assigning participants to groups helps ensure the groups are similar on average in every other way, so any difference in outcome can be attributed to the treatment rather than to pre-existing differences between the groups."},
+          {q: "A study compares math scores between students who chose to take an online course and students who chose an in-person course. Why is this not a true experiment?", a: "The researcher did not control who ended up in which group; students self-selected. This is a non-equivalent groups design, so the grouping variable is quasi-independent, not truly independent, and any difference could be due to pre-existing differences between the two kinds of students, not the course format itself."},
+          {q: "In a drug trial, what is the purpose of the control condition?", a: "It provides a baseline for comparison. By giving the control group no treatment or a neutral placebo, researchers can see what happens without the real treatment and compare it to the experimental condition to isolate the treatment's actual effect."}
         ]
       },
       {
         id: "dp2", title: "Ch.2 — Frequency Distributions",
-        lecture: "Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 2",
+        lecture: "Stats 2026lecture 2 (to print).pdf", filePath: "materials/datapolicy/Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 2",
         summary: [
           "A frequency distribution is just an organized count of how often each score shows up in a dataset, turning a messy pile of raw numbers into something you can actually read. Instead of staring at 200 individual scores, you see how many people got each score, or fall in each range of scores.",
           "Proportion and percentage are the two easiest ways to describe a frequency without needing the total sample size in your head. A proportion is just that frequency divided by the total number of people. Multiply the proportion by 100 and you get a percentage, the same information in a more familiar form.",
@@ -1735,19 +1747,23 @@ const DATA = {
       },
       {
         id: "dp3", title: "Ch.3 — Central Tendency",
-        lecture: "Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 3",
+        lecture: "Stats 2026lecture 2 (to print).pdf", filePath: "materials/datapolicy/Stats 2026lecture 2 (to print).pdf", textbookRef: "Chapter 3",
         summary: [
           "Central tendency asks one simple question: what's a typical, representative score in this dataset? There are three different answers, and picking the right one matters more than people expect.",
-          "The mean is the familiar arithmetic average, add up every score and divide by how many there are. Its biggest strength is that it uses every single score in the calculation, but that's also its weakness: one extreme outlier can drag the mean a long way from where most of the data actually sits.",
-          "The median only cares about order, it's simply the middle score once everything is sorted. Because it ignores how far away extreme scores are, only their rank, the median resists outliers in a way the mean can't. This is exactly why income statistics are usually reported as medians, one billionaire in the data would drag a mean income figure wildly upward without the median budging much at all.",
+          "The mean is the familiar arithmetic average, add up every score and divide by how many there are. Its biggest strength is that it uses every single score in the calculation, but that's also its weakness: one extreme outlier can drag the mean a long way from where most of the data actually sits. The mean can also be described two other ways: it's the amount everyone would get if the total were split equally, and it's the exact balance point of the distribution, the point where the distances of scores above and below it perfectly cancel out.",
+          "Sometimes you need to combine two separate groups of scores into one overall mean, and it is a common mistake to just average the two means together. The weighted mean avoids this by combining the actual sums and counts first: add up all the scores from both groups, add up the total number of scores from both groups, then divide. A bigger group pulls the combined mean toward its own value more than a smaller group does.",
+          "The median only cares about order, it's simply the middle score once everything is sorted. Because it ignores how far away extreme scores are, only their rank, the median resists outliers in a way the mean can't. This is exactly why income statistics are usually reported as medians, one billionaire in the data would drag a mean income figure wildly upward without the median budging much at all. For grouped, continuous data, finding the precise median takes an extra step, since the median could fall anywhere inside a class interval rather than landing exactly on a listed value.",
           "The mode is just the single most frequently occurring score, and it's the only one of the three that works for nominal, category based data, like the most common eye color in a room, where mean and median don't even make sense.",
           "Comparing the mean to the median tells you about skew without even drawing a graph. If the mean is bigger than the median, the distribution has positive skew, a few unusually high scores are pulling the mean upward. If the mean is smaller than the median, that's negative skew, a few unusually low scores are pulling it downward."
         ],
         notes: [
           "Mean is sensitive to every score. Adding a constant shifts the mean by that constant. Multiplying scales the mean the same way.",
-          "Median only cares about order, so it resists extreme scores. Mean gets pulled toward outliers.",
+          "The mean can be described three ways: the sum of scores divided by how many there are, the amount each person would get if the total were split equally, and the balance point of the distribution.",
+          "When combining two groups into an overall mean, do not just average the two group means. See the Formulas tab for the correct weighted mean calculation.",
+          "Median only cares about order, so it resists extreme scores. Mean gets pulled toward outliers. For grouped, continuous data, see the Formulas tab for how to find the precise median inside a class interval.",
           "Mode is the most frequent score. Only measure that works with nominal, category based data.",
-          "Mean minus Median greater than 0 means positive skew. Mean minus Median less than 0 means negative skew."
+          "Mean minus Median greater than 0 means positive skew. Mean minus Median less than 0 means negative skew.",
+          "Choosing a measure of central tendency:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span><strong>Mean</strong>: best when you can calculate ΣX and know every score. Misleading with extreme scores, a skewed distribution, undetermined values, an open-ended distribution, or ordinal/nominal data.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Median</strong>: better choice with extreme scores, a skewed distribution, undetermined or open-ended values.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Mode</strong>: needed for nominal scales and discrete variables, or to describe shape. Can accompany the mean or median for interval/ratio data.</div></div>"
         ],
         formulas: [
           {name: "Population Mean", expr: "μ = ΣX / N",
@@ -1757,15 +1773,35 @@ const DATA = {
           {name: "Sample Mean", expr: "M = ΣX / n",
             symbols: [{sym: "ΣX", def: "the sum of every score in the sample"}, {sym: "n", def: "the number of scores in the sample"}],
             example: "<p>A sample has scores 5, 7, 9 (n = 3).</p><span class='f'>M = (5+7+9) / 3 = 21 / 3 = 7</span>"
+          },
+          {name: "Weighted Mean", expr: "Overall M = (ΣX₁ + ΣX₂) / (n₁ + n₂)",
+            symbols: [{sym: "ΣX₁, ΣX₂", def: "the sum of scores in group 1 and group 2"}, {sym: "n₁, n₂", def: "the number of scores in group 1 and group 2"}],
+            def: "Combine the sums and counts first, then divide, rather than averaging the two group means directly.",
+            example: "<p>Group 1 has n₁ = 5 scores summing to 40. Group 2 has n₂ = 15 scores summing to 180.</p><span class='f'>Overall M = (40 + 180) / (5 + 15) = 220 / 20 = 11</span>"
+          },
+          {name: "Median for Grouped Data", expr: "Median = L + ((N/2 − CF) / f) × w",
+            symbols: [
+              {sym: "L", def: "the lower real limit of the class interval containing the median"},
+              {sym: "N", def: "the total number of scores"},
+              {sym: "CF", def: "the cumulative frequency of all intervals below the median interval"},
+              {sym: "f", def: "the frequency of the median interval itself"},
+              {sym: "w", def: "the width of the class interval"}
+            ],
+            example: "<p>N = 8 scores. The median interval has L = 3.5, f = 4, w = 1, and CF = 3 (scores below that interval).</p><span class='f'>Median = 3.5 + ((8/2 − 3) / 4) × 1 = 3.5 + (1/4) = 3.75</span>"
           }
         ],
         exercises: [
-          {q: "Income data has one billionaire, everyone else modest. Mean or median is more typical?", a: "Median. The billionaire drags the mean up, median ignores how extreme it is."}
+          {q: "Income data has one billionaire, everyone else modest. Mean or median is more typical?", a: "Median. The billionaire drags the mean up, median ignores how extreme it is."},
+          {q: "Group 1 has n = 5 scores summing to 30. Group 2 has n = 10 scores summing to 90. Calculate the overall weighted mean.", a: "Overall M = (30 + 90) / (5 + 10) = 120 / 15 = 8."},
+          {q: "Why is it wrong to find a combined mean by simply averaging the two group means together (e.g. (M1+M2)/2)?", a: "Averaging the two means directly treats both groups as equally sized, ignoring how many scores are actually in each group. A larger group should pull the overall mean more toward its own value, which only the weighted mean formula (combining sums and counts first) accounts for correctly."},
+          {q: "A distribution has median interval L = 9.5, N = 20, CF = 8, f = 6, w = 2. Calculate the precise median.", a: "Median = 9.5 + ((20/2 − 8)/6) × 2 = 9.5 + (2/6) × 2 = 9.5 + 0.67 ≈ 10.17."},
+          {q: "A distribution has mean 45 and median 50. Is it positively or negatively skewed?", a: "Negatively skewed, since Mean − Median = 45 − 50 = −5, which is less than 0."},
+          {q: "You need to describe the 'typical' hair color in a classroom. Which measure of central tendency should you use, and why?", a: "The mode. Hair color is nominal data with no numeric or ranked structure, so mean and median cannot be calculated; only the most frequently occurring category makes sense."}
         ]
       },
       {
         id: "dp4", title: "Ch.4 — Variability",
-        lecture: "Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 4",
+        lecture: "Stats 2026 lecture 3 (290819).pdf", filePath: "materials/datapolicy/Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 4",
         summary: [
           "If central tendency tells you where the middle of a dataset is, variability tells you how spread out the scores are around that middle. Two datasets can have the exact same mean while looking completely different, one tightly bunched together, one scattered wide, and variability is what captures that difference.",
           "The whole calculation is really just one pipeline of steps, each one building on the last. First find each score's deviation, how far it sits from the mean. Square every deviation, so negatives don't cancel out positives. Add up all those squared deviations to get the Sum of Squares, SS. Divide SS by the number of scores to get variance. Take the square root of variance to get the standard deviation, which brings the number back into the same units as the original scores.",
@@ -1798,7 +1834,7 @@ const DATA = {
       },
       {
         id: "dp5", title: "Ch.5 — z-Scores",
-        lecture: "Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 5",
+        lecture: "Stats 2026 lecture 3 (290819).pdf", filePath: "materials/datapolicy/Stats 2026 lecture 3 (290819).pdf", textbookRef: "Chapter 5",
         summary: [
           "A raw score on its own doesn't tell you much. Scoring 75 sounds fine, but is it good or bad? It depends entirely on the mean and spread of everyone else's scores. A z-score fixes this by converting any raw score into a single, universal unit: how many standard deviations above or below the mean that score sits.",
           "The sign of a z-score tells you direction, positive means above the mean, negative means below it. The size of the number tells you distance, a z-score of 2 is twice as far from the mean as a z-score of 1, measured in standard deviation units rather than raw points.",
@@ -1828,29 +1864,44 @@ const DATA = {
       },
       {
         id: "dp6", title: "Ch.6 — Probability",
-        lecture: "Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 6",
+        lecture: "Stats 2026 lecture 4 (50919).pdf", filePath: "materials/datapolicy/Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 6",
         summary: [
-          "Probability is just a formal way of answering: out of everything that could happen, how likely is this one specific outcome? It's calculated as the number of outcomes that count as a match, divided by the total number of possible outcomes.",
+          "Probability is just a formal way of answering: out of everything that could happen, how likely is this one specific outcome? It's calculated as the number of outcomes that count as a match, divided by the total number of possible outcomes. Probabilities are always written as proportions, so a probability of 0.25 and a proportion of 25% are the exact same idea.",
           "For this to work properly with real samples, random sampling needs two conditions to hold. Every person or item needs an equal chance of being selected, and the probability needs to stay constant across every draw, which in practice means sampling with replacement, putting each item back before the next draw so the odds never shift partway through.",
-          "This chapter's real payoff is connecting probability directly back to z-scores. Since a normal distribution's shape is completely known, you can convert any raw score into a z-score, then look up what proportion of the distribution falls above, below, or between certain points, which is exactly the same thing as asking for a probability.",
-          "Percentile rank uses this same idea in a more everyday way: it's simply the percentage of people who scored at or below a given score, telling you where that score stands relative to everyone else."
+          "This chapter's real payoff is connecting probability directly back to z-scores. The normal distribution has a fixed, known shape, symmetrical, with the most common scores in the middle and rarer scores tapering off toward both tails. Because the shape never changes, the proportion of the distribution above, below, or between any two z-scores is always the same, no matter what the original mean or standard deviation was. Those fixed proportions are collected in the unit normal table, so once you convert a raw score into a z-score, you can look up exactly what share of the population scored higher, lower, or in between.",
+          "Percentile rank uses this same idea in a more everyday way: it's simply the percentage of people who scored at or below a given score, telling you where that score stands relative to everyone else. Since probability, proportion, and percentile rank are really the same underlying idea expressed three ways, a probability question can always be rephrased as a percentile rank question and answered the same way."
         ],
         notes: [
+          "Probabilities are always proportions. p = 0.25 is the same statement as 25%. See the Formulas tab for the basic probability calculation.",
           "Random sampling needs equal chance per person and constant probability across draws, meaning sampling with replacement.",
-          "To find probability for a raw score, convert to z first, then look up the proportion.",
-          "Percentile rank is the percent of people scoring at or below that score."
+          "The normal distribution is symmetrical with a fixed shape, so the proportion of area between any two z-scores is always the same, regardless of the original mean or standard deviation.",
+          "The unit normal table lists the proportion of the normal distribution associated with any z-score. Work either direction: look up a z-score to find its proportion, or look up a proportion to find its z-score.",
+          "To find probability for a raw score, convert to z first, then look up the proportion in the unit normal table. This only works if the scores are normally distributed.",
+          "Percentile rank is the percent of people scoring at or below that score. A probability question and a percentile rank question are the same thing asked two ways."
         ],
         formulas: [
           {name: "Simple Probability", expr: "p(A) = outcomes classified as A / total possible outcomes",
             symbols: [{sym: "outcomes classified as A", def: "the number of outcomes that count as the event you're asking about"}, {sym: "total possible outcomes", def: "every possible outcome in the situation"}],
             example: "<p>A deck has 52 cards, 13 of which are hearts.</p><span class='f'>p(heart) = 13 / 52 = 0.25, or 25%</span>"
+          },
+          {name: "Probability via z-Score", expr: "z = (X − μ) / σ, then look up p in the unit normal table",
+            symbols: [{sym: "X", def: "the raw score"}, {sym: "μ", def: "the population mean"}, {sym: "σ", def: "the population standard deviation"}],
+            def: "Only accurate for normally distributed scores. Convert the raw score to a z-score first, then read the proportion off the unit normal table.",
+            example: "<p>IQ scores have μ = 100 and σ = 15. What proportion of people score above 130?</p><span class='f'>z = (130 − 100) / 15 = 2.00</span><p>Looking up z = 2.00 in the unit normal table gives a proportion of about 0.0228 beyond that point, so about 2.28% of people score above 130.</p>"
           }
         ],
-        exercises: []
+        exercises: [
+          {q: "A deck of 52 cards contains 12 royalty cards (jacks, queens, kings). What is the probability of drawing a royalty card?", a: "p(royalty) = 12 / 52 ≈ 0.231, or about 23.1%."},
+          {q: "Why does random sampling require sampling with replacement?", a: "Because probability requires the chance of selection to stay constant across every draw. If items are not replaced, the total pool shrinks and the odds change from one draw to the next, violating the constant-probability requirement."},
+          {q: "IQ scores have μ = 100 and σ = 15. Membership in a high-IQ society requires a score of 130. Using the unit normal table result (proportion beyond z = 2.00 is about 0.0228), what proportion of the population qualifies?", a: "About 0.0228, or 2.28% of the population, since a score of 130 converts to z = (130−100)/15 = 2.00."},
+          {q: "Why must the unit normal table only be used with normally distributed scores?", a: "The table's proportions are calculated from the exact shape of the normal distribution. If the actual distribution is skewed or a different shape, those same proportions no longer correspond to the real probabilities, so the lookup would be inaccurate."},
+          {q: "What is the relationship between a probability question and a percentile rank question?", a: "They are the same underlying question asked in two different forms. A percentile rank is just the probability (expressed as a percentage) of scoring at or below a given score, so any probability question can be rephrased as a percentile rank question and solved the same way."},
+          {q: "True or False: the proportion of area between z = 0 and z = 1 is different for a distribution with μ = 50 compared to a distribution with μ = 100.", a: "False. Because z-scores standardize the distribution, the proportion of area between any two z-scores is always the same regardless of the original mean or standard deviation."}
+        ]
       },
       {
         id: "dp7", title: "Ch.7 — Distribution of Sample Means",
-        lecture: "Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 7",
+        lecture: "Stats 2026 lecture 4 (50919).pdf", filePath: "materials/datapolicy/Stats 2026 lecture 4 (50919).pdf", textbookRef: "Chapter 7",
         summary: [
           "This chapter asks a slightly different question than the earlier ones: instead of describing individual scores, what happens if you took every possible sample of a certain size from a population, and looked at the mean of each sample? The distribution of sample means is exactly that, a distribution built not from raw scores, but from sample means themselves.",
           "The Central Limit Theorem is the single most important result behind this idea. It says that no matter what shape the original population has, as sample size grows, the distribution of sample means gets closer and closer to a normal, bell-shaped distribution. This is already true if the original population is normal, or once the sample size reaches about 30 or more, even if the original population is oddly shaped.",
@@ -1872,7 +1923,114 @@ const DATA = {
             example: "<p>M = 74, μ = 70, standard error = 4.</p><span class='f'>z = (74 − 70) / 4 = 1</span>"
           }
         ],
-        exercises: []
+        exercises: [
+          {q: "A population has μ = 60 and σ = 5. What is the expected value (mean) of the distribution of sample means for samples of size n = 4?", a: "60. The mean of the distribution of sample means always equals the population mean μ, regardless of sample size."},
+          {q: "A population has σ = 20. Calculate the standard error for samples of size n = 25.", a: "standard error = 20 / √25 = 20 / 5 = 4."},
+          {q: "Using the previous question's standard error of 4, if a sample mean is M = 78 from a population with μ = 70, calculate the z-score.", a: "z = (78 − 70) / 4 = 2."},
+          {q: "Why does the standard error get smaller as sample size increases?", a: "Sample size (n) is in the denominator inside the square root of the standard error formula. As n grows larger, dividing σ by a bigger √n produces a smaller result, meaning sample means cluster more tightly around the true population mean."},
+          {q: "Under what two conditions is the distribution of sample means guaranteed to be approximately normal?", a: "When the original population is already normally distributed, or when the sample size n is at least 30, regardless of the original population's shape (the Central Limit Theorem)."},
+          {q: "A random sample of n = 16 scores is drawn from a population with μ = 50 and σ = 16. The sample mean is M = 58. Calculate the z-score for this sample mean.", a: "standard error = 16 / √16 = 16/4 = 4. z = (58 − 50) / 4 = 2."}
+        ]
+      },
+      {
+        id: "dp8", title: "Ch.8 — Introduction to Hypothesis Testing",
+        lecture: "Stats 2026 lecture 5 (120919).pdf", filePath: "materials/datapolicy/Stats 2026 lecture 5 (120919).pdf", textbookRef: "Chapter 8",
+        summary: [
+          "Hypothesis testing is the core inferential procedure this whole subject has been building toward. The idea: use a sample to test a claim about a population, then decide whether that claim still looks reasonable once you see the actual data.",
+          "The logic runs in four steps. First, state a hypothesis about the population. The null hypothesis (H0) always claims there is no change, no difference, no effect. The alternative hypothesis (H1) claims there is one. Second, set a decision criterion in advance, called the alpha level, which defines how unlikely a sample result has to be before you're willing to call it real evidence against the null hypothesis rather than just random noise. This carves out a critical region, the extreme, unlikely outcomes. Third, actually collect the data and compute a test statistic (a z-score) showing exactly where the sample result falls. Fourth, make the decision: if the result lands inside the critical region, reject the null hypothesis. If not, you fail to reject it, which is not the same thing as proving it true, it just means there isn't enough evidence against it.",
+          "A jury trial is a genuinely useful analogy. The trial starts by assuming innocence (the null hypothesis). Prosecutors present evidence, and only if that evidence is strong enough does the jury reject innocence and convict. A not-guilty verdict does not prove the person is innocent, it just means the evidence wasn't strong enough to reject that assumption, exactly like failing to reject a null hypothesis.",
+          "Because this is all based on probability, not certainty, two types of mistakes are always possible. A Type I error is rejecting a null hypothesis that was actually true, concluding there's an effect when there isn't one, and the alpha level is exactly the probability of making this mistake. A Type II error is the opposite: failing to reject a null hypothesis that was actually false, missing a real effect that was there. Three factors push a test toward correctly detecting a real effect (higher statistical power): a bigger true difference between the sample and the hypothesized population mean, less variability in the scores, and a larger sample size.",
+          "A significant result only tells you an effect probably exists, not how big or important that effect actually is. A tiny, practically meaningless effect can still be statistically significant if the sample is large enough. That's why hypothesis testing is usually paired with a measure of effect size, most commonly Cohen's d, which measures how big the difference is in standardized, sample-size-independent units. Researchers also sometimes use a directional (one-tailed) test when they can predict which direction an effect will go, which makes the test easier to pass in that predicted direction, at the cost of being blind to an effect in the opposite direction."
+        ],
+        notes: [
+          "Hypothesis testing uses sample data to evaluate a claim about a population parameter, following four steps: state the hypotheses, set the decision criteria, collect data and compute the test statistic, make a decision.",
+          "The <strong>null hypothesis (H0)</strong> states there is no change, no difference, or no relationship in the population. The <strong>alternative hypothesis (H1)</strong> states that there is one.",
+          "The <strong>alpha level</strong> (significance level) defines how unlikely a result must be to count as real evidence against H0. It marks off the <strong>critical region</strong>, the extreme sample outcomes considered very unlikely if H0 is true.",
+          "Jury trial analogy: the null hypothesis is 'not guilty'. Enough evidence gets H0 rejected ('guilty'). Insufficient evidence means failing to reject H0 ('not guilty'), which is not the same as proving innocence.",
+          "Two kinds of mistakes, laid out side by side:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span><strong>Type I error</strong>: rejecting a true null hypothesis (concluding an effect exists when it doesn't). Its probability is exactly the alpha level.</div><div class='point-row'><span class='point-arrow'>→</span><strong>Type II error</strong>: failing to reject a false null hypothesis (missing a real effect). Its probability is called beta and is not easily identified.</div></div>",
+          "Factors that push toward rejecting H0 (detecting a real effect): a bigger difference between the sample mean and the hypothesized population mean, less variability in the scores (smaller standard error), and a larger sample size.",
+          "A <strong>directional (one-tailed) test</strong> predicts the effect's direction in advance and puts the whole critical region in one tail, making it easier to reject H0 in that predicted direction. A <strong>non-directional (two-tailed) test</strong> splits the critical region between both tails and is the standard choice unless there is a strong reason to predict a direction.",
+          "A statistically significant result does not mean a large or important effect, just an unlikely one under H0. See the Formulas tab for Cohen's d, the standard way to measure effect size independent of sample size.",
+          "<strong>Statistical power</strong> is the probability of correctly rejecting a false null hypothesis (detecting a real effect). Power = 1 − beta. Power increases with a bigger effect size, a larger sample, and a one-tailed test; power decreases with a smaller (more stringent) alpha level."
+        ],
+        formulas: [
+          {name: "z-Score Test Statistic", expr: "z = (M − μ) / standard error",
+            symbols: [{sym: "M", def: "the sample mean actually observed"}, {sym: "μ", def: "the population mean claimed by the null hypothesis"}, {sym: "standard error", def: "σ / √n, the standard distance expected between M and μ"}],
+            def: "Shows how many standard errors the sample mean is from the hypothesized population mean.",
+            example: "<p>H0 claims μ = 80. A sample of n = 25 has M = 86, drawn from a population with σ = 15.</p><span class='f'>standard error = 15 / √25 = 3</span><span class='f'>z = (86 − 80) / 3 = 2.00</span><p>With α = .05 (two-tailed), the critical z-values are ±1.96, so z = 2.00 falls in the critical region and H0 is rejected.</p>"
+          },
+          {name: "Cohen's d (Effect Size)", expr: "Cohen's d = mean difference / standard deviation",
+            symbols: [{sym: "mean difference", def: "the difference between the treatment mean and the no-treatment (population) mean"}, {sym: "standard deviation", def: "the standard deviation of the scores, without treatment"}],
+            def: "d = 0.2 is a small effect, d = 0.5 is a medium effect, d = 0.8 is a large effect. Unlike a hypothesis test, d does not depend on sample size.",
+            example: "<p>A treatment shifts the mean from 80 to 86 baht, with a standard deviation of 15.</p><span class='f'>Cohen's d = (86 − 80) / 15 = 0.40</span><p>A d of 0.40 falls between a small and medium effect.</p>"
+          }
+        ],
+        exercises: [
+          {q: "In your own words, what does the null hypothesis (H0) always claim?", a: "That there is no change, no difference, or no relationship in the population, i.e. the treatment or effect being tested does not actually do anything."},
+          {q: "What does it mean to 'fail to reject' the null hypothesis? Does this prove H0 is true?", a: "It means the sample result was not extreme enough to fall in the critical region, so there isn't enough evidence to reject H0. It does not prove H0 is true, it only means the evidence collected wasn't strong enough to rule it out."},
+          {q: "Using the jury trial analogy, what does a 'not guilty' verdict correspond to in hypothesis testing terms?", a: "Failing to reject the null hypothesis (innocence). It does not mean the defendant was proven innocent, only that the evidence wasn't strong enough to reject that assumption."},
+          {q: "Define a Type I error and state its probability.", a: "A Type I error is rejecting a null hypothesis that is actually true, concluding an effect exists when it doesn't. Its probability is exactly the alpha level chosen for the test."},
+          {q: "Define a Type II error.", a: "Failing to reject a null hypothesis that is actually false, meaning a real treatment effect existed but the test failed to detect it."},
+          {q: "A sample has M = 86, drawn from a population with μ = 80 and σ = 15, with n = 25. Calculate the z-score test statistic.", a: "standard error = 15/√25 = 3. z = (86−80)/3 = 2.00."},
+          {q: "With α = .05 for a two-tailed test, the critical z-values are ±1.96. Using the z = 2.00 result from the previous question, what decision should be made about H0?", a: "Reject H0, since z = 2.00 falls beyond 1.96, inside the critical region."},
+          {q: "Name three factors that increase the chance of rejecting a false null hypothesis (increase statistical power).", a: "A larger true effect size (bigger mean difference), lower variability in the scores (smaller standard error), and a larger sample size. Using a one-tailed test in the correct direction also increases power."},
+          {q: "A treatment shifts a mean from 50 to 56, with a standard deviation of 20. Calculate Cohen's d and classify the effect size.", a: "Cohen's d = (56−50)/20 = 0.30, which falls between a small (0.2) and medium (0.5) effect."},
+          {q: "Why can a result be statistically significant but still practically unimportant?", a: "Statistical significance only shows that an effect is unlikely to be zero; it says nothing about how large that effect is. With a large enough sample, even a very small, practically meaningless difference can become statistically significant, which is why effect size measures like Cohen's d are reported alongside significance."},
+          {q: "What is the difference between a directional (one-tailed) and non-directional (two-tailed) hypothesis test?", a: "A directional test predicts the effect's direction in advance and puts the entire critical region in one tail, making it easier to reject H0 in that direction but blind to an effect in the opposite direction. A non-directional test splits the critical region between both tails and can detect an effect in either direction; it is the standard default choice."},
+          {q: "Why does lowering the alpha level (e.g. from .05 to .01) decrease statistical power?", a: "A smaller alpha level makes the critical region smaller and harder to reach, so it becomes less likely that a real effect will produce a result extreme enough to reject H0, reducing the test's power to detect that real effect."}
+        ]
+      },
+      {
+        id: "dp9", title: "Ch.9 — Introduction to the t Statistic",
+        lecture: "Stats 2026 lecture 5 (120919).pdf", filePath: "materials/datapolicy/Stats 2026 lecture 5 (120919).pdf", textbookRef: "Chapter 9",
+        summary: [
+          "The z-score hypothesis test from the last chapter has one big practical problem: it requires knowing the population standard deviation, σ. In real research, that number is almost never actually known, researchers usually only have their own sample data to work with.",
+          "The t statistic solves this by substituting an estimated standard error, built from the sample's own variance, in place of the real standard error that would require the unknown σ. Everything else about the logic carries over directly from the z-test: state hypotheses, set a decision criterion, compute the test statistic, and make a decision.",
+          "This substitution has a consequence though. Since the estimate is built from a limited sample rather than the true population value, the t statistic is less precise than a z-score, especially with a small sample. To account for this, the t distribution is not a single fixed shape like the normal distribution, it's a whole family of distributions, one for each possible degrees of freedom (df = n minus 1). Every version of the t distribution is flatter and more spread out than the normal distribution, with fatter tails, meaning extreme values are somewhat more common than the normal distribution would predict. As sample size grows, though, the t distribution gets closer and closer to looking just like the normal z distribution.",
+          "Beyond hypothesis testing, the t statistic also unlocks confidence intervals, a different but related way to describe a result. Instead of a single point estimate, a confidence interval gives a range of plausible values for the true population mean, built around the sample mean using the t distribution. A 90% confidence interval, for example, means you can be 90% confident the true population mean falls somewhere inside that calculated range. A more demanding confidence level (say 99% instead of 90%) always produces a wider interval, and a larger sample size always produces a narrower one, since it shrinks the standard error.",
+          "As with the z-test, a significant t result on its own says nothing about how big the effect actually is, so it's typically reported alongside an effect size measure. Percentage of variance explained (r²) is the t-test's version of this: how much of the total variability in scores can be attributed to the treatment, rather than just chance."
+        ],
+        notes: [
+          "The z-score test requires knowing the population standard deviation σ, which researchers usually do not have. The t statistic replaces the real standard error with an estimated standard error built from the sample's own data. See the Formulas tab for both formulas side by side.",
+          "<strong>Degrees of freedom (df)</strong> for a single sample equal n − 1, since computing the sample variance already uses up one piece of information (the sample mean), leaving only n − 1 independent scores.",
+          "The t distribution is a family of distributions, one per df value, not a single fixed shape. Every t distribution is flatter and more spread out than the normal distribution (fatter tails), but gets closer to the normal shape as df (and sample size) increases. A t distribution table replaces the unit normal table for t-tests.",
+          "The four hypothesis testing steps carry over directly to the t-test: state hypotheses and pick alpha, locate the critical region using the t table and df, calculate the t statistic, decide about H0.",
+          "Assumptions of the t-test: the observations are independent, and the population sampled is normal (with a large enough sample, this second assumption matters less).",
+          "A confidence interval estimates where the true population mean μ likely falls, built around the sample mean using the t distribution instead of giving one single point guess. See the Formulas tab for the calculation.",
+          "What changes the width of a confidence interval:<div class='point-list'><div class='point-row'><span class='point-arrow'>→</span>A higher confidence level (e.g. 99% instead of 90%) widens the interval.</div><div class='point-row'><span class='point-arrow'>→</span>A larger sample size narrows the interval, since it shrinks the standard error.</div></div>",
+          "Percentage of variance explained (r²) is the t-test's effect size measure: r² = 0.01 is a small effect, 0.09 is medium, 0.25 is large. It measures how much of the total variability in scores the treatment accounts for."
+        ],
+        formulas: [
+          {name: "Estimated Standard Error", expr: "estimated standard error = s / √n",
+            symbols: [{sym: "s", def: "the sample standard deviation"}, {sym: "n", def: "the sample size"}],
+            def: "Used in place of the true standard error (σ/√n) when the population standard deviation σ is unknown.",
+            example: "<p>A sample has s = 12 and n = 9.</p><span class='f'>estimated standard error = 12 / √9 = 12 / 3 = 4</span>"
+          },
+          {name: "One-Sample t Statistic", expr: "t = (M − μ) / estimated standard error",
+            symbols: [{sym: "M", def: "the sample mean"}, {sym: "μ", def: "the population mean claimed by the null hypothesis"}, {sym: "estimated standard error", def: "s / √n"}],
+            def: "df = n − 1. Used instead of the z-statistic whenever σ is unknown.",
+            example: "<p>H0 claims μ = 40. A sample of n = 9 has M = 45 and s = 12.</p><span class='f'>estimated standard error = 12 / √9 = 4</span><span class='f'>t = (45 − 40) / 4 = 1.25</span><p>With df = 8, this t value would be compared against the critical value from the t distribution table at the chosen alpha level.</p>"
+          },
+          {name: "Confidence Interval for μ", expr: "μ = M ± t(estimated standard error)",
+            symbols: [{sym: "M", def: "the sample mean"}, {sym: "t", def: "the critical t value for the chosen confidence level and df"}, {sym: "estimated standard error", def: "s / √n"}],
+            def: "Gives a range of plausible values for the true population mean, centered on the sample mean.",
+            example: "<p>M = 45, estimated standard error = 4, df = 9. For 90% confidence, the critical t value is 1.833.</p><span class='f'>μ = 45 ± 1.833(4) = 45 ± 7.33</span><p>The 90% confidence interval runs from about 37.67 to 52.33.</p>"
+          }
+        ],
+        exercises: [
+          {q: "Why is the t statistic needed instead of always using the z-score test?", a: "The z-score test requires knowing the population standard deviation σ, which researchers almost never actually know. The t statistic replaces it with an estimated standard error calculated from the sample's own variance."},
+          {q: "A sample has s = 12 and n = 9. Calculate the estimated standard error.", a: "estimated standard error = 12 / √9 = 12/3 = 4."},
+          {q: "H0 claims μ = 40. A sample of n = 9 has M = 45 and s = 12. Calculate the t statistic and state the degrees of freedom.", a: "estimated standard error = 12/√9 = 4. t = (45−40)/4 = 1.25. df = n−1 = 8."},
+          {q: "Why does the t distribution have fatter tails than the normal z distribution?", a: "Because the t statistic uses an estimated standard error based on limited sample data rather than the true population value, there is extra uncertainty. This makes extreme t values somewhat more likely than extreme z values, spreading out the tails."},
+          {q: "What happens to the shape of the t distribution as sample size (and df) increases?", a: "It gets closer and closer to the shape of the normal z distribution, since a larger sample gives a more precise estimate of the standard error."},
+          {q: "State the two main assumptions required for a one-sample t-test.", a: "The observations must be independent, and the population being sampled from should be normally distributed (though this assumption matters less with a large sample)."},
+          {q: "A sample has M = 60, estimated standard error = 5, and df = 15. For 95% confidence, the critical t value is 2.131. Calculate the confidence interval for μ.", a: "μ = 60 ± 2.131(5) = 60 ± 10.655, giving an interval from about 49.35 to 70.66."},
+          {q: "If you wanted a narrower confidence interval without changing your confidence level, what could you do?", a: "Increase the sample size. A larger n reduces the estimated standard error, which narrows the resulting confidence interval."},
+          {q: "Why does increasing the confidence level (e.g. from 90% to 99%) widen a confidence interval?", a: "A higher confidence level requires a larger critical t value, since you need a wider net to be more confident that the true population mean falls inside the interval, and a larger t value multiplied by the standard error produces a wider interval."},
+          {q: "A hypothesis test reports t(21) = 2.38, p < .05. What was the sample size?", a: "n = 22, since df = n−1 = 21."},
+          {q: "What does r² = 0.09 indicate about a treatment's effect size?", a: "A medium effect size. The treatment accounts for about 9% of the total variability in scores."},
+          {q: "Why should a significant t-test result be reported alongside an effect size measure like r²?", a: "A significant result only shows that an effect is unlikely to be due to chance; it does not indicate how large or meaningful that effect actually is. Reporting r² alongside it shows how much of the total variability in scores the treatment actually explains, distinguishing a substantial effect from a small but statistically detectable one."}
+        ]
       }
     ]
   }
